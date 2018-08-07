@@ -41,7 +41,7 @@ if($currentPage!=''){
                     </ul>
                 </div>
                 <div class="ml-auto right-log clearfix">
-                    <span class="donate-top"><a href="#">Donate</a></span>
+                    <span class="donate-top"><a href="<?php echo base_url; ?>/donate">Donate</a></span>
 			        <ul class="list-inline">
                         <li class="dropdown"> <a class="dropdown-toggle"  href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alina Wilson</a>
                             <div class="dropdown-menu" aria-labelledby="profile">
