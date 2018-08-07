@@ -648,7 +648,6 @@ if (isset($_GET['c'], $_GET['id'])) {
 
     <!-- MODALS -->
 
-    <script src="<?php echo base_url; ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
     <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>

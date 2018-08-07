@@ -448,7 +448,6 @@ if ($m_got_screen == 0) {
     <link href="<?php echo base_url; ?>/assets/css/theme.css" rel="stylesheet">
     <link href="<?php echo base_url; ?>/assets/css/responsive.css" rel="stylesheet">
     <script src="<?php echo base_url; ?>/assets/js/jquery.min.js" type="text/javascript"></script>
-    <script src="<?php echo base_url; ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url; ?>/assets/js/loadingoverlay.js" type="text/javascript"></script>
     <script type="text/javascript">
       // $(function(){
@@ -1843,6 +1842,7 @@ if ($m_got_screen == 0) {
 
     <script>
          $(document).ready(function() {
+          //$('#supportTicket').modal('hide');
             $(".selectType").click(function() {
                 var selectUserType = $(this).attr('teamVal');
                 $('.chkteam').each(function() {

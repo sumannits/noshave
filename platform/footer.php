@@ -154,7 +154,7 @@ St. Jude Children’s Research Hospital is leading the way the world understands
                 <td style="vertical-align: top; width: 30%;"><i class="fa fa-fw fa-phone"></i> &nbsp;<strong>Phone&nbsp;&nbsp;&nbsp;</strong></td>
                 <td style="vertical-align: top;">
                   <p style="font-size: 120%;">
-                    Phone: <a href="" data-toggle="modal" data-target="#supportTicket">Request a Call</a><br>
+                    Phone: <a href="Javascript:void(0);" data-toggle="modal" data-target="#supportTicket">Request a Call</a><br>
                     Fax: (510) 255-6073
                   </p>
                 </td>
@@ -181,7 +181,7 @@ St. Jude Children’s Research Hospital is leading the way the world understands
               <tr>
                 <td style="vertical-align: top;"><i class="fa fa-fw fa-ticket"></i> &nbsp;<strong>Support&nbsp;&nbsp;&nbsp;</strong></td>
                 <td style="vertical-align: top;">
-                  <p style="font-size: 120%;"><a href="" data-toggle="modal" data-target="#supportTicket">Submit a ticket</a></p>
+                  <p style="font-size: 120%;"><a href="Javascript:void(0);" data-toggle="modal" data-target="#supportTicket">Submit a ticket</a></p>
                 </td>
             </tr>
               <tr>
@@ -365,7 +365,7 @@ St. Jude Children’s Research Hospital is leading the way the world understands
         // make call
         $.ajax({
           type: 'POST',
-          url: 'platform/api/submit_support_ticket.php',
+          url: './platform/api/submit_support_ticket.php',
           data: args,
           dataType: 'json',
           success: function (data) {
@@ -397,7 +397,7 @@ St. Jude Children’s Research Hospital is leading the way the world understands
                 <div class="col-md-6 col-12">
                     <div class="f-link">
                         <ul class="list-inline mb-0">
-                            <li><a href="" data-toggle="modal" data-target="#contactUS">Contact</a></li>
+                            <li><a href="Javascript:void(0);" data-toggle="modal" data-target="#contactUS">Contact</a></li>
                             <li><a href="<?php echo base_url; ?>/privacy">Privacy</a></li>
                             <li><a href="<?php echo base_url; ?>/terms">Terms</a></li>
                             <li><a href="http://www.mhfinc.org">mhfinc.org</a></li>
