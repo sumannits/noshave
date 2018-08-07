@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="<?php echo base_url; ?>/img/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -51,43 +51,20 @@
 
       function toggleFields() {
         if ($("#change").val() == "change") {
-          // show fields to enter old and new
-          $("#old_label").show();
-          $("#new_1_label").show();
-          $("#new_2_label").show();
-
-          $("#old_password").show();
-          $("#new_password").show();
-          $("#new_password_confirm").show();
+          $("#forgot_password").hide();
           $("#change_password").show();
-
-          $("#send_password").hide();
-
+          $("#change_password_div").show();
         } else if ($("#change").val() == "forgot") {
           // allow them to send email
-          $("#send_password").show();
-
-          $("#old_password").hide();
-          $("#new_password").hide();
-          $("#new_password_confirm").hide();
+          $("#forgot_password").show();
           $("#change_password").hide();
-
-          $("#old_label").hide();
-          $("#new_1_label").hide();
-          $("#new_2_label").hide();
+          $("#change_password_div").hide();
 
         } else {
           // hide all?
-          $("#send_password").hide();
-
-          $("#old_password").hide();
-          $("#new_password").hide();
-          $("#new_password_confirm").hide();
+          $("#forgot_password").hide();
           $("#change_password").hide();
-
-          $("#old_label").hide();
-          $("#new_1_label").hide();
-          $("#new_2_label").hide();
+          $("#change_password_div").hide();
         }
       }         
       </script>
@@ -112,120 +89,84 @@
                 ?>
 
                 <div class="login-form shadow-sm px-4 pt-5 mx-auto" style="max-width:420px;">
-                <form class="form" action="<?php echo base_url; ?>/login" method="post" name="login_form">
+                <form class="form" action="<?php  echo esc_url($_SERVER['PHP_SELF']); ?>" method="post" name="login_form">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input type="text" id="email_or_username" name="email_or_username" class="form-control" placeholder="Email or Username" required autofocus/>
+                                    <input type="email" id="email" name="email" placeholder="Enter Email Address" required class="form-control"/>
                                 </div>
                             </div>                             
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
+                                <select  class="form-control" id="change" name="change">
+                                    <option value="default">Please select an option</option>
+                                    <option value="forgot">Forgot Password (Reset Password)</option>
+                                    <option value="change">Change Password (Set New Password)</option>
+                                </select>
                                 </div>
                             </div> 
-                            <div class="col-12">
-                                <div class="form-group text-center">                                     
-                                    <input type="submit" class="btn btn-block btn-primary" value="Login"/>
-                                </div>
+                            <div id="change_password_div" style="display:none;">
+                              <div class="col-12">
+                                  <div class="form-group">                                     
+                                    <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Enter Current Password"/>
+                                  </div>
+                              </div> 
+                              <div class="col-12">
+                                  <div class="form-group">  
+                                     <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Enter New Password"> 
+                                  </div>
+                              </div> 
+                              <div class="col-12">
+                                  <div class="form-group">  
+                                    <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" placeholder="Confirm New Password"> 
+                                  </div>
+                              </div> 
                             </div>
-                            <div class="col-12">
-                                <div class="form-group text-center">                                     
-                                  <a href="<?php echo base_url; ?>/password" class="forgot-password">
-                                      <p class="text-center">Forgot your Password?</p>
-                                  </a>
-                                </div>
-                            </div>                              
-                            <div class="col-12">
-                                <div class="form-group text-center">  
-                                  <a href="<?php echo base_url; ?>/register" class="btn btn-block btn-signin btn-success " type="submit">Sign Up</a>
 
+                            <div class="col-12" id="change_password" style="display:none;">
+                                <div class="form-group text-center">                                <input type="submit" class="btn btn-block btn-primary" value="Change Password"/>
                                 </div>
                             </div>
+
+                            <div class="col-12" id="forgot_password" style="display:none;">
+                                <div class="form-group text-center">                                     
+                                    <input type="submit" class="btn btn-block btn-primary" value="Send Email"/>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                  <div class="form-group text-center">  
+                                  <div class="panel-footer"> Need Help?<a href="" data-toggle="modal" data-target="#contactUS"> Contact Support</a>
+              </div>
+                                  </div>
+                            </div> 
+                            
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-      
-      
-      
-      
-      
-      
-      
-    <div class="container">
-      <div class="row">
-
-        
-        
-          <div class="card card-container col-md-4 col-md-offset-4 ">
-            <div class="panel panel-default">
-            <div class="panel-heading"> <strong class="">Password Reset</strong></div>
-
-            <div class="panel-body">
-              <img id="profile-img" class="profile-img-card img-responsive" src="/img/nsn-full-logo.png" />
-              <br>
-              <p id="profile-name" class="profile-name-card"></p>
-              <form class="form-signin" action="<?php  echo esc_url($_SERVER['PHP_SELF']); ?>" method="post" name="login_form">
-                  <span id="reauth-email" class="reauth-email"></span>
-                  <label for="email">Email Address</label>
-                  <input type="email" class="form-control extra-wide" id="email" name="email" placeholder="Enter Email Address" required>
-                  <br>
-                   <select  class="form-control extra-wide" id="change" name="change">
-                      <option value="default">Please select an option</option>
-                      <option value="forgot">Forgot Password (Reset Password)</option>
-                      <option value="change">Change Password (Set New Password)</option>
-                  </select>
-                  <div id="old_password" style="display:none;">
-                  <br>
-                  <label id="old_label" for="old_password" style="display:none;">Old Password</label>
-                  <input type="password" class="form-control extra-wide" id="old_password" name="old_password" placeholder="Enter Current Password">
-                  <br></div>
-                  <label id="new_1_label" for="new_password" style="display:none;">New Password</label>
-                  <div id="new_password" style="display:none;"><input type="password" class="form-control extra-wide" id="new_password" name="new_password" placeholder="Enter New Password">
-                  <br></div>
-                  <label id="new_2_label" for="new_password_confirm" style="display:none;">New Password Confirm</label>
-                  <div id="new_password_confirm" style="display:none;"><input type="password" class="form-control extra-wide" id="new_password_confirm" name="new_password_confirm" placeholder="Confirm New Password">
-                  </div>
-
-                  <div id="change_password" style="display:none;"><br>
-                  <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Change Password</button></div>
-                  <div id="send_password" style="display:none;"><br>
-                  <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Send Email</button></div>
-              </form><!-- /form -->
-              <br>
+    <section class="app-sec" style="background-image: url(./img/fbg.png);">
+        <div class="container">
+            <div class="row animatedParent">
+                <div class="col-12 col-md-5">
+                    <figure class="animated bounceInUp animate-2">
+                        <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
+                    </figure>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="app-btn">
+                        <h2>Download App</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <div class="btn-inline animated growIn animate-3">
+                            <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
+                            <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-              <div class="panel-footer"> Need Help?<a href="" data-toggle="modal" data-target="#contactUS"> Contact Support</a>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /card-container -->
-
-
-      </div>
-    </div><!-- /container -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <!-- FOOTER -->
-
-    <!--<link href="/assets/css/bootstrap.css" rel="stylesheet">    
-    <link href="/assets/css/main.css" rel="stylesheet">
-    <link href='/assets/css/font.css' rel='stylesheet' type='text/css'>
-    <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">-->
+        </div>
+    </section>
     <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
   </body>

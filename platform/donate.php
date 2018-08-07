@@ -1,7 +1,9 @@
 <?php
+//include_once 'includes/psl-config.php';
+//include_once 'includes/db_connect.php';
+include_once 'includes/functions.php';
 include_once 'includes/brain.php';
-include_once 'includes/db_connect.php';
-include_once 'includes/psl-config.php';
+sec_session_start();
 
 // set defaults to empty
 $prefill_search = "";
@@ -99,25 +101,32 @@ if (isset($_GET['c'], $_GET['id'])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="<?php echo base_url; ?>/img/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="author" content="No-Shave November">
     <meta name="description" content="No-Shave November and its funded programs are putting your donation dollars to work, investing in groundbreaking cancer research and providing free information and services to cancer patients and their caregivers.">
     <title>Donate | No-Shave November</title>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">    
-    <link href="/assets/css/main.css" rel="stylesheet">
-    <link href='/assets/css/font.css' rel='stylesheet' type='text/css'>
-    <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>   
+    <link href="<?php echo base_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick-theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick.css" rel="stylesheet">   
+    <link href="<?php echo base_url; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/fonts/themify-icons.css" rel="stylesheet">   
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url; ?>/assets/css/animations.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/responsive.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/loadingoverlay.js" type="text/javascript"></script>
     <script type="text/javascript">
-      $(function(){
-        $("#menu").load("/platform/platform_menu.php"); 
-      });
-      $(function(){
-        $("#footer").load("/platform/platform_footer.html"); 
-      });
+      // $(function(){
+      //   $("#menu").load("/platform/platform_menu.php"); 
+      // });
+      // $(function(){
+      //   $("#footer").load("/platform/platform_footer.html"); 
+      // });
     </script>
     <style>
     .required-field {
@@ -132,6 +141,12 @@ if (isset($_GET['c'], $_GET['id'])) {
     .fa-cog {
       color: #FFF;
     }
+    .modal-body h4{
+      color: #333;
+      font-weight: 400;
+      font-size: 20px;
+    }
+    .hidden{display: none;}
     </style>
     <script>
 
@@ -160,7 +175,7 @@ if (isset($_GET['c'], $_GET['id'])) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/search_members.php', 
+          url: './platform/api/search_members.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -186,7 +201,7 @@ if (isset($_GET['c'], $_GET['id'])) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/search_teams.php', 
+          url: './platform/api/search_teams.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -212,7 +227,7 @@ if (isset($_GET['c'], $_GET['id'])) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/search_orgs.php', 
+          url: './platform/api/search_orgs.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -251,6 +266,7 @@ if (isset($_GET['c'], $_GET['id'])) {
         } else {
           $("#other_input").addClass("hidden");
           $("#complete_donation").html('Donate $' + $("input[name=donation_amount]:checked").val());
+          $("#donation_amount_value").val($("input[name=donation_amount]:checked").val());
         }
       }
 
@@ -346,7 +362,7 @@ if (isset($_GET['c'], $_GET['id'])) {
         // make call
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/donation.php', 
+          url: './platform/api/donation.php', 
           data: donation_info, 
           dataType: 'json',
           success: function (data) { 
@@ -377,132 +393,121 @@ if (isset($_GET['c'], $_GET['id'])) {
     </script>
   </head>
   <body>
+    <header>           
+      <?php include_once('menu.php');?>
+    </header>
 
-    <!-- MEDU BAR -->
-    <div id="menu"></div>
-    <!-- MENU BAR-->
+    <section class="register-step-3 register-div">
+        <div class="container">
+        <form class="form" id="donation_form" method="post">
+            <div class="text-left">
+                <h2 class="mb-0">Make a Donation</h2>                 
+                <!--<p class="mb-5">No-Shave November and its funded programs are putting your donaftion dollars to work, investing in groundbreaking cancer research and providing free information and services to cancer patients and their caregivers.</p>-->
 
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
+                <h5>Donation Amount *</h5>
+                <ul class="list-inline">
+                    <li>
+                        <div class="clearfix">
+                            <input type="radio" name="donation_amount" id="donation_amount_25" value="25">
+                            <label for="donation_amount_25">$25</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <input type="radio" name="donation_amount" id="donation_amount_50" value="50">
+                            <label for="donation_amount_50">$50</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <input type="radio" name="donation_amount" id="donation_amount_100" value="100" checked>
+                            <label for="donation_amount_100">$100</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <input type="radio" name="donation_amount" id="donation_amount_250" value="250">
+                            <label for="donation_amount_250">$250</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <input type="radio" name="donation_amount" id="donation_amount_500" value="500">
+                            <label for="donation_amount_500">$500</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <input type="radio" name="donation_amount" id="donation_amount_other" value="other">
+                            <label for="donation_amount_other">Other</label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="form-group hidden" id="other_input" visible="false">
+                    <label for="donation_amount_other_amount" class="col-md-3 control-label">Other <span class="required-field">*</span></label>
 
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-    
-    <div class="container">
+                    <div class="col-md-3">
+                      <input type="number" class="form-control full-input-width" id="donation_amount_other_amount" placeholder="Amount" name="donation_amount_other" onkeyup="updateAmount()">
+                    </div>
+                </div>
+                <h6>Most people are giving <span>$100</span> right now. Please give what you can.</h6>
 
-      <div class="row">
-        <div class="col-md-12">
-          <div class="page-header">
-            <h1>Make a Donation</h1>
-          </div>
-        </div>
-      </div>
+                <div class="pay-form">
+                    <!--<form class="form" id="donation_form" method="post">-->
+                        <input type="hidden" name="donation_amount" id="donation_amount_value" value="100">
+                        <div class="row">
+                            <div class="col-md-5 col-12">
+                                <h5 class="pt-5 mb-4">Your Information</h5>
+                                <div class="form-group">
+                                    <input type="text" required="required" class="form-control" placeholder="Name *" id="donation_name" name="donation_name" autofocus="">
+                                </div>                             
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="donation_company" name="donation_company" placeholder="Company" >
+                                </div>                             
+                                <div class="form-group">
+                                    <input type="email" required="required" class="form-control" id="donation_email" name="donation_email" placeholder="Email *">
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-12">
+                                <div class="border-pay">
+                                    <h5 class="mb-3">Make Donation to Member, Team or Organization (optional)</h5>
+                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="search_type" class="col-md-3">Search</label>
+                                        <div class="col-md-9">
+                                        <ul class="list-inline">
+                                              <li>
+                                                  <div class="clearfix">
+                                                      <input type="radio" name="search_type" id="search_type_member" value="member" <?php echo $member_checked;?>>
+                                                      <label for="search_type_member">Member</label>
+                                                  </div>
+                                              </li>
+                                              <li>
+                                                  <div class="clearfix">
+                                                      <input type="radio" name="search_type" id="search_type_team" value="team" <?php echo $team_checked;?>>
+                                                      <label for="search_type_team">Team</label>
+                                                  </div>
+                                              </li>
+                                              <li>
+                                                  <div class="clearfix">
+                                                      <input type="radio" name="search_type" id="search_type_org" value="org" <?php echo $org_checked;?>>
+                                                      <label for="search_type_org">Organization (Company, Fraternity, etc.)</label>
+                                                  </div>
+                                              </li>
+                                        </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="search" class="col-md-3"></label>
 
-      <div class="row">
+                                      <div class="col-md-7">
+                                        <input type="text" class="form-control" id="search_input" name="search_input" placeholder="Enter Search Terms" onkeyup="search()" autocomplete="off" value="<?php echo $prefill_search; ?>">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
 
-        <form class="form-horizontal">
-
-          <div class="col-md-8 col-md-offset-2">
-
-            <h4>Donation Amount</h4>
-            <hr>
-            <br>
-
-            <div class="form-group">
-              <label for="donation_amount" class="col-md-3 control-label">Amount (USD) <span class="required-field">*</span></label>
-              <div class="col-md-9">
-                <label class="radio-inline">
-                  <input type="radio" name="donation_amount" id="donation_amount_25" value="25"> $25
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="donation_amount" id="donation_amount_50" value="50"> $50
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="donation_amount" id="donation_amount_100" value="100" checked> $100
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="donation_amount" id="donation_amount_250" value="250"> $250
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="donation_amount" id="donation_amount_500" value="500"> $500
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="donation_amount" id="donation_amount_other" value="other"> Other
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group hidden" id="other_input" visible="false">
-              <label for="donation_amount_other_amount" class="col-md-3 control-label">Other <span class="required-field">*</span></label>
-
-              <div class="col-md-3">
-                <input type="number" class="form-control full-input-width" id="donation_amount_other_amount" placeholder="Amount" name="donation_amount" onkeyup="updateAmount()">
-              </div>
-            </div>
-
-
-            <br><br>
-            <h4>Your Information</h4>
-            <hr>
-            <br>
-
-            <div class="form-group">
-              <label for="donation_name" class="col-md-3 control-label">Full Name <span class="required-field">*</span></label>
-
-              <div class="col-md-7">
-                <input type="text" class="form-control full-input-width" id="donation_name" name="donation_name" placeholder="Name">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="donation_company" class="col-md-3 control-label">Company</label>
-
-              <div class="col-md-7">
-                <input type="text" class="form-control full-input-width" id="donation_company" name="donation_company" placeholder="Company">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="donation_email" class="col-md-3 control-label">Email <span class="required-field">*</span></label>
-
-              <div class="col-md-7">
-                <input type="email" class="form-control full-input-width" id="donation_email" name="donation_email" placeholder="Email">
-              </div>
-            </div>
-
-            <br><br>
-            <h4>Make Donation to Member, Team or Organization (optional)</h4>
-            <hr>
-            <br>
-
-            <div class="form-group">
-              <label for="search_type" class="col-md-3 control-label">Search</label>
-              <div class="col-md-9">
-                <label class="radio-inline">
-                  <input type="radio" name="search_type" id="search_type" value="member" <?php echo $member_checked;?>> Member
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="search_type" id="search_type" value="team" <?php echo $team_checked;?>> Team
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="search_type" id="search_type" value="org" <?php echo $org_checked;?>> Organization (Company, Fraternity, etc.)
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="search" class="col-md-3 control-label"></label>
-
-              <div class="col-md-7">
-                <input type="text" class="form-control full-input-width" id="search_input" name="search_input" placeholder="Enter Search Terms" onkeyup="search()" autocomplete="off" value="<?php echo $prefill_search; ?>">
-              </div>
-            </div>
-
-            <div class="form-group">
-
-              <div id="hide-label" <?php echo $hide_search_label; ?>><label for="search" class="col-md-3 control-label">Select</label></div>
+              <div id="hide-label" <?php echo $hide_search_label; ?>><label for="search" class="col-md-3">Select</label></div>
               <div class="col-md-7">
                 <div id="search_select">
                   <?php echo $search_result_get; ?>
@@ -511,98 +516,109 @@ if (isset($_GET['c'], $_GET['id'])) {
             </div>
 
             <div class="form-group">
-              <label for="make_anonymous" class="col-md-3 control-label">Make Anonymously</label>
+              <label for="make_anonymous" class="col-md-3">Make Anonymously</label>
               <div class="col-md-9">
-                <label class="radio-inline">
-                  <input type="radio" name="make_anonymous" id="make_anonymous" value="1"> Yes
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="make_anonymous" id="make_anonymous" value="0"> No
-                </label>
+              <ul class="list-inline">
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="make_anonymous" id="make_anonymous_yes" value="1">
+                          <label for="make_anonymous_yes">Yes</label>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="make_anonymous" id="make_anonymous_no" value="0">
+                          <label for="make_anonymous_no">No</label>
+                      </div>
+                  </li>
+              </ul>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="donation_visbile" class="col-md-3 control-label">Visible on Page</label>
+              <label for="donation_visbile" class="col-md-3">Visible on Page</label>
               <div class="col-md-9">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_visbile" id="donation_visbile" value="1" >
-                    Yes, display this donation publicly
-                  </label>
+                <ul class="list-inline">
+                    <li>
+                        <div class="clearfix">
+                        <input type="radio" name="donation_visbile" id="donation_visbile_yes" value="1" >
+                            <label for="donation_visbile_yes">Yes, display this donation publicly</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                        <input type="radio" name="donation_visbile" id="donation_visbile_no" value="0" >
+                            <label for="donation_visbile_no">No, please hide this donation</label>
+                        </div>
+                    </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-12">
+                <textarea type="text" class="form-control" id="donation_comment" name="donation_comment" placeholder="Comment" rows="3"></textarea>
+              </div>
+            </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="border-pay">
+                                    <h5 class="mb-3">Payment Method</h5>
+                                    <div class="col-md-7">
+                                        <div id="dropin-container"></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                    <div class="g-recaptcha center-recaptcha" data-sitekey="6LfQi2gUAAAAADJr1olB_ilCPMFjfhLHYkyRydXs"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group text-right">
+                                <button id="complete_donation" name="complete_donation" class="btn btn-primary pull-right" type="submit" onclick="wait_for_nonce()">Donate $100</button>
+
+                <button id="processing" name="processing" type="button" class="btn btn-success pull-right hidden"><i class="fa fa-cog fa-spin fa-fw"></i>  Processing</button>
+
+                                    
+                                </div>
+                               
+                            </div>
+                        </div>
+
                 </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_visbile" id="donation_visbile" value="0" >
-                    No, please hide this donation
-                  </label>
-                </div>
-              </div>
+                </form>
             </div>
-
-            <div class="form-group">
-              <label for="donation_comment" class="col-md-3 control-label">Comment</label>
-
-              <div class="col-md-7">
-                <textarea type="text" class="form-control full-input-width" id="donation_comment" name="donation_comment" placeholder="Comment" rows="3"></textarea>
-              </div>
-            </div>
-
-            <br><br>
-            <h4>Payment</h4>
-            <hr>
-            <br>
-
-            <div class="form-group">
-              <label for="dropin" class="col-md-3 control-label">Payment Method <span class="required-field">*</span></label>
-              <div class="col-md-7">
-                <div id="dropin-container"></div>
-                <br>
-                 <div class="g-recaptcha center-recaptcha" data-sitekey="6LfcNwUTAAAAAOqFjBNkLEi63xKPwvdhqBYoagCK"></div>
-              </div>
-            </div>
-
-            <br><br>
-            <h4>Complete Donation</h4>
-            <hr>
-            <br>
-            <div class="form-group">
-              <div class="col-md-7 col-md-offset-3">
-                <button id="complete_donation" name="complete_donation" class="btn btn-success btn-lg btn-block pull-right double-font" type="submit" onclick="wait_for_nonce()">Donate $100</button>
-                <button id="processing" name="processing" type="button" class="btn btn-success btn-lg btn-block pull-right double-font disabled hidden"><i class="fa fa-cog fa-spin fa-fw"></i>  Processing</button>
-              </div>
-              <div class="col-md-3"></div>
-            </div>
-          </div>
-        </form>
-
-      </div>
-
-    </div>
+        </div>
+    </section>
     
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <!-- FOOTER -->
-
-    <!-- BRAINTREE -->
+    <section class="app-sec" style="background-image: url(./img/fbg.png);">
+        <div class="container">
+            <div class="row animatedParent">
+                <div class="col-12 col-md-5">
+                    <figure class="animated bounceInUp animate-2">
+                        <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
+                    </figure>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="app-btn">
+                        <h2>Download App</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <div class="btn-inline animated growIn animate-3">
+                            <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
+                            <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="https://js.braintreegateway.com/js/braintree-2.26.0.min.js"></script>
-
     <script>
       braintree.setup('<?php echo($clientToken = Braintree_ClientToken::generate()); ?>', 'dropin', {
         container: 'dropin-container',
         onPaymentMethodReceived: function (obj) {
-          // Do some logic in here.
-          // When you're ready to submit the form:
-          //myForm.submit();
           window.client_nonce = obj.nonce;
         }
       });
@@ -613,11 +629,12 @@ if (isset($_GET['c'], $_GET['id'])) {
     <!-- MODALS -->
 
     <div id="failed_donation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_donation">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Make Donation</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Make Donation</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_donation_message" name="failed_donation_message"></h4>
@@ -631,9 +648,9 @@ if (isset($_GET['c'], $_GET['id'])) {
 
     <!-- MODALS -->
 
-    <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/assets/js/loadingoverlay.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
+    <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
   </body>
 </html>
