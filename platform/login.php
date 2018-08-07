@@ -3,6 +3,7 @@
   include_once 'includes/functions.php';
   include_once 'includes/process_login.php';
   sec_session_start();
+  //print_r($mysqli);
 ?>
 
 <?php if (login_check($mysqli) == true) : ?>
