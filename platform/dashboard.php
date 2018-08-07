@@ -434,17 +434,29 @@ if ($m_got_screen == 0) {
     <meta name="author" content="No-Shave November">
     <meta name="description" content="The No-Shave November dashboard is a one-stop shop to help you update your personal, team and organization fundraising pages, track your fundraising progress, and update your account information.">
     <title>Dashboard | No-Shave November</title>
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">    
+    <!-- <link href="/assets/css/bootstrap.css" rel="stylesheet">    
     <link href="/assets/css/main.css" rel="stylesheet">
-    <link href='/assets/css/font.css' rel='stylesheet' type='text/css'>
-    <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+    <link href='/assets/css/font.css' rel='stylesheet' type='text/css'> -->
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo base_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick-theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick.css" rel="stylesheet">   
+    <link href="<?php echo base_url; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/fonts/themify-icons.css" rel="stylesheet">   
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url; ?>/assets/css/animations.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/responsive.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/loadingoverlay.js" type="text/javascript"></script>
     <script type="text/javascript">
-      $(function(){
-        $("#menu").load("/platform/platform_menu.php"); 
-      });
-      $(function(){
-        $("#footer").load("/platform/platform_footer.html"); 
-      });
+      // $(function(){
+      //   $("#menu").load("/platform/platform_menu.php"); 
+      // });
+      // $(function(){
+      //   $("#footer").load("/platform/platform_footer.html"); 
+      // });
     </script>
 
     <script>
@@ -464,7 +476,7 @@ if ($m_got_screen == 0) {
         // make call
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_personal_page.php', 
+          url: './platform/api/update_personal_page.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -532,7 +544,7 @@ if ($m_got_screen == 0) {
         // make call
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_team_page.php', 
+          url: './platform/api/update_team_page.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -744,7 +756,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/search_teams.php', 
+          url: './platform/api/search_teams.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -848,7 +860,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/create_team.php', 
+          url: './platform/api/create_team.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -888,7 +900,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/create_org.php', 
+          url: './platform/api/create_org.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -1088,7 +1100,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_personal_photo.php', 
+          url: './platform/api/update_personal_photo.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -1392,7 +1404,7 @@ if ($m_got_screen == 0) {
         $("#tab_home").attr('class', 'list-group-item');
         $("#tab_personal_page").attr('class', 'list-group-item');
         $("#tab_team_page").attr('class', 'list-group-item');
-        $("#tab_org_page").attr('class', 'list-group-item');
+        $("#donations_active_tab").attr('class', 'list-group-item');
         $("#tab_donations").attr('class', 'list-group-item active');
         $("#tab_account").attr('class', 'list-group-item');
 
@@ -1421,6 +1433,7 @@ if ($m_got_screen == 0) {
         $("#icon_account").addClass('white-icon');
       }
     </script>
+    
     <style>
       .fa-home {
         color: #555;
@@ -1556,724 +1569,298 @@ if ($m_got_screen == 0) {
       .fa-spinner {
         color: #fff;
       }
+      .list-group-item.active {
+          background-color: #fff;
+          border-color: #fff;
+      }
+      .modal-body h4{
+        color: #333;
+        font-weight: 400;
+        font-size: 20px;
+      }
+      .otherSection{display: none;}
     </style>
   </head>
   <body>
 
     <!-- MEDU BAR -->
-    <div id="menu"></div>
+    <!-- <div id="menu"></div> -->
+    <header>
+    <?php include_once('menu.php'); ?>
+    </header>
     <!-- MENU BAR-->
 
-    <!-- GIMME A BREAK -->
-    <br>
-    <!-- GIMME A BREAK -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 page-header">
-          <h1>Welcome, <?php echo $m_full_name;?></h1>
-        </div>
-      </div>
-      <div class="row">
-
-        <div class="col-md-3">
-          <br>
-          <div class="list-group nav" role="tablist" id="tabs" name="tabs">
-            <a id="tab_home" href="#home" aria-controls="home" role="tab" data-toggle="tab" class="list-group-item active" onclick="home_active_tab()"><i id="icon_home" class="fa fa-home fa-fw white-icon" aria-hidden="true"></i>&nbsp; Home</a>
-            <a id="tab_personal_page" href="#personal_page" aria-controls="personal_page" role="tab" data-toggle="tab" class="list-group-item" onclick="personal_active_tab()"><i id="icon_personal_page" class="fa fa-newspaper-o fa-fw" aria-hidden="true"></i>&nbsp; Personal Page</a>
-            <a id="tab_team_page" href="#team_page" aria-controls="team_page" role="tab" data-toggle="tab" class="list-group-item" onclick="team_active_tab()"><i id="icon_team_page" class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp; Team Page</a>
-            <a id="tab_org_page" href="#org_page" aria-controls="org_page" role="tab" data-toggle="tab" class="list-group-item" onclick="org_active_tab()"><i id="icon_org_page" class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp; Organization Page</a>
-            <a id="tab_donations" href="#donations" aria-controls="donations" role="tab" data-toggle="tab" class="list-group-item" onclick="donations_active_tab()"><i id="icon_donations" class="fa fa-usd fa-fw" aria-hidden="true"></i>&nbsp; Donations</a>
-            <a id="tab_account" href="#account" aria-controls="account" role="tab" data-toggle="tab" class="list-group-item" onclick="account_active_tab()"><i id="icon_account" class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Account</a>
-            <a id="tab_previous" href="#previous" aria-controls="previous" role="tab" data-toggle="modal" class="list-group-item" data-target="#previous_coming_soon"><i id="icon_preview" class="fa fa-clock-o fa-fw" aria-hidden="true"></i>&nbsp; Previous Contributors</a>
-          </div>
-        </div>
-
-        <div class="col-md-9">
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="home">
-
-            <!-- Tab panes -->
-            <br>
-
-            <div class="tab-content no-top-margin">
-              <!-- PERSONAL PROGRESS -->
-                <div role="tabpanel" class="tab-pane fade in active" id="personal_progress">
+    <section class="dashboard-home dash-board">
+          <div class="container">
+              <div class="inner-board clearfix">
                   <div class="row">
-                      <div class="col-md-4">
-                          <div class="panel panel-primary">
-                              <div class="panel-heading">
-                                  <div class="row">
-                                      <div class="col-xs-3">
-                                          <i class="fa fa-gift fa-4x"></i>
+                      <div class="col-12 col-md-4 col-lg-3">
+                          <div class="side-login-bar">
+                               <div class="pic-part">
+                                  <figure><img src="<?php echo $m_profile_pic;?>" class="img-fluid" alt="profile picture"></figure>
+                              </div>
+                              <div class="side-nav">
+                                  <ul class="nav list-unstyled">
+                                      <li><a id="tab_home" href="#home" class="active" onclick="home_active_tab()"><i class="ion ion-md-home"></i>Home</a></li>
+                                      <li><a id="tab_personal_page" href="#personal_page" onclick="personal_active_tab()"><i class="ion ion-md-document"></i>Personal Page</a></li>
+                                      <li><a id="tab_team_page" href="#team_page" onclick="team_active_tab()"><i class="ion ion-ios-people"></i>Team Page</a></li>
+                                      <li><a id="tab_org_page" href="#org_page" onclick="org_active_tab()"><i class="ion ion-md-options"></i>Organization Page</a></li>
+                                      <li><a id="tab_donations" href="#donations" onclick="donations_active_tab()"><i class="ion ion-logo-usd"></i>Donations</a></li>
+                                      <li><a id="tab_account" href="#account" onclick="account_active_tab()"><i class="ion ion-md-person"></i>Account</a></li>
+                                      <li><a id="tab_previous" href="#previous" aria-controls="previous" role="tab" data-toggle="modal" class="list-group-item" data-target="#previous_coming_soon"><i class="ion ion-ios-shuffle"></i>Previous Contributors</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-9" id="dashhome">
+                          <div class="right-board">
+                              <h2 class="mt-4">Welcome, <?php echo $m_full_name;?></h2>
+                              <div class="row py-3">
+                                  <div class="col-12 col-md-4">
+                                      <div class="re-box re-1">
+                                          <h1><?php echo $donation_count; ?><span><?php echo $donation_or_donations; ?></span></h1>
+                                          <a href="#donations" aria-controls="donations" role="tab" data-toggle="tab" onclick="donations_active_tab()">View Donations</a>
                                       </div>
-                                      <div class="col-xs-9 text-right">
-                                          <div class="huge"><?php echo $donation_count; ?></div>
-                                          <div><?php echo $donation_or_donations; ?></div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                      <div class="re-box re-2">
+                                          <h1>$<?php echo number_format($total_raised); ?> <span>Raised</span></h1>                                          
+                                          <!-- <a href="">Share Your Page</a> -->
+                                          <a href="#" data-toggle="modal" data-target="#sharePersonal">Share Your Page</a>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                      <div class="re-box re-3">
+                                          <h1><?php echo $goal_percentage;?> <span>of $<?php echo number_format($m_page_goal)?></span></h1>
+                                          <!-- <a href="">View Your Page</a> -->
+                                          <a target="_blank" href="/member/<?php echo $m_username; ?>">View Your Page</a>
                                       </div>
                                   </div>
                               </div>
-                              <a href="#">
-                                  <div class="panel-footer">
-                                      <span class="pull-left"><a href="#donations" aria-controls="donations" role="tab" data-toggle="tab" onclick="donations_active_tab()">View Donations</a></span>
-                                      <span class="pull-right"><a href="#donations" aria-controls="donations" role="tab" data-toggle="tab" onclick="donations_active_tab()"><i class="fa fa-arrow-circle-right"></i></a></span>
-                                      <div class="clearfix"></div>
-                                  </div>
-                              </a>
+                              <div class="das-content-box">
+                                  <h3>No-Shave November 2017</h3>
+                                  <p>Thank you for joining No-Shave November and helping the fight against cancer! With you and your fundraising efforts, it brings us one step closer to finding a cure for the disease.</p>
+                                  <p>This year's campaign will support programs at Prevent Cancer Foundation, Fight Colorectal Cancer, and St. Jude Children's Research Hospital. Each of the foundations listed are making great strides in fighting, researching, and preventing cancer. Put down the razor, skip the hair appointment, and let's make the 2017 No-Shave November campaign the best year yet!</p>
+                                  <p>Hairy November,</p>
+                                  <p>The No-Shave November Team</p>
+                              </div>
                           </div>
                       </div>
-                      <div class="col-md-4">
-                          <div class="panel panel-primary">
-                              <div class="panel-heading">
-                                  <div class="row">
-                                      <div class="col-xs-3">
-                                          <i class="fa fa-dollar fa-4x"></i>
+                      <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashpersonal">
+                            <div class="right-board">
+                              <h2 class="mt-4">Personal Page</h2>                            
+                                <div class="ac-own mt-5">
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Link :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-success" id="personal_url"><a id="view_personal_page_2" target="_blank" href="/member/<?php echo $m_username; ?>">no-shave.org/member/<?php echo $m_username; ?></a></span>
                                       </div>
-                                      <div class="col-xs-9 text-right">
-                                          <div class="huge">$<?php echo number_format($total_raised); ?></div>
-                                          <div>Raised</div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Location :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted" id="personal_location"><?php echo $personal_location; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Title :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted" id="page_title"><?php echo $m_page_title; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Photo :</label>
+                                      <div class="col-12 col-md-9">
+                                          <!-- <img id="pageimg" src="./img/pic-page.png" alt="your image" class="mb-2"  style="max-height: 150px;"/> -->
+                                          <img id="pageimg" style="max-height: 150px;" src="<?php echo $m_pic_0;?>" alt="<?php echo $m_full_name; ?> No Shave November 2017" class="mb-2">
+                                          <br>
+                                          <!-- <input type="file" id="pagepic" onchange="readURL(this);" hidden="">
+                                          <label class="btn btn-primary" for="pagepic"><i class="ion ion-md-cloud-upload"></i> Change Photo</label> -->
+                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPersonalPhotos"><i class="ion ion-md-cloud-upload"></i>&nbsp; Change Photo</button>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Fundraising Goal :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted">$<?php echo number_format($m_page_goal); ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Description:</label>
+                                      <div class="col-12 col-md-9">
+                                          <p class="text-muted"><?php echo $m_page_description; ?></p>
+                                          <!-- <p class="text-muted">For over six years, participants around the globe have put down their razors and foregone their hair appointments to join the fight against cancer. The No-Shave November campaign has successfully raised over $3.5 million dollars to combat this disease. Every dollar raised brings us one step closer in our efforts to fund cancer research and education, help prevent the disease, and aid those fighting the battle. Each whisker grown allows us to embrace our hair, which many cancer patients lose during treatment. Will you join me? Start by using the links to the right.</p> -->
+                                      </div>
+                                  </div>                                 
+                                  <div class="form-group row">                                      
+                                      <div class="col-12 col-md-9 ml-auto text-left">
+                                          <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editPersonal"><i class="ion ion-md-create"></i>Edit</a>
+                                          <a id="view_personal_page" class="btn btn-outline-primary btn-sm mx-2" target="_blank" href="/member/<?php echo $m_username; ?>"><i class="fa fa-eye"></i>View</a>
+                                          <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#sharePersonal"><i class="ion ion-md-share"></i>Share</a>
                                       </div>
                                   </div>
                               </div>
-                              <a href="#">
-                                  <div class="panel-footer">
-                                      <span class="pull-left"><a href="#" data-toggle="modal" data-target="#sharePersonal">Share Your Page</a></span>
-                                      <span class="pull-right"><a href="#" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-arrow-circle-right"></i></a></span>
-                                      <div class="clearfix"></div>
-                                  </div>
-                              </a>
                           </div>
                       </div>
-                      <div class="col-md-4">
-                          <div class="panel panel-primary">
-                              <div class="panel-heading">
-                                  <div class="row">
-                                      <div class="col-xs-3">
-                                          <i class="fa fa-flag-checkered fa-4x"></i>
-                                      </div>
-                                      <div class="col-xs-9 text-right">
-                                          <div class="huge"><?php echo $goal_percentage; ?></div>
-                                          <div>of $<?php echo number_format($m_page_goal)?></div>
-                                      </div>
-                                  </div>
+                      <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashteam">
+                          <div class="right-board">
+                              <h2 class="mt-4">Create or Join Team </h2>
+                              <span class="h-text">Select an Option Below to Get Started</span>
+                              <p>If you want to join or create a team, select an option below.</p>
+                              <div class="d-flex justify-content-center">
+                                    <a href="javascript:void(0)" class="btn-box selectType" teamVal="no">
+                                    <input type="radio" name="create_or_join_team_select" id="no" class="chkteam" value="create" checked>
+                                        <figure><img src="./img/add.png" class="img-fluid" alt=""></figure>
+                                        <span>Create Team</span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn-box selectType" teamVal="yes">
+                                    <input type="radio" name="create_or_join_team_select" id="yes" class="chkteam" value="join">
+                                        <figure><img src="./img/team.png" class="img-fluid" alt=""></figure>
+                                        <span>Join Team</span>
+                                    </a>
+                                </div>
+                              <div class="text-center">
+                                  <!-- <a href=""  class="btn btn-primary w-25 mt-5 btn-lg" onclick="create_or_join_team_modal()">Continue</a> -->
+                                   <button name="create_or_join_team" id="create_or_join_team" type="button" class="btn btn-primary w-25 mt-5 btn-lg" onclick="create_or_join_team_modal()">Continue</button>
                               </div>
-                              <a href="#">
-                                  <div class="panel-footer">
-                                      <span class="pull-left"><a target="_blank" href="/member/<?php echo $m_username; ?>">View Your Page</a></span>
-                                      <span class="pull-right"><a target="_blank" href="/member/<?php echo $m_username; ?>"><i class="fa fa-arrow-circle-right"></i></a></span>
-                                      <div class="clearfix"></div>
-                                  </div>
-                              </a>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashorganisation">
+                          <div class="right-board">
+                              <h2 class="mt-4">Create or Join an Organization?</h2>
+                              <span class="h-text">Select an Option Below to Get Started</span>
+                              <p>If you want to join or create an Organization, select an option below. Please note, only teams can belong to organizations</p>
+                              <div class="d-flex justify-content-center">
+                                    <a href="javascript:void(0)" class="btn-box selectOrg" orgVal="orgno">
+                                        <input type="radio" name="create_or_join_org_select" id="orgno" class="chkorg" value="create" checked>
+                                        <figure><img src="./img/pencil.png" class="img-fluid" alt=""></figure>
+                                        <span>Create Organization</span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn-box selectOrg" orgVal="orgyes">
+                                        <input type="radio" name="create_or_join_org_select" id="orgyes" class="chkorg" value="join">
+                                        <figure><img src="./img/link.png" class="img-fluid" alt=""></figure>
+                                        <span>Join Organization</span>
+                                    </a>
+                                </div>
+                              <div class="text-center">
+                                  <!-- <a href="" class="btn btn-primary w-25 mt-5 btn-lg">Continue</a> -->
+                                  <button name="create_or_join_org" id="create_or_join_org" type="button" class="btn btn-primary w-25 mt-5 btn-lg" onclick="create_or_join_org_modal()">Continue</button>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashdonation">
+                          <div class="right-board">
+                              <h2 class="mt-4">Donations</h2>
+                              <h3 class="text-medium">Personal Donations</h3>
+                              <ul class="list-unstyled mt-4 d-wrap">
+                                     <li> 
+                                        <div class="row ">
+                                            <div class="col-sm-7 col-12">
+                                                <div class="text-md-left">
+                                                    <span class="sn-no">1</span>
+                                                    <span class="d-name">Alex Wilson</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 col-12">
+                                                <div class="text-right">
+                                                    <span class="donation-price">$56.53</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 dc-wrap">
+                                                <span class="d-date">Date: </span> <p>20june, 2018</p>
+                                                <span class="d-cmnt">Comment: </span> <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                     <li> 
+                                        <div class="row ">
+                                            <div class="col-sm-7 col-12">
+                                                <div class="text-md-left">
+                                                    <span class="sn-no">2</span>
+                                                    <span class="d-name">Alex Wilson</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 col-12">
+                                                <div class="text-right">
+                                                    <span class="donation-price">$56.53</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 dc-wrap">
+                                                <span class="d-date">Date: </span> <p>20june, 2018</p>
+                                                <span class="d-cmnt">Comment: </span> <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                              </ul>
                           </div>
                       </div>
                   </div>
-                  <!-- /.row -->
-                </div>
               </div>
-              <!-- PERSONAL PROGRESS -->
-
-              <h4>No-Shave November 2017</h4>
-              <hr>
-
-              <p>Thank you for joining No-Shave November and helping the fight against cancer! With you and your fundraising efforts, it brings us one step closer to finding a cure for the disease.<br><br>This year's campaign will support programs at Prevent Cancer Foundation, Fight Colorectal Cancer, and St. Jude Children's Research Hospital.  Each of the foundations listed are making great strides in fighting, researching, and preventing cancer.  Put down the razor, skip the hair appointment, and let's make the 2017 No-Shave November campaign the best year yet!<br><br>Hairy November,<br><br>The No-Shave November Team</p>
-              <br>
-
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade" id="personal_page">
-              <!-- title -->
-              <div class="page-header no-top-margin">
-                <h2 class="visible-lg visible-md visible-sm hidden-xs">Personal Page
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPersonal"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edit</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPersonalPhotos"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
-                    <a id="view_personal_page" type="button" class="btn btn-default" target="_blank" href="/member/<?php echo $m_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
-                  </div>
-                </h2>
-                <h2 class="hidden-lg hidden-md hidden-sm visible-xs">Personal Page
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#" data-toggle="modal" data-target="#editPersonal"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i>&nbsp; Edit</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#editPersonalPhotos"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-fw fa-share" aria-hidden="true"></i>&nbsp; Share</a></li>
-                      <li><a id="view_personal_page" target="_blank" href="/member/<?php echo $m_username; ?>"><i class="fa fa-fw fa-eye" aria-hidden="true"></i>&nbsp; View</a></li>
-                    </ul>
-                  </div>
-                </h2>
-              </div>
-              <!-- title -->
-
-              <!-- raw content -->
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Link</label>
-                      <div class="col-sm-9">
-                        <p id="personal_url" class="form-control-static"><a id="view_personal_page_2" target="_blank" href="/member/<?php echo $m_username; ?>">no-shave.org/member/<?php echo $m_username; ?></a></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Location</label>
-                      <div class="col-sm-9">
-                        <p id="personal_location" class="form-control-static"><?php echo $personal_location; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Title</label>
-                      <div class="col-sm-9">
-                        <p id="page_title" class="form-control-static"><?php echo $m_page_title; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Photo</label>
-                      <div class="col-sm-9">
-                        <img id="current_personal_page_photo" style="width: 100%; height: 100%;" src="<?php echo $m_pic_0;?>" alt="<?php echo $m_full_name; ?> No Shave November 2017" class="img-rounded">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Fundraising Goal</label>
-                      <div class="col-sm-9">
-                        <p id="page_goal" class="form-control-static">$<?php echo number_format($m_page_goal); ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Description</label>
-                      <div class="col-sm-9">
-                        <p id="page_description" class="description-text form-control-static"><?php echo $m_page_description; ?></p>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </div>
-              </div>
-              <!-- raw content -->
-
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade" id="team_page">
-
-
-              <?php if (team_owner($user_id, $mysqli) == true) : ?>
-
-              <!-- TEAM OWNER -->
-              <div class="page-header no-top-margin">
-                <h2 class="visible-lg visible-md hidden-sm hidden-xs">Team Page
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editTeam"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edit</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#emailTeam"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Email Team</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editTeamPhotos"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#inviteTeam"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Invite</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
-                    <a id="view_team_page" type="button" class="btn btn-default" target="_blank" href="/team/<?php echo $t_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
-                  </div>
-                </h2>
-
-                <h2 class="hidden-lg hidden-md visible-sm visible-xs">Team Page
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#" data-toggle="modal" data-target="#editTeam"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i>&nbsp; Edit</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#emailTeam"><i class="fa fa-fw fa-envelope-o" aria-hidden="true"></i>&nbsp; Email Team</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#editTeamPhotos"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#inviteTeam"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>&nbsp; Invite</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-fw fa-share" aria-hidden="true"></i>&nbsp; Share</a></li>
-                      <li><a id="view_team_page" target="_blank" href="/team/<?php echo $t_username; ?>"><i class="fa fa-fw fa-eye" aria-hidden="true"></i>&nbsp; View</a></li>
-                    </ul>
-                  </div>
-                </h2>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Link</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><a id="view_team_page_2" href="https://no-shave.org/team/<?php echo $t_username; ?>">no-shave.org/team/<?php echo $t_username; ?></a></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Title</label>
-                      <div class="col-sm-9">
-                        <p id="team_title" class="form-control-static"><?php echo $t_page_title; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Photos</label>
-                      <div class="col-sm-9">
-                        <img id="current_team_page_photo" style="width: 100%; height: 100%;" src="<?php echo $t_pic_0; ?>" alt="<?php echo $t_name; ?> No Shave November 2017" class="img-rounded">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Fundraising Goal</label>
-                      <div class="col-sm-9">
-                        <p id="team_goal" class="form-control-static">$<?php echo number_format($t_page_goal); ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Description</label>
-                      <div class="col-sm-9">
-                        <p id="team_description" class="description-text form-control-static"><?php echo $t_page_description;?><br></p>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </div>
-              </div>
-              <!-- TEAM OWNER -->
-
-            <?php  elseif (team_member($user_id, $mysqli) == true) : ?>
-
-              <!-- TEAM MEMBER -->
-              <div class="page-header no-top-margin">
-                <h2 class="visible-lg visible-md visible-sm hidden-xs">Team Page
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#leaveTeam"><i class="fa fa-user-times" aria-hidden="true"></i>&nbsp; Leave Team</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
-                    <a id="view_team_page" type="button" class="btn btn-default" target="_blank" href="/team/<?php echo $t_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
-                  </div>
-                </h2>
-
-                <h2 class="hidden-lg hidden-md hidden-sm visible-xs">Team Page
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#" data-toggle="modal" data-target="#leaveTeam"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i>&nbsp; Leave Team</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-fw fa-share" aria-hidden="true"></i>&nbsp; Share</a></li>
-                      <li><a id="view_team_page" target="_blank" href="/team/<?php echo $t_username; ?>"><i class="fa fa-fw fa-eye" aria-hidden="true"></i>&nbsp; View</a></li>
-                    </ul>
-                  </div>
-                </h2>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Link</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><a href="https://no-shave.org/team/<?php echo $t_username; ?>">no-shave.org/team/<?php echo $t_username; ?></a></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Title</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><?php echo $t_page_title; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Photos</label>
-                      <div class="col-sm-9">
-                        <img style="width: 100%; height: 100%;" src="<?php echo $t_pic_0; ?>" alt="<?php echo $t_name; ?> No Shave November 2017" class="img-rounded">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Fundraising Goal</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static">$<?php echo number_format($t_page_goal); ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Description</label>
-                      <div class="col-sm-9">
-                        <p class="description-text form-control-static"><?php echo $t_page_description;?><br></p>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </div>
-              </div>
-              <!-- TEAM MEMBER -->
-
-            <?php  else : ?>
-
-              <!-- NO TEAM, YET -->
-              <div class="page-header no-top-margin">
-                <h2>Create or Join a Team?
-                </h2>
-              </div>
-
-              <div class="row">
-                <h2 class="centered">Select an Option Below to Get Started</h2>
-                <p class="centered">If you want to join or create a team, select an option below.</p>
-                <br>
-
-                <div class="centered">
-                  <div class="centered btn-table" data-toggle="buttons">
-                    <label class="btn btn-default btn-checkbox">
-                      <input type="radio" name="create_or_join_team_select" id="create_or_join_team_select" value="create" checked> <i class="fa fa-users fa-5x" aria-hidden="true"></i><br><br>Create Team
-                    </label>
-                    <!-- Need some room, geeze -->
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <label class="btn btn-default btn-checkbox">
-                      <input type="radio" name="create_or_join_team_select" id="create_or_join_team_select" value="join"> <i class="fa fa-user-plus fa-5x" aria-hidden="true"></i><br><br>Join Team
-                    </label>
-                  </div>
-                </div>
-
-              <br><br>
-              <button name="create_or_join_team" id="create_or_join_team" type="button" class="btn btn-success center-block" onclick="create_or_join_team_modal()">Get Started</button>
-              
-              </div>
-              <!-- NO TEAM, YET -->
-
-            <?php  endif; ?>
-
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade" id="org_page">
-
-              <?php if (org_owner($user_id, $mysqli) == true) : ?>
-
-              <!-- ORG OWNER -->
-              <div class="page-header no-top-margin">
-                <h2 class="visible-lg visible-md visible-sm hidden-xs">Organization Page
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editOrg"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edit</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editOrgPhotos"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#shareOrg"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
-                    <a id="view_org_page" type="button" class="btn btn-default" target="_blank" href="/org/<?php echo $o_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
-                  </div>
-                </h2>
-
-                <h2 class="hidden-lg hidden-md hidden-sm visible-xs">Organization Page
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#" data-toggle="modal" data-target="#editOrg"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i>&nbsp; Edit</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#editOrgPhotos"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#shareOrg"><i class="fa fa-fw fa-share" aria-hidden="true"></i>&nbsp; Share</a></li>
-                      <li><a id="view_org_page" target="_blank" href="/org/<?php echo $o_username; ?>"><i class="fa fa-fw fa-eye" aria-hidden="true"></i>&nbsp; View</a></li>
-                    </ul>
-                  </div>
-                </h2>
-              </div>
-
-              <!-- raw content -->
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Link</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><a id="view_org_page_1" href="https://no-shave.org/org/<?php echo $o_username; ?>">no-shave.org/org/<?php echo $o_username; ?></a></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Title</label>
-                      <div class="col-sm-9">
-                        <p id="org_title" class="form-control-static"><?php echo $o_page_title; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Photo</label>
-                      <div class="col-sm-9">
-                        <img id="current_org_page_photo" style="width: 100%; height: 100%;" src="<?php echo $o_pic_0; ?>" alt="<?php echo $o_name; ?> No Shave November 2017" class="img-rounded">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Fundraising Goal</label>
-                      <div class="col-sm-9">
-                        <p id="org_goal" class="form-control-static">$<?php echo number_format($o_page_goal); ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Description</label>
-                      <div class="col-sm-9">
-                        <p id="org_description" class="description-text form-control-static"><?php echo $o_page_description; ?><br></p>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </div>
-              </div>
-              <!-- ORG OWNER -->
-
-              <?php  elseif (org_member($user_id, $mysqli) == true) : ?>
-
-              <!-- ORG MEMBER -->
-              <div class="page-header no-top-margin">
-                <h2 class="visible-lg visible-md visible-sm hidden-xs">Organization Page
-                  <div class="pull-right">
-
-                    <?php if (team_owner($user_id, $mysqli) == true) : ?>
-                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#leaveOrg"><i class="fa fa-user-times" aria-hidden="true"></i>&nbsp; Leave Organization</button>
-                    <?php  else : ?>
-                    <?php  endif; ?>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#shareOrg"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
-                    <a type="button" class="btn btn-default" target="_blank" href="/org/<?php echo $o_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
-                  </div>
-                </h2>
-
-                <h2 class="hidden-lg hidden-md hidden-sm visible-xs">Organization Page
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <?php if (team_owner($user_id, $mysqli) == true) : ?>
-                      <li><a href="#" data-toggle="modal" data-target="#leaveOrg"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i>&nbsp; Leave Organization</a></li>
-                      <?php  else : ?>
-                      <?php  endif; ?>
-                      <li><a href="#" data-toggle="modal" data-target="#shareOrg"><i class="fa fa-fw fa-share" aria-hidden="true"></i>&nbsp; Share</a></li>
-                      <li><a target="_blank" href="/org/<?php echo $o_username; ?>"><i class="fa fa-fw fa-eye" aria-hidden="true"></i>&nbsp; View</a></li>
-                    </ul>
-                  </div>
-                </h2>
-              </div>
-
-              <!-- raw content -->
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Link</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><a href="https://no-shave.org/org/<?php echo $o_username; ?>">no-shave.org/org/<?php echo $o_username; ?></a></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Title</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><?php echo $o_page_title; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Photo</label>
-                      <div class="col-sm-9">
-                        <img style="width: 100%; height: 100%;" src="<?php echo $o_pic_0; ?>" alt="<?php echo $o_name; ?> No Shave November 2017" class="img-rounded">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Fundraising Goal</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static">$<?php echo number_format($o_page_goal); ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Page Description</label>
-                      <div class="col-sm-9">
-                        <p class="description-text form-control-static"><?php echo $o_page_description; ?><br></p>
-                      </div>
-                    </div>
-
-                  </form>
-
-                </div>
-              </div>
-              <!-- ORG MEMBER -->
-
-              <?php  else : ?>
-
-              <!-- NO ORG, YET -->
-              <div class="page-header no-top-margin">
-                <h2>Create or Join an Organization?
-                </h2>
-              </div>
-
-              <div class="row">
-                <h2 class="centered">Select an Option Below to Get Started</h2>
-                <p class="centered">If you want to join or create an Organization, select an option below. Please note, only teams can belong to organizations.</p>
-                <br>
-
-                <div class="centered">
-                  <div class="centered btn-table" data-toggle="buttons">
-                    <label class="btn btn-default btn-checkbox">
-                      <input type="radio" name="create_or_join_org_select" id="create_or_join_org_select" value="create" checked> <i class="fa fa-sitemap fa-5x" aria-hidden="true"></i><br><br>Create Organization
-                    </label>
-                    <!-- Need some room, geeze -->
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <label class="btn btn-default btn-checkbox">
-                      <input type="radio" name="create_or_join_org_select" id="create_or_join_org_select" value="join"> <i class="fa fa-plus fa-5x" aria-hidden="true"></i><br><br>Join Organization
-                    </label>
-                  </div>
-                </div>
-
-              <br><br>
-              <button name="create_or_join_org" id="create_or_join_org" type="button" class="btn btn-success center-block" onclick="create_or_join_org_modal()">Get Started</button>
-              
-              </div>
-              <!-- NO ORG, YET -->
-
-              <?php  endif; ?>
-
-            </div>
-
-
-            <div role="tabpanel" class="tab-pane fade" id="donations">
-              <div class="page-header no-top-margin">
-                <h2>Donations
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default visible-lg visible-md visible-sm hidden-xs" data-toggle="modal" data-target="#offlineDonation"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Offline Contribution</button>
-                    <button type="button" class="btn btn-default hidden-lg hidden-md hidden-sm visible-xs" data-toggle="modal" data-target="#offlineDonation"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Offline Donation</button>
-                  </div>
-                </h2>
-              </div>
-
-              <!-- raw content -->
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <?php echo $personal_donation_table; ?>
-                    <?php echo $team_donation_table; ?>
-                    <?php echo $org_donation_table; ?>
-
-                  </form>
-
-                </div>
-              </div>
-
-
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade" id="account">
-              <div class="page-header no-top-margin">
-                <h2 class="visible-lg visible-md visible-sm hidden-xs">Account
-                  <div class="pull-right">
-                    <a type="button" class="btn btn-default" href="/password" target="_blank"><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp; Change Password</a>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#changeProfilePicture"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Change Picture</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editAccount"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edit</button>
-                  </div>
-                </h2>
-
-                <h2 class="hidden-lg hidden-md hidden-sm visible-xs">Account
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="/password" target="_blank"><i class="fa fa-fw fa-unlock-alt" aria-hidden="true"></i>&nbsp; Change Password</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#changeProfilePicture"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i>&nbsp; Change Picture</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#editAccount"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i>&nbsp; Edit</a></li>
-                    </ul>
-                  </div>
-                </h2>
-              </div>
-
-              <!-- raw content -->
-              <div class="row">
-                <div class="col-md-12">
-
-                  <form class="form-horizontal">
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Full Name</label>
-                      <div class="col-sm-9">
-                        <p id="show_full_name" class="form-control-static"><?php echo $m_full_name; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Profile Picture</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static"><img id="preview_profile_picture_image" class="img-rounded" height="42" width="42" src="<?php echo $m_profile_pic; ?>"></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Email Address</label>
-                      <div class="col-sm-9">
-                        <p id="show_email_address" class="form-control-static"><?php echo $m_email; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Password</label>
-                      <div class="col-sm-9">
-                        <p class="form-control-static">********</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">City</label>
-                      <div class="col-sm-9">
-                        <p id="show_city" class="form-control-static"><?php echo $m_city; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">State</label>
-                      <div class="col-sm-9">
-                        <p id="show_state" class="form-control-static"><?php echo $m_state; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Country</label>
-                      <div class="col-sm-9">
-                        <p id="show_country" class="form-control-static"><?php echo $m_country; ?></p>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Got Screened</label>
-                      <div class="col-sm-9">
-                        <p id="show_got_screen" class="form-control-static"><?php echo $member_got_screened; ?></p>
-                      </div>
-                    </div>
-
-                  </form>
-                </div>
-              </div>
-            </div>        
           </div>
-        </div>
-      </div>
-    </div>
+      </section>
 
+      <script>
+        $('#tab_personal_page').on('click', function(){
+        $('#dashpersonal').removeClass('otherSection');
+        $('#dashhome').addClass('otherSection');
+        $('#dashteam').addClass('otherSection');
+        $('#dashorganisation').addClass('otherSection');
+        $('#dashdonation').addClass('otherSection'); 
+        });
+
+        $('#tab_home').on('click', function(){
+        $('#dashhome').removeClass('otherSection');
+        $('#dashpersonal').addClass('otherSection');
+        $('#dashteam').addClass('otherSection');
+        $('#dashorganisation').addClass('otherSection');
+        $('#dashdonation').addClass('otherSection'); 
+        });
+
+        $('#tab_team_page').on('click', function(){
+        $('#dashteam').removeClass('otherSection');
+        $('#dashhome').addClass('otherSection');
+        $('#dashpersonal').addClass('otherSection');
+        $('#dashorganisation').addClass('otherSection');
+        $('#dashdonation').addClass('otherSection'); 
+        });
+
+        $('#tab_org_page').on('click', function(){
+        $('#dashorganisation').removeClass('otherSection');  
+        $('#dashteam').addClass('otherSection');
+        $('#dashhome').addClass('otherSection');
+        $('#dashpersonal').addClass('otherSection');
+        $('#dashdonation').addClass('otherSection');
+        });
+
+        $('#tab_donations').on('click', function(){
+        $('#dashdonation').removeClass('otherSection');  
+        $('#dashteam').addClass('otherSection');
+        $('#dashhome').addClass('otherSection');
+        $('#dashpersonal').addClass('otherSection');
+        $('#dashorganisation').addClass('otherSection');
+        });
+    </script>  
+
+    <script>
+         $(document).ready(function() {
+            $(".selectType").click(function() {
+                var selectUserType = $(this).attr('teamVal');
+                $('.chkteam').each(function() {
+                    $(this).removeAttr('checked');
+                });
+                $('#'+selectUserType).attr('checked', 'checked');
+            });
+
+            $(".selectOrg").click(function() {
+                var selectOrgType = $(this).attr('orgVal');
+                $('.chkorg').each(function() {
+                    $(this).removeAttr('checked');
+                });
+                $('#'+selectOrgType).attr('checked', 'checked');
+            });
+        });
+    </script>  
+      
     <!-- - - - - - -  -->
     <!-- PAGE CONTENT -->
     <!-- - - - - - -  -->
@@ -2290,8 +1877,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
+            <h4 class="modal-title">Edit Personal Page</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Edit Personal Page</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -2652,8 +2240,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Share Personal Page</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Share Personal Page</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -2878,8 +2467,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Change Personal Page Photo</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Change Personal Page Photo</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -3004,8 +2594,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
+            <h4 class="modal-title">Join a Team</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Join a Team</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -3042,8 +2633,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
+            <h4 class="modal-title">Join an Organization</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Join an Organization</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -3165,8 +2757,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Create a Team</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
             </div>
 
             <div class="modal-body">
@@ -3203,8 +2796,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
+            <h4 class="modal-title">Create an Organization</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Create an Organization</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -3503,11 +3097,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="previous_coming_soon" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="previous_coming_soon">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Previous Campiang Contributions (Coming soon)</h4>
+          <h4 class="modal-title">Previous Campiang Contributions (Coming soon)</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            
           </div>
           <div class="modal-body">
             <h4 id="previous_coming_soon_message" name="previous_coming_soon_message">We're working hard to gather this data for you. Please check back soon.</h4>
@@ -3518,18 +3113,6 @@ if ($m_got_screen == 0) {
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div>
-
-    <!-- - - - -->
-    <!-- MODALS -->
-    <!-- - - -  -->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <!-- FOOTER -->
 
     <script>
       function twitter(){
@@ -3566,9 +3149,9 @@ if ($m_got_screen == 0) {
       }
     </script>
 
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/js/loadingoverlay.js" type="text/javascript"></script>
+    
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
+    <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
   </body>
 </html>
