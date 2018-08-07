@@ -1,0 +1,6 @@
+platform/move_donation.php
+platform/api/search_donations.php
+platform/api/transfer_donation.php
+platform/includes/cache_orgs.php
+platform/gen_receipt.php
+/nbproject/private/

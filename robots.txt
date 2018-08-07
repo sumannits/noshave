@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /password
+Disallow: /dashboard
+Disallow: /platform/api
+Disallow: /platform/includes
+Disallow: /platform/uploads
+Disallow: /404
+Disallow: /404.html
+Disallow: /unsubscribe.html

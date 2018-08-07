@@ -1,0 +1,478 @@
+@media screen and (max-width:1199px){
+    .navbar-expand-lg .navbar-nav a {	
+	font-size: 12px;
+    }
+    .right-log ul li a{
+        font-size: 12px;
+    }
+    span.donate-top {	
+	font-size: 13px;	
+	padding: 0 14px;
+	height: 62px;
+	margin: 0px 9px 0px;
+    }
+    .right-log{
+        padding-left: 100px;
+    }
+    .curve-bg-div {	
+	height: 251px;
+	width: 296px;
+	bottom: -270px;	
+	left: -232px;
+	padding: 29px 25px 20px;
+    }
+    .curve-bg-div p {       
+        font-size: 18px;
+    }
+    .curve-bg-div h2 {
+        font-size: 33px;
+    }
+    .banner-slide .slick-dots{
+        width: 100%;
+        margin: 0 auto;
+        
+    }
+    .banner-slide .slick-dots li{
+        width: 32.6%;
+    }
+    .pink-box h2{
+        font-size: 24px;
+    }
+    .pink-box .btn {	
+	font-size: 14px;	
+	padding: 4px 10px;
+    }
+    .col-sm-3.col-form-label{
+        padding: 0;
+    }
+}
+
+@media screen and (max-width:991px){
+    .curve-bg-div{
+        display: none;
+    }
+    .navbar-toggler.navbar-toggler-right {
+        position: absolute;
+        right: -15px;
+        top: 10px;
+        outline: 0 !important;
+    }
+    .right-log {
+        top: 13px;
+        position: absolute;
+        right: 50px;
+    }
+    header .container{
+        position: relative;
+    }
+    .top-heading{
+        margin-bottom: 0;
+    }
+    .cr-box,
+    .cr-box .in-content{
+        transform: none !important;
+        max-width: 990px;
+        height: auto;
+        padding: 10px 10px;
+    }
+    .skew-box.py-5.mb-3{
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .content-m p{
+        font-size: 18px;
+        line-height: 26px;
+        max-width: 100%;
+    }
+    .participate h3{
+        font-size: 22px;
+    }
+    .trans-blue figure{
+        margin: 10px auto;
+        width: 150px;
+        height: 150px;
+    }
+    .trans-blue h2{
+        margin-top: 0;
+        font-size: 24px;        
+    }
+    .trans-blue p {
+	font-size: 13px;       
+	line-height: 20px;
+    }
+    .trans-blue .btn{
+        margin-bottom: 15px;
+    }
+    .app-btn h2{
+        font-size: 38px;
+    }
+    .f-link ul li a{
+        padding: 10px 10px;
+    }
+    .right-board h2{
+        font-size: 24px;
+    }
+    .right-board span.h-text{
+        font-size: 18px;
+    }
+    .right-board p{
+        font-size: 14px;
+    }
+    .btn.btn-primary.w-25{
+        min-width: 200px;
+    }
+    .side-nav ul li a{
+        font-size: 14px;
+    }
+    .right-board .col-md-4{
+        padding: 0 5px;
+    }
+    .right-board .form-group img{
+        max-width: 100%;
+    }
+    .ac-own label,
+    .ac-own span{
+        font-size: 15px;
+    }
+    .dc-wrap span{
+        width: 25%;
+    }
+    .dc-wrap p{
+        width: 75%;
+    }
+    .c-form-main,.addr-main{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:767px){
+    .right-board .col-md-4{
+        padding: 0 15px;
+    }
+    body{
+        font-weight: 300;
+        font-size: 13px;
+    }
+    .container{
+        max-width: 100%;
+    }
+    .our-mission figure img{
+        margin: 0 auto;
+        display: block;
+    }
+    .top-heading h2,
+    .our-mission h2{
+        font-size: 32px;
+    }
+    .top-heading span,
+    .cr-box h2{
+        font-size: 20px;
+    }
+    .top-heading p,
+    .content-m p{
+        font-size: 14px;
+    }
+    .fund-box{
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #888;
+    }
+    .filter-wrap{
+        max-width: 100%;
+        margin-left: 0;
+    }
+    .story-cont {
+        padding: 20px 20px;
+    }
+    .trans-blue{
+        text-align: center;
+    }    
+    .trans-blue .btn {	
+	padding: 4px 15px;	
+	font-size: 12px;
+    }
+    .awerness .d-flex {
+        min-height: 150px;
+    }
+    .awerness h2{
+        font-size: 24px;
+    }
+    .awerness p{
+        font-size: 13px;
+        max-width: 480px;
+        margin: 10px auto;
+    }
+    .shop-home,.our-story,.spread-word,
+    .participate,.what-is-nov.py-5{
+        padding: 30px 0 !important;
+    }
+    .footer, .footer .text-left,.footer .text-right{
+        text-align: center !important;
+        padding-bottom: 0;
+    }
+    .footer::before {	
+	border-bottom: 44px solid #241915;
+	border-left: 800px solid transparent;
+	margin-top: -44px;
+    }
+    .app-sec{
+        padding: 30px 0;
+        margin-bottom: 0;
+    }
+    .green-bg,.brwon-bg{
+        padding: 20px 17px 10px;
+    }
+    .participate .btn {
+	color: #212121;
+	font-weight: 500;
+	padding: 2px 14px;
+	font-size: 12px;
+	margin-bottom: 15px;
+    }
+    .participate h3{
+        font-size: 20px;
+    }
+    .app-btn{
+        padding-left: 0;
+    }
+    .app-sec{
+        min-height: 150px;
+    }
+    .animate-2{
+        animation-duration: 1s;
+        animation-delay: 0.1s;
+     }
+     .register-div h2,
+     .register-step-2 h2.mb-0{
+         font-size: 30px;
+         margin-bottom: 20px;
+     }
+     .register-div h3{
+         font-size: 20px;
+     }
+     .register-div p{
+         font-size: 15px;
+     }
+     .register-div .form-control{
+         font-size: 12px;
+         min-height: 20px;
+         border: 1px solid #e3e3e3;
+         border-radius: 4px;
+     }
+     .register-div .form-group{
+         margin-bottom: 20px;
+     }
+     .register-div .form-control:focus{
+        border: 1px solid #3e50b4;   
+    }
+    .register-div .btn {
+        width: 140px;
+        border-radius: 4px;
+        height: 36px;
+        font-size: 13px;
+    }
+    .border-pay{
+        padding:20px 10px;        
+        margin-left: 0;
+    }
+    .register-div ul li label {
+	font-size: 15px;
+	color: #777;
+	font-weight: 300;
+	margin-left: 0px;
+    }
+    .register-div ul li {
+        padding: 10px 5px;
+    }
+    .pay-form {
+        margin-top: 0;
+    }
+    .ac-own.mt-5{
+        margin-top: 20px !important;
+    }
+    .dc-wrap span{
+        width: 100%;
+    }
+    .dc-wrap p{
+        width: 100%;
+    }
+    .c-form-main .form-control{
+        padding-bottom: 8px;
+    }
+    .leaderboard h2{
+        font-size: 30px;
+    }
+    .leaderboard h3{
+        font-size: 18px;
+    }
+    .table-tab li a {	
+	padding: 5px 10px;	
+	font-size: 13px;
+        margin-bottom: 10px;
+    }
+    .table-bordered td {
+        padding: 10px 10px;       
+    }
+    .table-bordered tr td b{
+        font-size: 20px;
+    }
+    .table-bordered tr td span{
+        font-size: 16px;
+    }
+    .table-bordered th{
+        padding: 8px 8px;
+    }
+}
+
+@media screen and (max-width:576px){
+    .bk-li .d-flex{
+        display: block !important;
+    }
+    .green-bg,.brwon-bg{
+        transform: none;
+        margin-top: 20px;
+        border-radius: 4px 4px 4px 4px;
+    }
+    .brwon-bg .cont-text,.green-bg .cont-text{
+        transform: none;
+    }
+    .navbar-brand {
+        max-width: 97px;
+    }
+    span.donate-top {
+        height: 32px;
+        top: -9px;
+        line-height: 30px;
+    }
+    .navbar{
+        padding: 2px 1rem;
+    }
+    .banner-slide .slick-dots li{
+        height: 3px;
+    }
+    .pink-box .btn {
+	font-size: 12px;
+	padding: 3px 6px;
+	margin: 5px 2px;
+    }
+    .app-sec figure{
+        display: none;
+    }
+     .app-btn {
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 15px;
+    }
+    .animate-3{
+        animation-duration: 0.5s;
+        animation-delay: 0s;
+    }
+    .app-btn h2 {
+	font-size: 31px;
+    }
+    .f-link ul li a {
+	padding: 5px 6px;
+	font-size: 13px;
+    }
+    .f-link p{
+        padding: 0;
+        font-size: 13px;
+    }
+    .top-heading h2{
+	font-size: 25px;
+	margin-bottom: 10px;
+    }
+    .register-div .d-flex{
+        display: block !important;
+    }
+    .border-pay .col-6{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .register-div ul li label {
+	font-size: 13px;
+	color: #777;
+	font-weight: 300;
+	margin-left: 0px;
+    }
+    .right-board .d-flex{
+        display: block !important;
+    }
+    .btn-box{
+        margin: 20px auto;
+    }
+    .right-board img{
+        max-width: 100% !important;
+    }
+    .right-board a.btn.btn-outline-primary{
+        font-size: 13px;
+        font-weight: 300;
+    }
+    .ac-own label{
+        font-size: 15px;
+    }
+    .ac-own span{
+        font-size: 15px;
+    }
+    .right-board .form-group p{
+        font-size: 13px;
+    }
+    .pic-part{
+        padding: 20px 0;
+    }
+    .pic-part:after{
+        height: 50px;
+    }
+    .side-nav ul li a{
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border-left: 2px solid #c1c1c1;
+        font-size: 13px;
+    }
+    .side-nav ul li a:hover, .side-nav ul li a.active {
+        color: #074f5f;
+        border-left: 2px solid #074f5f;
+    }
+    .pic-part figure{
+        height: 70px;
+        width: 70px;
+    }
+    .d-wrap .text-right{
+        padding-left: 55px;
+        text-align: left !important;
+    }
+    .right-board h3,
+    span.donation-price{
+        font-size: 20px;
+    }
+    .dash-board {
+        padding: 20px 0;
+    }
+}
+@media screen and (max-width:379px){
+    .navbar-brand {
+        max-width: 70px;
+    }
+    .banner-slide .slick-dots li{
+        display: none !important;
+    }
+    span.donate-top,span.donate-top a{
+        transform: none;
+    }
+    .right-log{
+        right: 40px;
+    }
+    span.donate-top {
+	height: 21px;
+	top: 0;
+	line-height: 21px;
+	padding: 0 5px;
+	text-transform: capitalize;
+	left: 26px;
+    }
+    .skew-box.py-5.mb-3{
+        padding-top: 5px !important;
+    }
+   
+    
+}
