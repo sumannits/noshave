@@ -18,4 +18,4 @@ setcookie(session_name(),
  
 // Destroy session 
 session_destroy();
-header('Location: /login');
+header('Location: '.base_url.'/login');
