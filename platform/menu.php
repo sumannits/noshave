@@ -4,8 +4,9 @@ if($currentPage!=''){
     $pageName = explode('.',$currentPage);
 
 }
+//print_r($mysqli);
 ?>
-<?php if (login_check($mysqli) == true) : ?>        
+<?php if (login_check($mysqli) == true){ ?>        
             <!-- Navigation after login-->
             <nav class="navbar navbar-expand-lg">
               <div class="container">
@@ -55,7 +56,7 @@ if($currentPage!=''){
               </div>
             </nav>
             <!--end of navigation after login-->
-	    <?php else : ?>
+<?php }else{ ?>
 	    <!-- Navigation before login-->
             <nav class="navbar navbar-expand-lg">
               <div class="container">
@@ -119,4 +120,4 @@ if($currentPage!=''){
               </div>
             </nav>
             <!--end of navigation before login -->		
-	    <?php endif; ?>
+                    <?php } ?>

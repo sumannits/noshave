@@ -87,22 +87,33 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
 
     $member_count += 1;
 
-    $member_table .= '
-                      <tr>
-                        <td class="col-md-1">
-                          <h4>' . $member_count . '</h4>
-                        </td>
-                        <td class="vert-align col-md-1">
-                          <img class="img-rounded" height="42" width="42" src="' . $m_profile_pic . '">
-                        </td>
-                        <td class="vert-align col-md-7">
-                          <h4><a href="/member/' . $m_username . '">' . $m_full_name . '</a></h4>
-                        </td>
-                        <td class="vert-align col-md-3">
-                          <h3 class="donation-green">$' . number_format($m_total_raised) . '</h3>
-                        </td>
-                      </tr>
-                    ';
+    // $member_table .= '
+    //                   <tr>
+    //                     <td class="col-md-1">
+    //                       <h4>' . $member_count . '</h4>
+    //                     </td>
+    //                     <td class="vert-align col-md-1">
+    //                       <img class="img-rounded" height="42" width="42" src="' . $m_profile_pic . '">
+    //                     </td>
+    //                     <td class="vert-align col-md-7">
+    //                       <h4><a href="/member/' . $m_username . '">' . $m_full_name . '</a></h4>
+    //                     </td>
+    //                     <td class="vert-align col-md-3">
+    //                       <h3 class="donation-green">$' . number_format($m_total_raised) . '</h3>
+    //                     </td>
+    //                   </tr>
+    //                 ';
+                $member_table .= '
+                    <tr>
+                      <td>' . $member_count . '</td>
+                      <td>
+                        <img src="' . $m_profile_pic . '" alt=""> <span> <a href="/member/' . $m_username . '">' . $m_full_name . '</a> </span>
+                      </td>
+                      <td>
+                      <b>$' . number_format($m_total_raised) . '</b>
+                      </td>
+                    </tr>
+                  ';                
 
   }
 

@@ -25,8 +25,8 @@ $results = '
                 <li role="presentation" class="visible-lg visible-md visible-sm hidden-xs"><a class="black-link" href="#org_results" aria-controls="org_results" role="tab" data-toggle="tab"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Organizations</a></li>
 
                 <li role="presentation" class="active hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#member_results" aria-controls="member_results" role="tab" data-toggle="tab"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-                <li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#team_results" aria-controls="team_results" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Teams</a></li>
-                <li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#org_results" aria-controls="org_results" role="tab" data-toggle="tab"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Orgs</a></li>
+                <!--<li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#team_results" aria-controls="team_results" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Teams</a></li>
+                <li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#org_results" aria-controls="org_results" role="tab" data-toggle="tab"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Orgs</a></li>-->
               </ul>
             ';
 

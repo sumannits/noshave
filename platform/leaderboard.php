@@ -1,17 +1,19 @@
 <?php
   // Load database connection and php functions
-  include_once 'includes/psl-config.php';
-  include_once 'includes/db_connect.php';
+  //include_once 'includes/psl-config.php';
+  //include_once 'includes/db_connect.php';
   include_once 'includes/functions.php';
   // Start secure session
   sec_session_start();
 ?>
 
 <?php
-
+$member_count = 0;
+$member_table1 = '';
 //SELECT count(o_id) FROM org;
 if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, total_orgs, top_members, top_teams, top_orgs FROM leaderboard")) {
   $stmt->execute();
+  //print_r($stmt);
   $stmt->store_result();
   $stmt->bind_result($total_raised, $total_members, $total_teams, $total_orgs, $member_table, $team_table, $org_table);
   $stmt->fetch();
@@ -28,30 +30,58 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
   $org_table = "Something's not right.";
 }
 
+if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum(d_amount) FROM donation, member WHERE m_id = d_classifier_id GROUP BY d_classifier_id ORDER BY sum(d_amount) DESC LIMIT 10")) {
+  $stmt->execute();
+  $stmt->store_result();
+  $stmt->bind_result($m_username, $m_full_name, $m_profile_pic, $m_total_raised);
+
+  while ($stmt->fetch()) {
+
+    $member_count += 1;
+
+                $member_table1 .= '
+                    <tr>
+                      <td>' . $member_count . '</td>
+                      <td>
+                        <img src="' . $m_profile_pic . '" alt=""> <span> <a href="/member/' . $m_username . '">' . $m_full_name . '</a> </span>
+                      </td>
+                      <td>
+                      <b>$' . number_format($m_total_raised) . '</b>
+                      </td>
+                    </tr>
+                  ';                
+
+  }
+
+} else {
+  // unable to get data
+  $member_table1 = "Something went wrong.";
+}
+//print_r($member_table);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="<?php echo base_url; ?>/img/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="author" content="No-Shave November">
     <meta name="description" content="Check out who's leading this year's No-Shave November fundraising efforts! Looking for someoneone specific? Search and find them!">
     <title>Leaderboard | No-Shave November</title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet">    
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link href='assets/css/font.css' rel='stylesheet' type='text/css'>
-    <script src="assets/js/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function(){
-        $("#menu").load("platform/platform_menu.php"); 
-      });
-      $(function(){
-        $("#footer").load("platform/platform_footer.html"); 
-      });
-    </script>
+    <link href="<?php echo base_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick-theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick.css" rel="stylesheet">   
+    <link href="<?php echo base_url; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/fonts/themify-icons.css" rel="stylesheet">   
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url; ?>/assets/css/animations.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/responsive.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/loadingoverlay.js" type="text/javascript"></script>
+    
     <script>
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
@@ -59,8 +89,7 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
     </script>
     <script>
 
-      function search() {
-
+      function search1() {
         // grab field
         var args = {
           q: $('#q').val()
@@ -69,7 +98,7 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
         // make call
         $.ajax({ 
           type: 'POST',
-          url: 'platform/api/search.php', 
+          url: './platform/api/search.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -105,7 +134,7 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
         // make call
         $.ajax({ 
           type: 'POST',
-          url: 'platform/api/search.php', 
+          url: './platform/api/search.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -214,26 +243,26 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
     .fa-search {
       color: #555;
     }
+    .modal-body h4{
+      color: #333;
+      font-weight: 400;
+      font-size: 20px;
+    }
+    .hidden{display: none;}
     </style>
   </head>
   <body>
+      <header>           
+        <?php include_once('menu.php');?>
+      </header>
 
-    <!-- MEDU BAR -->
-    <div id="menu"></div>
-    <!-- MENU BAR-->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-
-          <?php
+      <section class="leaderboard text-center">
+            <div class="container">
+                <h2>Leaderboard</h2>
+                <h3>This year $<?php echo number_format($total_raised); ?> has been raised by <?php echo number_format($total_members); ?> members, <?php echo number_format($total_teams); ?> teams and <?php echo number_format($total_orgs); ?> organizations.</h3>
+                <div class="row">
+                  <div class="col-md-12">
+                <?php
             if (isset($_GET['d'])) {
               echo '
                   <div class="alert alert-success alert-dismissible" role="alert" style="margin-bottom: -15px; margin-top: 25px;">
@@ -243,145 +272,177 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
               ';
             }
           ?>
-
-          <br><br>
-          <img style="width: 100%; height: 100%;" src="https://storage.googleapis.com/nsn-misc/nsn-full-logo.png" alt="No Shave November 2017" class="img-rounded">
-          <br><br>
-
-          <div class="row">
-            <div class="col-md-4 col-xs-4">
-                <img style="width: 100%; height: 100%;" src="img/partners/pcf.gif" alt="" class="img-rounded">
-            </div>
-            <div class="col-md-4 col-xs-4">
-                <img style="width: 100%; height: 100%;" src="img/partners/fcc.png" alt="" class="img-rounded">
-            </div>
-            <div class="col-md-4 col-xs-4">
-                <img style="width: 100%; height: 100%;" src="img/partners/stj-2.png" alt="" class="img-rounded">
-            </div>
-          </div>
-
-          <br><br>
-
-          <h2 class="centered visible-lg visible-md visible-sm hidden-xs">This year <big class="donation-green">$<?php echo number_format($total_raised); ?></big> has been raised by <big class="donation-green"><?php echo number_format($total_members); ?></big> members, <big class="donation-green"><?php echo number_format($total_teams); ?></big> teams and <big class="donation-green"><?php echo number_format($total_orgs); ?></big> organizations.</h2>
-          
-          <h4 class="centered hidden-lg hidden-md hidden-sm visible-xs">This year <big class="donation-green">$<?php echo number_format($total_raised); ?></big> has been raised by <big class="donation-green"><?php echo number_format($total_members); ?></big> members, <big class="donation-green"><?php echo number_format($total_teams); ?></big> teams and <big class="donation-green"><?php echo number_format($total_orgs); ?></big> organizations.</h4>
-
-          <br><br>
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-              <div class="form-inline">
-                <div class="input-group">
-                  <input type="text" class="form-control" name="q" id="q" placeholder="Search Members, Teams and Organizations" onKeyDown="if(event.keyCode==13) search();">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default btn-add form-control" onclick="search()">
-                      <span class="glyphicon glyphicon-search"></span> Search
-                    </button>
-                  </span>
+                  </div>
                 </div>
-              </div>
+                <div class="d-flex justify-content-end">
+                    <div class="input-group mt-4 mb-5">
+                        <input type="text" class="form-control" placeholder="Search Members, Teams and Organizations" name="q" id="q" onKeyDown="if(event.keyCode==13) search1();">
+                        <div class="input-group-append">
+                          <a href="Javascript:void(0);" class="btn btn-dark" id="basic-addon2" onclick="search1()">Search</a>
+                        </div>
+                    </div>
+                </div>                
+                <ul class="nav table-tab mb-5" id="myTab" role="tablist">
+                    <li>
+                      <a class="active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Member Leaderboard</a>
+                    </li>
+                    <li>
+                      <a class="" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Team Leaderboard</a>
+                    </li>
+                    <li>
+                      <a class="" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Organization Leaderboard</a>
+                    </li>
+                    <!--<li>
+                      <a class="" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Organization Leaderboard</a>
+                    </li>
+                    <li>
+                      <a class="" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Organization Leaderboard</a>
+                    </li>-->
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial No</th>
+                                    <th scope="col" class="pl-5">Member</th>
+                                    <th scope="col" class="pl-5">Raised</th>                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php echo $member_table1; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial No</th>
+                                    <th scope="col" class="pl-5">Team</th>
+                                    <th scope="col" class="pl-5">Raised</th>                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php echo $team_table; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial No</th>
+                                    <th scope="col" class="pl-5">Organization</th>
+                                    <th scope="col" class="pl-5">Raised</th>                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php echo $org_table; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
             </div>
-          </div>
-          <br><br><br>
+        </section>
+        <!--end of leaderboard-->       
+       <section class="funded-programs" style="background-image:url(./img/cans-bg.jpg);">
+           <div class="container">              
+               <div class="row">
+                   <div class="col-12 col-md-4">
+                       <div class="fund-box text-center">
+                           <figure>
+                               <img src="./img/img1.png" class="img-fluid" alt="funding logo">
+                           </figure>
+                           <div class="clearfix text-center">
+                               <h4>Prevent Cancer Foundation</h4>
+                               <p>Prevent Cancer Foundation is the only U.S. nonprofit solely focused on the prevention and early detection of cancer. </p>
+                               <a href="" class="text-white">Learn More</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-12 col-md-4">
+                       <div class="fund-box text-center">
+                           <figure>
+                               <img src="./img/img2.png" class="img-fluid" alt="funding logo">
+                           </figure>
+                           <div class="clearfix text-center">
+                               <h4>Fight Colorectal Cancer</h4>
+                               <p>Fight Colorectal Cancer is a community of activists committed to fighting colorectal cancer until there's a cure.</p>
+                               <a href="" class="text-white">Learn More</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-12 col-md-4">
+                       <div class="fund-box text-center">
+                           <figure>
+                               <img src="./img/img3.png" class="img-fluid" alt="funding logo">
+                           </figure>
+                           <div class="clearfix text-center">
+                               <h4>St. Jude Children's Research Hospital</h4>
+                               <p>St. Jude Children's Research Hospital is leading the way the world understands, treats and defeats childhood cancer. </p>
+                               <a href="" class="text-white">Learn More</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>      
+       <!--end of funded-->
+       <section class="press-release">
+           <div class="container">             
+               <div class="brand-wrap">
+                   <ul class="list-inline brand-slide">
+                       <li><figure><img src="./img/brand1.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand2.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand3.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand4.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand5.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand6.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand1.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand2.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand3.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand4.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand5.png" class="img-fluid" alt="partner"></figure></li>
+                       <li><figure><img src="./img/brand6.png" class="img-fluid" alt="partner"></figure></li>
+                   </ul>
+               </div>
+           </div>
+       </section>
 
-          <!-- LEADERBOARD SELECTION -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active visible-lg visible-md visible-sm hidden-xs"><a class="black-link" href="#member" aria-controls="member" role="tab" data-toggle="tab"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Member Leaderboard</a></li>
-            <li role="presentation" class="visible-lg visible-md visible-sm hidden-xs"><a class="black-link" href="#team" aria-controls="team" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team Leaderboard</a></li>
-            <li role="presentation" class="visible-lg visible-md visible-sm hidden-xs"><a class="black-link" href="#org" aria-controls="org" role="tab" data-toggle="tab"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Organization Leaderboard</a></li>
-
-            <li role="presentation" class="active hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#member" aria-controls="member" role="tab" data-toggle="tab"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-            <li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#team" aria-controls="team" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Teams</a></li>
-            <li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#org" aria-controls="org" role="tab" data-toggle="tab"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Orgs</a></li>            
-          </ul>
-          <!-- LEADERBOARD SELECTION -->
-
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="member">
-              <br>
-              <table class="table table-hover">
-                <thead>
-                  <tr class="visible-lg visible-md visible-sm hidden-xs">
-                    <th class="col-md-1"><h4>#</h4></th>
-                    <th class="col-md-7" colspan="2"><h4><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Member</h4></th>
-                    <th class="col-md-2"><h4>Raised</h4></th>
-                  </tr>
-
-                  <tr class="hidden-lg hidden-md hidden-sm visible-xs">
-                    <th class="col-md-1"><h4>#</h4></th>
-                    <th class="col-md-7" colspan="2"><h4>Member</h4></th>
-                    <th class="col-md-2"><h4>Raised</h4></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php echo $member_table; ?>
-                </tbody>
-              </table>
+    <section class="app-sec" style="background-image: url(./img/fbg.png);">
+        <div class="container">
+            <div class="row animatedParent">
+                <div class="col-12 col-md-5">
+                    <figure class="animated bounceInUp animate-2">
+                        <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
+                    </figure>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="app-btn">
+                        <h2>Download App</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <div class="btn-inline animated growIn animate-3">
+                            <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
+                            <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane fade in" id="team">
-              <br>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th class="col-md-1"><h4>#</h4></th>
-                    <th class="col-md-7"><h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team</h4></th>
-                    <th class="col-md-4"><h4>Raised</h4></th>
-                  </tr>
-                </thead>
-                <tbody> 
-                  <?php echo $team_table; ?>
-                </tbody>
-              </table>
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade in" id="org">
-              <br>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th class="col-md-1"><h4>#</h4></th>
-                    <th class="col-md-7"><h4><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Organization</h4></th>
-                    <th class="col-md-4"><h4>Raised</h4></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    echo $org_table;
-                  ?>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- Tab panes -->
-
-
-        </div> <!-- col md 12 -->
-      </div> <!-- row -->
-    </div> <!-- container -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <!-- FOOTER -->
-
+        </div>
+    </section>   
     <!-- MODALS -->
 
     <!-- SEARCH -->
     <div class="modal fade" tabindex="-1" role="dialog" id="searchModal">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Search Members, Teams and Organizations</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Search Members, Teams and Organizations</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -412,11 +473,12 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
     <!-- SEARCH -->
 
     <div id="failed_search" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_search">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Unable to Search</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_search_message" name="failed_search_message"></h4>
@@ -430,8 +492,8 @@ if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, t
 
     <!-- MODALS -->
 
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
+    <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
   </body>
 </html>
