@@ -539,6 +539,9 @@ if (isset($_GET['t'])){
                 $(this).removeAttr('checked');
             });
             $('#'+selectUserType).attr('checked', 'checked');
+            if(selectUserType!=''){
+                existing_member();
+            }
         });
         
         $("input[name=donation_amount]").change(function () {
@@ -641,7 +644,7 @@ if (isset($_GET['t'])){
                   </div>
                   <div class="col-12 col-md-12">&nbsp;</div>
                   <div class="col-12 col-md-8">
-                      <button name="section_1_continue" id="section_1_continue" type="button" class="btn btn-success pull-right" data-toggle="tab" href="#section_2" onclick="existing_member()">Continue <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                      <!--<button name="section_1_continue" id="section_1_continue" type="button" class="btn btn-success pull-right" data-toggle="tab" href="#section_2" onclick="existing_member()">Continue <i class="fa fa-arrow-right" aria-hidden="true"></i></button>-->
                   </div>
               
               </div>
