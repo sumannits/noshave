@@ -15,7 +15,7 @@ if (isset($_POST['email_or_username'], $_POST['password'])) {
     if ($login_status == 1) {
 
         // Take them to the admin console
-        header('Location: /dashboard');
+        header('Location: '.base_url.'/dashboard');
 
     } elseif ($login_status == 0) {
 

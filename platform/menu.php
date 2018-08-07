@@ -44,9 +44,9 @@ if($currentPage!=''){
 			        <ul class="list-inline">
                         <li class="dropdown"> <a class="dropdown-toggle"  href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alina Wilson</a>
                             <div class="dropdown-menu" aria-labelledby="profile">
-                                <a class="dropdown-item" href="#">My Account</a>
-                                <a class="dropdown-item" href="#">Dashboard</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="<?php echo base_url; ?>/dashboard">My Account</a>
+                                <a class="dropdown-item" href="<?php echo base_url; ?>/dashboard">Dashboard</a>
+                                <a class="dropdown-item" href="<?php echo base_url; ?>/logout">Logout</a>
                             </div>
                         </li>
                     </ul>
