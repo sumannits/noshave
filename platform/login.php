@@ -109,27 +109,7 @@
               </div>
           </div>
       </section>
-      <section class="app-sec" style="background-image: url(./img/fbg.png);">
-            <div class="container">
-                <div class="row animatedParent">
-                    <div class="col-12 col-md-5">
-                        <figure class="animated bounceInUp animate-2">
-                            <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
-                        </figure>
-                    </div>
-                    <div class="col-12 col-md-7">
-                        <div class="app-btn">
-                            <h2>Download App</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="btn-inline animated growIn animate-3">
-                                <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
-                                <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      
        <!--end of app-sec--> 
       <!--end of register-div-->
         <!--<section class="app-sec" style="background-image: url(images/fbg.png);">

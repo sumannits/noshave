@@ -6,7 +6,25 @@ if($currentPage!=''){
 }
 //print_r($mysqli);
 ?>
-<?php if (login_check($mysqli) == true){ ?>        
+<?php 
+if (login_check($mysqli) == true){ 
+    $log_user_id = $_SESSION['user_id'];
+
+// grab data
+// get user data
+if ($stmt = $mysqli->prepare("SELECT m_full_name, m_email, m_username, m_team_id FROM member WHERE m_id = ? LIMIT 1")) {
+  $stmt->bind_param('i', $log_user_id);
+  $stmt->execute();
+  $stmt->store_result();
+  $stmt->bind_result($user_m_full_name, $user_m_email, $user_m_username, $user_m_team_id);
+  $stmt->fetch();
+  $stmt->close();
+
+} else {
+  // give error 5590 - unable to get data from DB using user ID from session
+  //header('Location: /error?id=1');
+}
+    ?>        
             <!-- Navigation after login-->
             <nav class="navbar navbar-expand-lg">
               <div class="container">
@@ -21,7 +39,7 @@ if($currentPage!=''){
                           <a class="nav-link" href="<?php echo base_url; ?>/#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Shop</a>
+                            <a class="nav-link" href="<?php echo base_url; ?>/#shop">Shop</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="<?php echo base_url; ?>/#participate">Participate</a>
@@ -35,15 +53,30 @@ if($currentPage!=''){
                         <li class="nav-item ">
                           <a class="nav-link" href="<?php echo base_url; ?>/#share">Share</a>             
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#"> More</a>             
-                        </li>
+                        <li class="dropdown nav-item">
+                            <a class="btn dropdown-toggle" href="Javascript:void(0);" id="moremenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                More
+                            </a>    
+                            <div class="dropdown-menu" aria-labelledby="moremenu">
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/#press">Press Releases</a>
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/#shop">Shop</a>
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/#story">Our Story</a>
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/awarness.html">Awareness Initiative</a>
+                               <div class="dropdown-divider"></div>
+                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
+                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/contact_us">Contact Us</a>
+                            </div>        
+                        </li> 
+                        
                     </ul>
                 </div>
                 <div class="ml-auto right-log clearfix">
                     <span class="donate-top"><a href="<?php echo base_url; ?>/donate">Donate</a></span>
 			        <ul class="list-inline">
-                        <li class="dropdown"> <a class="dropdown-toggle"  href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alina Wilson</a>
+                        <li class="dropdown"> <a class="dropdown-toggle"  href="#" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php
+                        $fname = explode( ' ', $user_m_full_name ); 
+                        echo isset($fname[0])?$fname[0]:'';?> </a>
                             <div class="dropdown-menu" aria-labelledby="profile">
                                 <a class="dropdown-item" href="<?php echo base_url; ?>/dashboard">My Account</a>
                                 <a class="dropdown-item" href="<?php echo base_url; ?>/dashboard">Dashboard</a>
@@ -71,7 +104,7 @@ if($currentPage!=''){
                           <a class="nav-link" href="<?php echo base_url; ?>/#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Shop</a>
+                            <a class="nav-link" href="<?php echo base_url; ?>/#shop">Shop</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="<?php echo base_url; ?>/#participate">Participate</a>
@@ -86,19 +119,19 @@ if($currentPage!=''){
                           <a class="nav-link" href="<?php echo base_url; ?>/#share">Share</a>             
                         </li>
                         <li class="dropdown">
-                            <a class="btn dropdown-toggle" href="dashboard.html" id="moremenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="btn dropdown-toggle" href="Javascript:void(0);" id="moremenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 More
                             </a>    
                             <div class="dropdown-menu" aria-labelledby="moremenu">
                                <a class="dropdown-item" href="<?php echo base_url; ?>/#press">Press Releases</a>
-                               <a class="dropdown-item" href="#">Shop</a>
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/#shop">Shop</a>
                                <!--<a class="dropdown-item" href="">Partnerships</a>-->
                                <a class="dropdown-item" href="<?php echo base_url; ?>/#story">Our Story</a>
                                <a class="dropdown-item" href="<?php echo base_url; ?>/awarness.html">Awareness Initiative</a>
                                <div class="dropdown-divider"></div>
-                               <a class="dropdown-item" href="" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
-                               <a class="dropdown-item" href="" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>
-                               <a class="dropdown-item" href="" data-toggle="modal" data-target="#contactUS">Contact Us</a>
+                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
+                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/contact_us">Contact Us</a>
                             </div>        
                         </li> 
                     </ul>

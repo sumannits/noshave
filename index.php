@@ -240,7 +240,7 @@ sec_session_start();
            </div>
        </section>
        <!--end of awerness-->
-       <section class="shop-home">
+       <section class="shop-home"  id="shop">
            <div class="container">
                <div class="top-heading text-center">
                    <h2>Shop</h2>
@@ -248,7 +248,109 @@ sec_session_start();
                </div>
                
                <div class="shop-cont row">
-                   <div class="col-12 col-md-6 card shadow ml-auto">
+                <div id='product-component-5c11d0d3b9b'></div>
+                    <script type="text/javascript">
+                        /*<![CDATA[*/
+
+                        (function () {
+                            var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                            if (window.ShopifyBuy) {
+                            if (window.ShopifyBuy.UI) {
+                                ShopifyBuyInit();
+                            } else {
+                                loadScript();
+                            }
+                            } else {
+                            loadScript();
+                            }
+
+                            function loadScript() {
+                            var script = document.createElement('script');
+                            script.async = true;
+                            script.src = scriptURL;
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                            script.onload = ShopifyBuyInit;
+                            }
+
+                            function ShopifyBuyInit() {
+                            var client = ShopifyBuy.buildClient({
+                                domain: 'mhf-dba-no-shave-november.myshopify.com',
+                                apiKey: '0007cd26e3c16354feca5d50133e707a',
+                                appId: '6',
+                            });
+
+                            ShopifyBuy.UI.onReady(client).then(function (ui) {
+                                ui.createComponent('product', {
+                                id: [13107391179],
+                                node: document.getElementById('product-component-5c11d0d3b9b'),
+                                moneyFormat: '%24%7B%7Bamount%7D%7D',
+                                options: {
+                            "product": {
+                            "variantId": "all",
+                            "contents": {
+                                "imgWithCarousel": false,
+                                "variantTitle": false,
+                                "description": false,
+                                "buttonWithQuantity": false,
+                                "quantity": false
+                            },
+                            "styles": {
+                                "product": {
+                                "@media (min-width: 601px)": {
+                                    "max-width": "calc(25% - 20px)",
+                                    "margin-left": "20px",
+                                    "margin-bottom": "50px"
+                                }
+                                }
+                            }
+                            },
+                            "cart": {
+                            "contents": {
+                                "button": true
+                            },
+                            "styles": {
+                                "footer": {
+                                "background-color": "#ffffff"
+                                }
+                            }
+                            },
+                            "modalProduct": {
+                            "contents": {
+                                "img": false,
+                                "imgWithCarousel": true,
+                                "variantTitle": false,
+                                "buttonWithQuantity": true,
+                                "button": false,
+                                "quantity": false
+                            },
+                            "styles": {
+                                "product": {
+                                "@media (min-width: 601px)": {
+                                    "max-width": "100%",
+                                    "margin-left": "0px",
+                                    "margin-bottom": "0px"
+                                }
+                                }
+                            }
+                            },
+                            "productSet": {
+                            "styles": {
+                                "products": {
+                                "@media (min-width: 601px)": {
+                                    "margin-left": "-20px"
+                                }
+                                }
+                            }
+                            }
+                        }
+                                });
+                            });
+                            }
+                        })();
+                        /*]]>*/
+                    </script>
+                   <!--<div class="col-12 col-md-6 card shadow ml-auto">
+                    
                        <div class="slide-wrap">
                            <div class="price-tag">$<br>99.9</div>
                            <ul class="product-slide list-inline">
@@ -282,7 +384,7 @@ sec_session_start();
                                </div>
                            </div>
                        </div>
-                   </div>
+                   </div>-->
                </div>
            </div>
        </section>
@@ -335,29 +437,6 @@ sec_session_start();
                </div>
            </div>
        </section>
-       <!--end of press release-->
-        <section class="app-sec" style="background-image: url(<?php echo base_url; ?>/assets/images/fbg.png);">
-            <div class="container">
-                <div class="row animatedParent">
-                    <div class="col-12 col-md-5">
-                        <figure class="animated bounceInUp animate-2">
-                            <img src="<?php echo base_url; ?>/assets/images/half-mobile.png" class="img-fluid" alt="">                           
-                        </figure>
-                    </div>
-                    <div class="col-12 col-md-7">
-                        <div class="app-btn">
-                            <h2>Download App</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="btn-inline animated growIn animate-3">
-                                <a href="#" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
-                                <a href="#" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-       <!--end of app-sec-->    
        
        <?php include_once('platform/footer.php')?>
   </body>

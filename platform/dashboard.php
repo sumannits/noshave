@@ -77,21 +77,7 @@ if ($stmt = $mysqli->prepare("SELECT d_id, d_time, d_name, d_email, d_amount, d_
   $total_raised = 0;
   $donation_count = 0;
 
-  $personal_donation_table = '
-                            <h4>Personal Donations</h4>
-                            <hr>
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th class="col-md-2">Date</th>
-                                  <th class="col-md-2">Donor</th>
-                                  <th>Amount</th>
-                                  <th>Comment</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              ';
+  $personal_donation_table = '<ul class="list-unstyled mt-4 d-wrap">';
 
   while ($stmt->fetch()) {
 
@@ -105,55 +91,44 @@ if ($stmt = $mysqli->prepare("SELECT d_id, d_time, d_name, d_email, d_amount, d_
     $total_raised += $d_amount;
 
 
-    $personal_donation_table .= '
-                              <tr>
-                                <td>' . $donation_count . '</td>
-                                <td>' . date('F j, Y', strtotime($d_time . '- 5 hours')) . '</td>
-                                <td>' . $d_name . '</td>
-                                <td>$' . $d_amount . '</td>
-                                <td>' . $d_message . '</td>
-                              </tr>
-                        ';
+    $personal_donation_table.= '<li> 
+    <div class="row ">
+        <div class="col-sm-7 col-12">
+            <div class="text-md-left">
+                <span class="sn-no">' . $donation_count . '</span>
+                <span class="d-name"> ' . $d_name . ' </span>
+            </div>
+        </div>
+        <div class="col-sm-5 col-12">
+            <div class="text-right">
+                <span class="donation-price">$' . $d_amount . '</span>
+            </div>
+        </div>
+        <div class="col-12 dc-wrap">
+            <span class="d-date">Date: </span> <p>'.date('F j, Y', strtotime($d_time . '- 5 hours')).'</p>
+            <span class="d-cmnt">Comment: </span> <p>'.$d_message.'</p>
+        </div>
+    </div>
+</li>';
     }
-
-    $personal_donation_table .= '
-                                  </tbody>
-                                </table>
-                                <br>
-                                  ';
 
   // close that 
   $stmt->close();
 
   if ($donation_count == "0") {
 
-    $personal_donation_table = '
-                            <h4>Personal Donations</h4>
-                            <hr>
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th class="col-md-2">Date</th>
-                                  <th class="col-md-2">Donor</th>
-                                  <th>Amount</th>
-                                  <th>Comment</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td colspan="6" class="vert-align centered">
-                                    <br>
-                                    <h4>There are no donations to display.</h4>
-                                  </td>
-                                </tr>
-                              </tbody>
-                          </table>
-                          <br>
-                        ';
+    $personal_donation_table.= '<li> 
+    <div class="row ">
+        <div class="col-sm-12 col-md-12">
+            <div class="text-md-left">
+                <span class="d-name">There are no donations to display.</span>
+            </div>
+        </div>
+    </div>
+</li>';
 
   }
-
+  $personal_donation_table.= '</ul>';
 } else {
   // give error 5590 - unable to get data from DB using user ID from session
   header('Location: /error?id=2');
@@ -1327,6 +1302,7 @@ if ($m_got_screen == 0) {
       // TODO
       // extend to menu buttons at the top
       $(document).ready(function () {
+        $('#dashhome').show();
         $('a[href="' + document.location.hash + '"]').trigger('click');
       });
 
@@ -1414,6 +1390,8 @@ if ($m_got_screen == 0) {
         $("#icon_org_page").removeClass('white-icon');
         $("#icon_donations").addClass('white-icon');
         $("#icon_account").removeClass('white-icon');
+        $('.otherSection').hide();
+        $('#dashdonation').show();
       }
       function account_active_tab() {
         $("#tab_home").attr('class', 'list-group-item');
@@ -1604,35 +1582,35 @@ if ($m_got_screen == 0) {
                                       <li><a id="tab_personal_page" href="#personal_page" onclick="personal_active_tab()"><i class="ion ion-md-document"></i>Personal Page</a></li>
                                       <li><a id="tab_team_page" href="#team_page" onclick="team_active_tab()"><i class="ion ion-ios-people"></i>Team Page</a></li>
                                       <li><a id="tab_org_page" href="#org_page" onclick="org_active_tab()"><i class="ion ion-md-options"></i>Organization Page</a></li>
-                                      <li><a id="tab_donations" href="#donations" onclick="donations_active_tab()"><i class="ion ion-logo-usd"></i>Donations</a></li>
+                                      <li><a id="tab_donations" href="Javascript: void(0);" onclick="donations_active_tab()"><i class="ion ion-logo-usd"></i>Donations</a></li>
                                       <li><a id="tab_account" href="#account" onclick="account_active_tab()"><i class="ion ion-md-person"></i>Account</a></li>
                                       <li><a id="tab_previous" href="#previous" aria-controls="previous" role="tab" data-toggle="modal" class="list-group-item" data-target="#previous_coming_soon"><i class="ion ion-ios-shuffle"></i>Previous Contributors</a></li>
                                   </ul>
                               </div>
                           </div>
                       </div>
-                      <div class="col-12 col-md-8 col-lg-9" id="dashhome">
+                      <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashhome">
                           <div class="right-board">
                               <h2 class="mt-4">Welcome, <?php echo $m_full_name;?></h2>
                               <div class="row py-3">
                                   <div class="col-12 col-md-4">
                                       <div class="re-box re-1">
                                           <h1><?php echo $donation_count; ?><span><?php echo $donation_or_donations; ?></span></h1>
-                                          <a href="#donations" aria-controls="donations" role="tab" data-toggle="tab" onclick="donations_active_tab()">View Donations</a>
+                                          <a href="Javascript:void(0);" aria-controls="dashdonation" role="tab" data-toggle="tab" onclick="donations_active_tab()">View Donations</a>
                                       </div>
                                   </div>
                                   <div class="col-12 col-md-4">
                                       <div class="re-box re-2">
                                           <h1>$<?php echo number_format($total_raised); ?> <span>Raised</span></h1>                                          
                                           <!-- <a href="">Share Your Page</a> -->
-                                          <a href="#" data-toggle="modal" data-target="#sharePersonal">Share Your Page</a>
+                                          <a href="Javascript: void(0);" data-toggle="modal" data-target="#sharePersonal">Share Your Page</a>
                                       </div>
                                   </div>
                                   <div class="col-12 col-md-4">
                                       <div class="re-box re-3">
                                           <h1><?php echo $goal_percentage;?> <span>of $<?php echo number_format($m_page_goal)?></span></h1>
                                           <!-- <a href="">View Your Page</a> -->
-                                          <a target="_blank" href="/member/<?php echo $m_username; ?>">View Your Page</a>
+                                          <a target="_blank" href="<?php echo base_url; ?>/member/<?php echo $m_username; ?>">View Your Page</a>
                                       </div>
                                   </div>
                               </div>
@@ -1652,7 +1630,7 @@ if ($m_got_screen == 0) {
                                   <div class="form-group row">
                                       <label class="col-md-3 col-12">Page Link :</label>
                                       <div class="col-12 col-md-9">
-                                          <span class="text-success" id="personal_url"><a id="view_personal_page_2" target="_blank" href="/member/<?php echo $m_username; ?>">no-shave.org/member/<?php echo $m_username; ?></a></span>
+                                          <span class="text-success" id="personal_url"><a id="view_personal_page_2" target="_blank" href="<?php echo base_url; ?>/member/<?php echo $m_username; ?>">no-shave.org/member/<?php echo $m_username; ?></a></span>
                                       </div>
                                   </div>
                                   <div class="form-group row">
@@ -1693,9 +1671,9 @@ if ($m_got_screen == 0) {
                                   </div>                                 
                                   <div class="form-group row">                                      
                                       <div class="col-12 col-md-9 ml-auto text-left">
-                                          <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editPersonal"><i class="ion ion-md-create"></i>Edit</a>
-                                          <a id="view_personal_page" class="btn btn-outline-primary btn-sm mx-2" target="_blank" href="/member/<?php echo $m_username; ?>"><i class="fa fa-eye"></i>View</a>
-                                          <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#sharePersonal"><i class="ion ion-md-share"></i>Share</a>
+                                          <a href="Javascript: void(0);" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editPersonal"><i class="ion ion-md-create"></i>Edit</a>
+                                          <a id="view_personal_page" class="btn btn-outline-primary btn-sm mx-2" target="_blank" href="<?php echo base_url; ?>/member/<?php echo $m_username; ?>"><i class="fa fa-eye"></i>View</a>
+                                          <a href="Javascript: void(0);" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#sharePersonal"><i class="ion ion-md-share"></i>Share</a>
                                       </div>
                                   </div>
                               </div>
@@ -1751,46 +1729,7 @@ if ($m_got_screen == 0) {
                           <div class="right-board">
                               <h2 class="mt-4">Donations</h2>
                               <h3 class="text-medium">Personal Donations</h3>
-                              <ul class="list-unstyled mt-4 d-wrap">
-                                     <li> 
-                                        <div class="row ">
-                                            <div class="col-sm-7 col-12">
-                                                <div class="text-md-left">
-                                                    <span class="sn-no">1</span>
-                                                    <span class="d-name">Alex Wilson</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5 col-12">
-                                                <div class="text-right">
-                                                    <span class="donation-price">$56.53</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 dc-wrap">
-                                                <span class="d-date">Date: </span> <p>20june, 2018</p>
-                                                <span class="d-cmnt">Comment: </span> <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                     <li> 
-                                        <div class="row ">
-                                            <div class="col-sm-7 col-12">
-                                                <div class="text-md-left">
-                                                    <span class="sn-no">2</span>
-                                                    <span class="d-name">Alex Wilson</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5 col-12">
-                                                <div class="text-right">
-                                                    <span class="donation-price">$56.53</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 dc-wrap">
-                                                <span class="d-date">Date: </span> <p>20june, 2018</p>
-                                                <span class="d-cmnt">Comment: </span> <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                              </ul>
+                              <?php echo $personal_donation_table;?>
                           </div>
                       </div>
                       <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashaccount">
@@ -1851,7 +1790,7 @@ if ($m_got_screen == 0) {
                                   </div>
                                   <div class="form-group row">                                      
                                       <div class="col-12 text-center">
-                                          <a href="#" class="btn btn-outline-primary btn-sm mr-3" data-toggle="modal" data-target="#editAccount"><i class="ion ion-md-create"></i> Edit</a>
+                                          <a href="Javascript: void(0);" class="btn btn-outline-primary btn-sm mr-3" data-toggle="modal" data-target="#editAccount"><i class="ion ion-md-create"></i> Edit</a>
                                           <a href="<?php echo base_url;?>/password" target="_blank" class="btn btn-outline-primary btn-sm"><i class="ion ion-md-lock"></i> Change password</a>
                                       </div>
                                   </div>
@@ -1863,81 +1802,42 @@ if ($m_got_screen == 0) {
           </div>
       </section>
 
-      <section class="app-sec" style="background-image: url(./img/fbg.png);">
-            <div class="container">
-                <div class="row animatedParent">
-                    <div class="col-12 col-md-5">
-                        <figure class="animated bounceInUp animate-2">
-                            <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
-                        </figure>
-                    </div>
-                    <div class="col-12 col-md-7">
-                        <div class="app-btn">
-                            <h2>Download App</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="btn-inline animated growIn animate-3">
-                                <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
-                                <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
       <script>
         $('#tab_personal_page').on('click', function(){
-        $('#dashpersonal').removeClass('otherSection');
-        $('#dashhome').addClass('otherSection');
-        $('#dashteam').addClass('otherSection');
-        $('#dashorganisation').addClass('otherSection');
-        $('#dashdonation').addClass('otherSection'); 
-        $('#dashaccount').addClass('otherSection');
+          $('.otherSection').hide();
+          $('#dashpersonal').show();
+        // $('#dashpersonal').removeClass('otherSection');
+        // $('#dashhome').addClass('otherSection');
+        // $('#dashteam').addClass('otherSection');
+        // $('#dashorganisation').addClass('otherSection');
+        // $('#dashdonation').addClass('otherSection'); 
+        // $('#dashaccount').addClass('otherSection');
         });
 
         $('#tab_home').on('click', function(){
-        $('#dashhome').removeClass('otherSection');
-        $('#dashpersonal').addClass('otherSection');
-        $('#dashteam').addClass('otherSection');
-        $('#dashorganisation').addClass('otherSection');
-        $('#dashdonation').addClass('otherSection');
-        $('#dashaccount').addClass('otherSection'); 
+          $('.otherSection').hide();
+          $('#dashhome').show();
         });
 
         $('#tab_team_page').on('click', function(){
-        $('#dashteam').removeClass('otherSection');
-        $('#dashhome').addClass('otherSection');
-        $('#dashpersonal').addClass('otherSection');
-        $('#dashorganisation').addClass('otherSection');
-        $('#dashdonation').addClass('otherSection');
-        $('#dashaccount').addClass('otherSection'); 
+          $('.otherSection').hide();
+          $('#dashteam').show();
+        
         });
 
         $('#tab_org_page').on('click', function(){
-        $('#dashorganisation').removeClass('otherSection');  
-        $('#dashteam').addClass('otherSection');
-        $('#dashhome').addClass('otherSection');
-        $('#dashpersonal').addClass('otherSection');
-        $('#dashdonation').addClass('otherSection');
-        $('#dashaccount').addClass('otherSection');
+          $('.otherSection').hide();
+          $('#dashorganisation').show();
         });
 
         $('#tab_donations').on('click', function(){
-        $('#dashdonation').removeClass('otherSection');  
-        $('#dashteam').addClass('otherSection');
-        $('#dashhome').addClass('otherSection');
-        $('#dashpersonal').addClass('otherSection');
-        $('#dashorganisation').addClass('otherSection');
-        $('#dashaccount').addClass('otherSection');
+          $('.otherSection').hide();
+          $('#dashdonation').show();
         });
 
         $('#tab_account').on('click', function(){
-        $('#dashaccount').removeClass('otherSection');	
-        $('#dashdonation').addClass('otherSection');  
-        $('#dashteam').addClass('otherSection');
-        $('#dashhome').addClass('otherSection');
-        $('#dashpersonal').addClass('otherSection');
-        $('#dashorganisation').addClass('otherSection');
+          $('.otherSection').hide();
+          $('#dashaccount').show();
         });
     </script>  
 
@@ -2356,13 +2256,13 @@ if ($m_got_screen == 0) {
             <div class="modal-body centered">
               <div class="visible-lg visible-md visible-sm hidden-xs">
                 <br>
-                <a onclick="twitter()">
+                <a onclick="twitter()" href="Javascript: void(0);">
                   <button class="btn btn-info btn-lg">
                     <i class="fa fa-twitter share"></i>&nbsp; Twitter
                   </button>
                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <a onclick="facebook()">
+                <a onclick="facebook()" href="Javascript: void(0);">
                   <button class="btn btn-primary btn-lg">
                     <i class="fa fa-facebook share"></i>&nbsp; Facebook
                   </button>
@@ -2384,11 +2284,11 @@ if ($m_got_screen == 0) {
                     Share Page <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a onclick="twitter()">
+                    <li><a onclick="twitter()" href="Javascript: void(0);">
                         <i style="color: #555;" class="fa fa-fw fa-twitter"></i>&nbsp; Twitter
                     </a></li>
 
-                    <li><a onclick="facebook()">
+                    <li><a onclick="facebook()" href="Javascript: void(0);">
                         <i style="color: #555;" class="fa fa-fw fa-facebook"></i>&nbsp; Facebook
                     </a></li>
 
@@ -2431,13 +2331,13 @@ if ($m_got_screen == 0) {
 
             <div class="modal-body centered">
               <br>
-              <a onclick="twitter_team()">
+              <a onclick="twitter_team()" href="Javascript: void(0);">
                 <button class="btn btn-info btn-lg">
                   <i class="fa fa-twitter share"></i>&nbsp; Twitter
                 </button>
               </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-              <a onclick="facebook_team()">
+              <a onclick="facebook_team()" href="Javascript: void(0);">
                 <button class="btn btn-primary btn-lg">
                   <i class="fa fa-facebook share"></i>&nbsp; Facebook
                 </button>
@@ -2481,13 +2381,13 @@ if ($m_got_screen == 0) {
 
             <div class="modal-body centered">
               <br>
-              <a onclick="twitter_team_invite()">
+              <a onclick="twitter_team_invite()" href="Javascript: void(0);">
                 <button class="btn btn-info btn-lg">
                   <i class="fa fa-twitter share"></i>&nbsp; Twitter
                 </button>
               </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-              <a onclick="facebook_team_invite()">
+              <a onclick="facebook_team_invite()" href="Javascript: void(0);">
                 <button class="btn btn-primary btn-lg">
                   <i class="fa fa-facebook share"></i>&nbsp; Facebook
                 </button>
@@ -2531,13 +2431,13 @@ if ($m_got_screen == 0) {
 
             <div class="modal-body centered">
               <br>
-              <a onclick="twitter_org()">
+              <a onclick="twitter_org()" href="Javascript: void(0);">
                 <button class="btn btn-info btn-lg">
                   <i class="fa fa-twitter share"></i>&nbsp; Twitter
                 </button>
               </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-              <a onclick="facebook_org()">
+              <a onclick="facebook_org()" href="Javascript: void(0);">
                 <button class="btn btn-primary btn-lg">
                   <i class="fa fa-facebook share"></i>&nbsp; Facebook
                 </button>

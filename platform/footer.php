@@ -1,4 +1,31 @@
-    
+  <style>
+    .modal-body h4{
+        color: #333;
+        font-weight: 400;
+        font-size: 20px;
+    }
+  </style>
+  <section class="app-sec" style="background-image: url(./img/fbg.png);">
+      <div class="container">
+          <div class="row animatedParent">
+              <div class="col-12 col-md-5">
+                  <figure class="animated bounceInUp animate-2">
+                      <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
+                  </figure>
+              </div>
+              <div class="col-12 col-md-7">
+                  <div class="app-btn">
+                      <h2>Download App</h2>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                      <div class="btn-inline animated growIn animate-3">
+                          <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
+                          <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
     <!-- Financial Info Modal Start -->
     <div class="modal fade" id="financialInfo" tabindex="-1" role="dialog" aria-labelledby="financialInfo" aria-hidden="true">
       <div class="modal-dialog">
@@ -335,7 +362,7 @@ St. Jude Children’s Research Hospital is leading the way the world understands
     </div>
 
     <div id="failed_submit_support_ticket" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_submit_support_ticket">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Failed to Create Support Ticket</h5>
@@ -397,7 +424,7 @@ St. Jude Children’s Research Hospital is leading the way the world understands
                 <div class="col-md-6 col-12">
                     <div class="f-link">
                         <ul class="list-inline mb-0">
-                            <li><a href="Javascript:void(0);" data-toggle="modal" data-target="#contactUS">Contact</a></li>
+                            <li><a href="<?php echo base_url; ?>/contact_us">Contact</a></li>
                             <li><a href="<?php echo base_url; ?>/privacy">Privacy</a></li>
                             <li><a href="<?php echo base_url; ?>/terms">Terms</a></li>
                             <li><a href="http://www.mhfinc.org">mhfinc.org</a></li>
