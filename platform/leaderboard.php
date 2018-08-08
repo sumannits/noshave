@@ -287,7 +287,7 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
                       <a class="active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Member Leaderboard</a>
                     </li>
                     <li>
-                      <a class="" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Team Leaderboard</a>
+                      <a class="" id="profile123-tab" data-toggle="tab" href="#profile123" role="tab" aria-controls="profile123" aria-selected="false">Team Leaderboard</a>
                     </li>
                     <li>
                       <a class="" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Organization Leaderboard</a>
@@ -314,7 +314,7 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade" id="profile123" role="tabpanel" aria-labelledby="profile123-tab">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

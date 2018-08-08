@@ -651,7 +651,7 @@ if ($m_got_screen == 0) {
         // make call
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_account.php', 
+          url: './platform/api/update_account.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -1793,10 +1793,97 @@ if ($m_got_screen == 0) {
                               </ul>
                           </div>
                       </div>
+                      <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashaccount">
+                          <div class="right-board">
+                              <h2 class="mt-4">Account</h2>                            
+                              <div class="ac-own mt-5">
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Name :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-success"><?php echo $m_full_name; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Email Address :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $m_email; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Password :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted">******</span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Profile Picture :</label>
+                                      <div class="col-12 col-md-9">
+                                         <!--  <img id="blah" src="./img/pic.png" alt="your image" class="mb-2"  style="max-height: 150px;"/> -->
+                                          <img id="preview_profile_picture_image" class="mb-2" style="max-height: 150px;" src="<?php echo $m_profile_pic; ?>">
+                                          <br>
+                                          <input type="file" id="picown" onchange="readURL(this);" hidden="">
+                                          <label class="btn btn-primary" for="picown"><i class="ion ion-md-cloud-upload"></i> Change Photo</label>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">City :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $m_city; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">State :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $m_state; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Country :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $m_country; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Got Screened :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $member_got_screened; ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">                                      
+                                      <div class="col-12 text-center">
+                                          <a href="#" class="btn btn-outline-primary btn-sm mr-3" data-toggle="modal" data-target="#editAccount"><i class="ion ion-md-create"></i> Edit</a>
+                                          <a href="<?php echo base_url;?>/password" target="_blank" class="btn btn-outline-primary btn-sm"><i class="ion ion-md-lock"></i> Change password</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
       </section>
+
+      <section class="app-sec" style="background-image: url(./img/fbg.png);">
+            <div class="container">
+                <div class="row animatedParent">
+                    <div class="col-12 col-md-5">
+                        <figure class="animated bounceInUp animate-2">
+                            <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
+                        </figure>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <div class="app-btn">
+                            <h2>Download App</h2>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <div class="btn-inline animated growIn animate-3">
+                                <a href="" class="btn btn-light-outline"><i class="fa fa-apple"></i></a>
+                                <a href="" class="btn btn-light-outline"><i class="fa fa-android"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
       <script>
         $('#tab_personal_page').on('click', function(){
@@ -1805,6 +1892,7 @@ if ($m_got_screen == 0) {
         $('#dashteam').addClass('otherSection');
         $('#dashorganisation').addClass('otherSection');
         $('#dashdonation').addClass('otherSection'); 
+        $('#dashaccount').addClass('otherSection');
         });
 
         $('#tab_home').on('click', function(){
@@ -1812,7 +1900,8 @@ if ($m_got_screen == 0) {
         $('#dashpersonal').addClass('otherSection');
         $('#dashteam').addClass('otherSection');
         $('#dashorganisation').addClass('otherSection');
-        $('#dashdonation').addClass('otherSection'); 
+        $('#dashdonation').addClass('otherSection');
+        $('#dashaccount').addClass('otherSection'); 
         });
 
         $('#tab_team_page').on('click', function(){
@@ -1820,7 +1909,8 @@ if ($m_got_screen == 0) {
         $('#dashhome').addClass('otherSection');
         $('#dashpersonal').addClass('otherSection');
         $('#dashorganisation').addClass('otherSection');
-        $('#dashdonation').addClass('otherSection'); 
+        $('#dashdonation').addClass('otherSection');
+        $('#dashaccount').addClass('otherSection'); 
         });
 
         $('#tab_org_page').on('click', function(){
@@ -1829,10 +1919,21 @@ if ($m_got_screen == 0) {
         $('#dashhome').addClass('otherSection');
         $('#dashpersonal').addClass('otherSection');
         $('#dashdonation').addClass('otherSection');
+        $('#dashaccount').addClass('otherSection');
         });
 
         $('#tab_donations').on('click', function(){
         $('#dashdonation').removeClass('otherSection');  
+        $('#dashteam').addClass('otherSection');
+        $('#dashhome').addClass('otherSection');
+        $('#dashpersonal').addClass('otherSection');
+        $('#dashorganisation').addClass('otherSection');
+        $('#dashaccount').addClass('otherSection');
+        });
+
+        $('#tab_account').on('click', function(){
+        $('#dashaccount').removeClass('otherSection');	
+        $('#dashdonation').addClass('otherSection');  
         $('#dashteam').addClass('otherSection');
         $('#dashhome').addClass('otherSection');
         $('#dashpersonal').addClass('otherSection');
@@ -1891,46 +1992,52 @@ if ($m_got_screen == 0) {
 
               <div class="form-group">
                 <label>Location Visibility</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="location_visibility" id="location_visibility" value="1" <?php echo $show_location; ?>>
-                    Show Location
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="location_visibility" id="location_visibility" value="0" <?php echo $hide_location; ?>>
-                    Hide Location
-                  </label>
-                </div>
+                <ul class="list-inline">
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="location_visibility" id="location_visibility_loc" value="1" <?php echo $show_location; ?>>
+                          <label for="location_visibility_loc">Show Location</label>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="location_visibility" id="location_visibility_hide" value="0" <?php echo $hide_location; ?>>
+                          <label for="location_visibility_hide">Hide Location</label>
+                      </div>
+                  </li>
+              </ul>
+                
               </div>
 
               <div class="form-group">
                 <label>Location Format</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="location_format" id="location_format" value="0" <?php echo $city_state; ?>>
-                    City, State
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="location_format" id="location_format" value="1" <?php echo $city_country; ?>>
-                    City, Country
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="location_format" id="location_format" value="2" <?php echo $city_only; ?>>
-                    City
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="location_format" id="location_format" value="3" <?php echo $country_only; ?>>
-                    Country
-                  </label>
-                </div>
+                <ul class="list-inline">
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="location_format" id="location_format_cstate" value="0" <?php echo $city_state; ?>>
+                          <label for="location_format_cstate">City, State</label>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="location_format" id="location_format_cc" value="1" <?php echo $city_country; ?>>
+                          <label for="location_format_cc">City, Country</label>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="clearfix">
+                        <input type="radio" name="location_format" id="location_format_city_1" value="2" <?php echo $city_only; ?>>
+                          <label for="location_format_city_1">City</label>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="clearfix">
+                       <input type="radio" name="location_format" id="location_format_country_1" value="3" <?php echo $country_only; ?>>
+                          <label for="location_format_country_1">Country</label>
+                      </div>
+                  </li>
+              </ul>
+                
               </div>
 
               <div class="form-group">
@@ -2076,8 +2183,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Edit Account</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
             </div>
 
             <div class="modal-body">

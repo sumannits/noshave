@@ -472,40 +472,40 @@ if (isset($_GET['c'], $_GET['id'])) {
                                 <div class="border-pay">
                                     <h5 class="mb-3">Make Donation to Member, Team or Organization (optional)</h5>
                                     <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label for="search_type" class="col-md-3">Search</label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-12">
                                         <ul class="list-inline">
                                               <li>
                                                   <div class="clearfix">
                                                       <input type="radio" name="search_type" id="search_type_member" value="member" <?php echo $member_checked;?>>
-                                                      <label for="search_type_member">Member</label>
+                                                      <label for="search_type_member" style="font-size:12px;">Member</label>
                                                   </div>
                                               </li>
                                               <li>
                                                   <div class="clearfix">
                                                       <input type="radio" name="search_type" id="search_type_team" value="team" <?php echo $team_checked;?>>
-                                                      <label for="search_type_team">Team</label>
+                                                      <label for="search_type_team" style="font-size:12px;">Team</label>
                                                   </div>
                                               </li>
                                               <li>
                                                   <div class="clearfix">
                                                       <input type="radio" name="search_type" id="search_type_org" value="org" <?php echo $org_checked;?>>
-                                                      <label for="search_type_org">Organization (Company, Fraternity, etc.)</label>
+                                                      <label for="search_type_org" style="font-size:12px;">Organization (Company, Fraternity, etc.)</label>
                                                   </div>
                                               </li>
                                         </ul>
                                         </div>
                                       </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 28px;">
                                       <label for="search" class="col-md-3"></label>
 
-                                      <div class="col-md-7">
+                                      <div class="col-md-12">
                                         <input type="text" class="form-control" id="search_input" name="search_input" placeholder="Enter Search Terms" onkeyup="search()" autocomplete="off" value="<?php echo $prefill_search; ?>">
                                       </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 28px;">
 
               <div id="hide-label" <?php echo $hide_search_label; ?>><label for="search" class="col-md-3">Select</label></div>
               <div class="col-md-7">
@@ -515,9 +515,9 @@ if (isset($_GET['c'], $_GET['id'])) {
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="make_anonymous" class="col-md-3">Make Anonymously</label>
-              <div class="col-md-9">
+            <div class="form-group" style="margin-bottom: 28px;">
+              <label for="make_anonymous" class="col-md-6">Make Anonymously</label>
+              <div class="col-md-12">
               <ul class="list-inline">
                   <li>
                       <div class="clearfix">
@@ -535,9 +535,9 @@ if (isset($_GET['c'], $_GET['id'])) {
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 28px;">
               <label for="donation_visbile" class="col-md-3">Visible on Page</label>
-              <div class="col-md-9">
+              <div class="col-md-12">
                 <ul class="list-inline">
                     <li>
                         <div class="clearfix">
@@ -555,7 +555,7 @@ if (isset($_GET['c'], $_GET['id'])) {
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 28px;">
               <div class="col-md-12">
                 <textarea type="text" class="form-control" id="donation_comment" name="donation_comment" placeholder="Comment" rows="3"></textarea>
               </div>

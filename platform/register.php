@@ -1068,7 +1068,7 @@ if (isset($_GET['t'])){
                     <div class="col-12">
                         <div class="form-group text-right">
                             <button name="section_18_back" id="section_18_back" type="button" class="btn btn-outline-primary" onclick="goback('section_17')"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button> &nbsp;
-              <a name="section_18_continue" id="section_18_continue" type="button" class="btn btn-primary disabled" href="<?php echo base_url; ?>/login?new=true" onclick="unbindUnload()">Complete Registration &nbsp;<i class="fa fa-check" aria-hidden="true"></i></a>   
+              <a name="section_18_continue" id="section_18_continue" type="button" class="btn btn-block btn-primary disabled" href="<?php echo base_url; ?>/login?new=true" onclick="unbindUnload()" style="width: 314px;display:inline-block;">Complete Registration &nbsp;<i class="fa fa-check" aria-hidden="true"></i></a>   
                         </div>
                     </div>
                 </div>
