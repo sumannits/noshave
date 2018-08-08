@@ -2117,18 +2117,20 @@ if ($m_got_screen == 0) {
 
               <div class="form-group">
                 <label>Cancer Screening</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="got_screened" id="got_screened" value="yes" <?php echo $yes_screened; ?>>
-                    Yes, I got a cancer screening
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="got_screened" id="got_screened" value="no" <?php echo $no_screened; ?>>
-                    No, not yet
-                  </label>
-                </div>
+                <ul class="list-inline">
+                    <li>
+                        <div class="clearfix">
+                        <input type="radio" name="got_screened" id="got_screened_yes" value="yes" <?php echo $yes_screened; ?>>
+                            <label for="got_screened_yes"> Yes, I got a cancer screening </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                        <input type="radio" name="got_screened" id="got_screened_no" value="no" <?php echo $no_screened; ?>>
+                            <label for="got_screened_no"> No, not yet</label>
+                        </div>
+                    </li>
+                </ul>
               </div>
 
             </div>
@@ -2181,52 +2183,52 @@ if ($m_got_screen == 0) {
 
               <div class="form-group">
                 <label>Visible on Page</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_visbile" id="donation_visbile" value="1" >
-                    Yes, display this donation
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_visbile" id="donation_visbile" value="0" >
-                    No, please hide this donation
-                  </label>
-                </div>
+                <ul class="list-inline">
+                  <li>
+                      <div class="clearfix">
+                      <input type="radio" name="donation_visbile" id="donation_visbile_yes" value="1" >
+                          <label for="donation_visbile_yes"> Yes, display this donation </label>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="clearfix">
+                      <input type="radio" name="donation_visbile" id="donation_visbile_no" value="0" >
+                          <label for="donation_visbile_no">No, please hide this donation</label>
+                      </div>
+                  </li>
+              </ul>
               </div>
 
               <div class="form-group">
                 <label>Donation Attribution</label>
 
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_attribution" id="donation_attribution" value="1" >
-                    Add the donation to my personal page
-                  </label>
-                </div>
-
+                <ul class="list-inline">
+                    <li>
+                        <div class="clearfix">
+                        <input type="radio" name="donation_attribution" id="donation_attribution_add_personal" value="1" >
+                            <label for="donation_attribution_add_personal"> Add the donation to my personal page </label>
+                        </div>
+                    </li>
+                    
               <?php if (team_member($user_id, $mysqli) == true) : ?>
 
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_attribution" id="donation_attribution" value="2" >
-                    Add the donation to my team's page
-                  </label>
-                </div>
-
+                  <li>
+                        <div class="clearfix">
+                        <input type="radio" name="donation_attribution" id="donation_attribution_add" value="2" >
+                            <label for="donation_attribution_add">Add the donation to my team's page</label>
+                        </div>
+                  </li>
               <?php  endif; ?>
 
               <?php  if (org_member($user_id, $mysqli) == true) : ?>
-
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="donation_attribution" id="donation_attribution" value="3" >
-                    Add the donation to my organization's page
-                  </label>
-                </div>
-
+                  <li>
+                        <div class="clearfix">
+                        <input type="radio" name="donation_attribution" id="donation_attribution_organization" value="3" >
+                            <label for="donation_attribution_organization"> Add the donation to my organization's page </label>
+                        </div>
+                  </li>
               <?php  endif; ?>
-
+                </ul>
               </div>
             </div>
 
@@ -2836,11 +2838,12 @@ if ($m_got_screen == 0) {
     <!-- CREATE ORG -->
 
     <div id="emailTeam" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="emailTeam">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Email Team Members</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Email Team Members</h4>
+            
           </div>
 
           <div class="modal-body">
@@ -2866,11 +2869,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_emailed_team" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_emailed_team">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Email Team</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Email Team</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_emailed_team_message" name="failed_emailed_team_message"></h4>
@@ -2884,11 +2888,12 @@ if ($m_got_screen == 0) {
 
 
     <div id="failed_update_personal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_personal">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Personal Page</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Personal Page</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_personal_message" name="failed_update_personal_message"></h4>
@@ -2901,11 +2906,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_account" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_account">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Account</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Account</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_account_message" name="failed_update_account_message"></h4>
@@ -2918,11 +2924,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_offline_donation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_offline_donation">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Add Offline Contribution</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Add Offline Contribution</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_offline_donation_message" name="failed_offline_donation_message"></h4>
@@ -2935,11 +2942,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_join_team" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_join_team">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Join Team</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Join Team</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_join_team_message" name="failed_join_team_message"></h4>
@@ -2952,11 +2960,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_join_org" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_join_org">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Join Organization</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Join Organization</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_join_org_message" name="failed_join_org_message"></h4>
@@ -2969,11 +2978,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_create_team" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_create_team">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Create Team</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Create Team</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_create_team_message" name="failed_create_team_message"></h4>
@@ -2986,11 +2996,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_create_org" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_create_org">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Create Organization</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Create Organization</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_create_org_message" name="failed_create_org_message"></h4>
@@ -3003,11 +3014,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_team" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_team">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Team</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Team</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_team_message" name="failed_update_team_message"></h4>
@@ -3020,11 +3032,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_org" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_org">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Organization</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Organization</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_org_message" name="failed_update_org_message"></h4>
@@ -3037,11 +3050,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_personal_photo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_personal_photo">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Page Photo</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Page Photo</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_personal_photo_message" name="failed_update_personal_photo_message"></h4>
@@ -3054,11 +3068,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_team_photo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_team_photo">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Team Page Photo</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Team Page Photo</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_team_photo_message" name="failed_update_team_photo_message"></h4>
@@ -3071,11 +3086,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_org_photo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_org_photo">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Organization Page Photo</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Organization Page Photo</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_org_photo_message" name="failed_update_org_photo_message"></h4>
@@ -3088,11 +3104,12 @@ if ($m_got_screen == 0) {
     </div>
 
     <div id="failed_update_profile_picture" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="failed_update_profile_picture">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h4 class="modal-title">Failed to Update Organization Page Photo</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Failed to Update Organization Page Photo</h4>
+            
           </div>
           <div class="modal-body">
             <h4 id="failed_update_profile_picture_message" name="failed_update_profile_picture_message"></h4>
