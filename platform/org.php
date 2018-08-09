@@ -176,7 +176,7 @@ if ($o_id != 0) {
                             <img class="img-rounded" height="42" width="42" src="' . $m_profile_pic . '">
                           </td>
                           <td class="vert-align col-md-8">
-                            <h4><a href="/member/' . $m_username . '">' . $m_full_name . '</a></h4>
+                            <h4><a href="'.base_url.'/member/' . $m_username . '">' . $m_full_name . '</a></h4>
                           </td>
                           <td class="vert-align col-md-4">
                             <h4 class="donation-green">$' . number_format($total_raised_member) . '</h4>

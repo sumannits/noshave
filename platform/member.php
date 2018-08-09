@@ -1,6 +1,6 @@
 <?php
   // Load database connection and php functions
-  include_once 'includes/db_connect.php';
+  //include_once 'includes/db_connect.php';
   include_once 'includes/functions.php';
   // Start secure session
   sec_session_start();
@@ -448,7 +448,7 @@ if ($m_id != 0 && $m_2017 != 0) {
               <div class="row">
                 <div class="col-md-10 col-md-offset-1 centered">
                   <label>Page Link</label>
-                  <input type="text" class="form-control text-center" placeholder="https://no-shave.org/member/<?php echo $m_username; ?>" value="https://no-shave.org/member/<?php echo $m_username; ?>" onClick="this.select();">
+                  <input type="text" class="form-control text-center" placeholder="<?php echo base_url;?>/member/<?php echo $m_username; ?>" value="<?php echo base_url;?>/member/<?php echo $m_username; ?>" onClick="this.select();">
                 </div>
               </div>
 
@@ -470,7 +470,7 @@ if ($m_id != 0 && $m_2017 != 0) {
         return false;
       }
       function facebook(){
-        window.open("https://www.facebook.com/sharer/sharer.php?u=https://no-shave.org/member/<?php echo $m_username; ?>", "newwindow", "width=500, height=400");
+        window.open("https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url;?>/member/<?php echo $m_username; ?>", "newwindow", "width=500, height=400");
         return false;
       }
     </script>

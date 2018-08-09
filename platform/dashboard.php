@@ -457,9 +457,9 @@ if ($m_got_screen == 0) {
             if (data['status'] == "success") {
 
               // update the field values TODO
-              $('#view_personal_page').attr("href", "/member/" + $('#personal_username').val());
-              $('#view_personal_page_2').text('no-shave.org/member/' + $('#personal_username').val());
-              $('#view_personal_page_2').attr("href", "/member/" + $('#personal_username').val());
+              $('#view_personal_page').attr("href", "<?php echo base_url;?>/member/" + $('#personal_username').val());
+              $('#view_personal_page_2').text('<?php echo base_url;?>/member/' + $('#personal_username').val());
+              $('#view_personal_page_2').attr("href", "<?php echo base_url;?>/member/" + $('#personal_username').val());
               $('#page_title').text($('#personal_page_title').val());
               $('#page_goal').text('$' + $('#personal_goal').val());
               $('#page_description').text($('#personal_page_description').val());
@@ -1630,7 +1630,7 @@ if ($m_got_screen == 0) {
                                   <div class="form-group row">
                                       <label class="col-md-3 col-12">Page Link :</label>
                                       <div class="col-12 col-md-9">
-                                          <span class="text-success" id="personal_url"><a id="view_personal_page_2" target="_blank" href="<?php echo base_url; ?>/member/<?php echo $m_username; ?>">no-shave.org/member/<?php echo $m_username; ?></a></span>
+                                          <span class="text-success" id="personal_url"><a id="view_personal_page_2" target="_blank" href="<?php echo base_url; ?>/member/<?php echo $m_username; ?>"><?php echo base_url;?>/member/<?php echo $m_username; ?></a></span>
                                       </div>
                                   </div>
                                   <div class="form-group row">
@@ -2306,7 +2306,7 @@ if ($m_got_screen == 0) {
               <div class="row">
                 <div class="col-md-10 col-md-offset-1 centered">
                   <label>Page Link</label>
-                  <input type="text" class="form-control text-center" placeholder="https://no-shave.org/member/<?php echo $m_username; ?>" value="https://no-shave.org/member/<?php echo $m_username; ?>" onClick="this.select();">
+                  <input type="text" class="form-control text-center" placeholder="<?php echo base_url;?>/member/<?php echo $m_username; ?>" value="<?php echo base_url;?>/member/<?php echo $m_username; ?>" onClick="this.select();">
                 </div>
               </div>
 
@@ -3157,19 +3157,19 @@ if ($m_got_screen == 0) {
         return false;
       }
       function facebook(){
-        window.open("https://www.facebook.com/sharer/sharer.php?u=https://no-shave.org/member/<?php echo $m_username; ?>", "newwindow", "width=500, height=400");
+        window.open("https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url;?>/member/<?php echo $m_username; ?>", "newwindow", "width=500, height=400");
         return false;
       }
       function facebook_team(){
-        window.open("https://www.facebook.com/sharer/sharer.php?u=https://no-shave.org/team/<?php echo $t_username; ?>", "newwindow", "width=500, height=400");
+        window.open("https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url;?>/team/<?php echo $t_username; ?>", "newwindow", "width=500, height=400");
         return false;
       }
       function facebook_team_invite(){
-        window.open("https://www.facebook.com/sharer/sharer.php?u=https://no-shave.org/register?t=<?php echo $t_username; ?>", "newwindow", "width=500, height=400");
+        window.open("https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url;?>/register?t=<?php echo $t_username; ?>", "newwindow", "width=500, height=400");
         return false;
       }
       function facebook_org(){
-        window.open("https://www.facebook.com/sharer/sharer.php?u=https://no-shave.org/org/<?php echo $o_username; ?>", "newwindow", "width=500, height=400");
+        window.open("https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url;?>/org/<?php echo $o_username; ?>", "newwindow", "width=500, height=400");
         return false;
       }
     </script>
