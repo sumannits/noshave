@@ -525,9 +525,9 @@ if ($m_got_screen == 0) {
             if (data['status'] == "success") {
 
               // UPDATE TEAM VARS IN REAL TIME
-              $('#view_team_page').attr("href", "/team/" + $('#team_username_edit').val());
-              $('#view_team_page_2').text('no-shave.org/team/' + $('#team_username_edit').val());
-              $('#view_team_page_2').attr("href", "/team/" + $('#team_username_edit').val());
+              $('#view_team_page').attr("href", "<?php echo base_url; ?>/team/" + $('#team_username_edit').val());
+              $('#view_team_page_2').text('<?php echo base_url; ?>/team/' + $('#team_username_edit').val());
+              $('#view_team_page_2').attr("href", "<?php echo base_url; ?>/team/" + $('#team_username_edit').val());
               $('#team_title').text($('#team_title_edit').val());
               $('#team_goal').text('$' + $('#team_goal_edit').val());
               $('#team_description').text($('#team_description_edit').val());
@@ -2356,7 +2356,7 @@ if ($m_got_screen == 0) {
               <div class="row">
                 <div class="col-md-10 col-md-offset-1 centered">
                   <label>Page Link</label>
-                  <input type="text" class="form-control text-center" placeholder="https://no-shave.org/team/<?php echo $t_username; ?>" value="https://no-shave.org/team/<?php echo $t_username; ?>" onClick="this.select();">
+                  <input type="text" class="form-control text-center" placeholder="<?php echo base_url; ?>/team/<?php echo $t_username; ?>" value="<?php echo base_url; ?>/team/<?php echo $t_username; ?>" onClick="this.select();">
                 </div>
               </div>
 

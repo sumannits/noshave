@@ -78,7 +78,7 @@ span.donate-top {
     display: inline-block;
     font-size: 15px;
     text-transform: uppercase;
-    background: #3e50b4;
+    background: #074f5f;
     color: #fff;
     padding: 0 38px;
     height: 62px;
@@ -348,12 +348,12 @@ header.fixed-header .curve-bg-div{
      padding: 45px 25px 25px;
      text-align: center;
 }
-.left-pink-box{
+/*.left-pink-box{
     background: #f6eddf;
 }
 .right-pink-box{
     background: #f3ecec;
-}
+}*/
 .pink-box h2{
     font-size: 30px;
     color: #3b2c19;
@@ -544,6 +544,9 @@ select.form-control{
 .press-release{
     padding: 50px 0;
 }
+.press-release .top-heading h2{
+    color: #6a3447;
+}
 .brand-slide .slick-prev, 
 .brand-slide .slick-next{
     top: 16px;
@@ -658,16 +661,16 @@ footer{
     padding: 60px 0;
 }
 .register-div h2{
-    font-size: 60px;
+    font-size: 48px;
     color: #074f5f;
-    font-weight: 200;
-    text-transform: capitalize;
+    font-weight: 900;
+    text-transform: uppercase;
     margin-bottom: 40px;
 }
 .register-div h3{
-    font-size: 32px;
+    font-size: 28px;
     color: #392d19;
-     font-weight: 200;
+     font-weight: 400;
     text-transform: capitalize;
     max-width: 550px;
     margin: 0 auto;
@@ -682,7 +685,7 @@ footer{
     position: relative;
     width: 268px;
     height: 262px;
-    border: 1px solid #9c28b1;
+    border: 1px solid #6a3447;
     margin: 25px 15px 0;
     align-items: center;
     justify-content: center;
@@ -699,15 +702,15 @@ footer{
     text-transform: uppercase;
     font-size: 18px;
     color: #fff;
-    background: #9c28b1;
+    background: #6a3447;
     font-weight: 300;
 }
 .register-step-2 h2.mb-0{
     font-size: 40px;
 }
-.register-step-2 p{
+/*.register-step-2 p{
     font-size: 16px;
-}
+}*/
 .reg-form{
     max-width: 980px;
     margin: 40px auto 20px;
@@ -974,7 +977,7 @@ font-weight: 200;
 }
 .right-board h2{
     font-size: 32px;
-    font-weight: 200;
+    font-weight: 500;
     color: #074f5f;
 }
 .right-board h3{
@@ -1085,10 +1088,10 @@ ul.d-wrap li:last-child{
     padding: 50px 0;
 }
 .leaderboard h2 {
-    font-size: 60px;
-    font-weight: 200;
+    font-size: 48px;
+    font-weight: 900;
     color: #074f5f;
-    text-transform: capitalize;
+    text-transform: uppercase;
 }
 .leaderboard h3{
     font-size: 32px;
@@ -1111,6 +1114,10 @@ ul.d-wrap li:last-child{
     background: #392d19;
     border: 1px solid #392d19;
     line-height: 28px;
+}
+.leaderboard h3 span{
+    font-size: 42px;
+    font-weight: 600;
 }
 .table-tab li{
     display: inline-block;
@@ -1167,7 +1174,7 @@ ul.d-wrap li:last-child{
     font-size: 28px;
     display: block;
     text-align: center;
-    color: #6a3447;
+    color: #111;
     font-weight: 900;
 }
 .table-bordered tr td span{
@@ -1177,8 +1184,22 @@ ul.d-wrap li:last-child{
     margin-left: 15px;
     color: #777777;
 }
+.table-bordered tr td a{
+     color: #777777;
+}
 .p-border{
-    border: 1px solid #673bb7;
+    border: 1px solid #6a3447;
+}
+ul#myTab {
+    justify-content: center;
+    text-align: center;
+}
+.inner-board .right-board h2{
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.inner-board .right-board h3{
+    font-weight: 600;
 }
 .c-form-main{
     width: 60%;
@@ -1187,7 +1208,7 @@ ul.d-wrap li:last-child{
     padding-bottom: 25px;
 }
 .addr-main{
-    background: #673bb7;
+    background: #6a3447;
     padding: 60px 20px 20px;
     width: 40%;
     color: #fff;
@@ -1250,4 +1271,10 @@ ul.d-wrap li:last-child{
     font-size: 24px;
     color: #074f5f;
     font-weight: 500;
+}
+.b-sidebar a.text-center.text-dark.d-block {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

@@ -96,7 +96,7 @@ if (isset($_POST['q'])){
             $team_results .= '
                                   <tr>
                                     <td class="vert-align col-md-12">
-                                      <h4><a href="/team/' . $t_username . '">' . $t_name . '</a></h4>
+                                      <h4><a href="'.base_url.'/team/' . $t_username . '">' . $t_name . '</a></h4>
                                     </td>
                                   </tr>
                                 ';

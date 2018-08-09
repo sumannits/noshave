@@ -1,6 +1,6 @@
 <?php
   // Load database connection and php functions
-  include_once 'includes/db_connect.php';
+  //include_once 'includes/db_connect.php';
   include_once 'includes/functions.php';
   // Start secure session
   sec_session_start();
@@ -58,20 +58,10 @@ if ($t_id != 0) {
         $total_raised_member = 0;
       }
 
-      $member_table .= '
-                        <tr>
-                          <td class="col-md-1">
-                            <img class="img-rounded" height="42" width="42" src="' . $m_profile_pic . '">
-                          </td>
-                          <td class="vert-align col-md-8">
-                            <h4><a href="'.base_url.'/member/' . $m_username . '">' . $m_full_name . '</a></h4>
-                          </td>
-                          <td class="vert-align col-md-4">
-                            <h4 class="donation-green">$' . number_format($total_raised_member) . '</h4>
-                          </td>
-                        </tr>
-                        ';
-
+      $member_table .= '<tr>
+      <td colspan="2" style="text-align: left;"><img src="' . $m_profile_pic . '" alt=""><span><a href="'.base_url.'/member/' . $m_username . '">' . $m_full_name . '</a></span></td>
+      <td><b>$'.number_format($total_raised_member).'</b></td>
+  </tr>';
       $total_team_raised += $total_raised_member;
 
     }
@@ -83,7 +73,7 @@ if ($t_id != 0) {
       // no members
       $member_table .= '
                         <tr>
-                          <td colspan="3" class="vert-align">
+                          <td colspan="3">
                             <h4 class="centered">There are no members, yet :)</h4>
                           </td>
                         </tr>
@@ -121,17 +111,13 @@ if ($t_id != 0) {
 
       if ($d_visible_on_page == 1){
 
-        $donation_table .= '
-                              <tr>
-                                <td class="vert-align">
-                                  <h2 class="donation-green">$'. number_format($d_amount) .'</h2>
-                                  <h4>'. $d_name .'</h4>
-                                </td>
-                                <td class="vert-align">
-                                  <p>'. $d_message .'</p>
-                                </td>
-                              </tr>
-                            ';
+        $donation_table .= '<tr>
+        <td>
+          <h2 class="">$'.number_format($d_amount).'</h2>
+          <h3>'. $d_name .'</h3>
+        </td>
+        <td><p>'. $d_message .'</p></td>
+      </tr>';
 
       } else {
         // no!
@@ -142,15 +128,12 @@ if ($t_id != 0) {
 
     if ($donation_table == "") {
 
-      $donation_table = '
-                      <tr>
-                        <td colspan="2" class="vert-align centered">
-                          <br>
-                          <h4>Be the first to donate to ' . $t_name . '!</h4>
-                          <p><a href="'.base_url.'/donate?id=' . $t_id . '&amp;c=2" class="btn btn-success"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Donate</a>
-                        </td>
-                      </tr>
-                    ';
+      $donation_table = '<tr>
+      <td colspan="2">
+        <h2 class=""> Be the first to donate to ' . $t_name . '! </h2>
+        <p><a href="'.base_url.'/donate?id=' . $t_id . '&amp;c=2" class="btn btn-success"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Donate</a></p>
+      </td>
+    </tr>';
 
     }
 
@@ -182,14 +165,13 @@ if ($t_id != 0) {
 
 
     // set team page info
-    $org_link = '
-                  <div class="page-header">
-                    <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Organization</h4>
-                  </div>
-                  <div class="list-group">
-                    <a href="'.base_url.'/org/' . $o_username . '" class="list-group-item centered">' . $o_name . '<br><br><img class="img-rounded fill-section" src="' . $o_pic_0 . '" alt="' . $o_name . '"></a>
-                  </div>
-                  ';
+    $org_link = '<div class="page-header">
+    <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Organization</h4>
+</div>
+<div class="list-group">
+    <h3><a href="'.base_url.'/org/' . $o_username . '" class="text-center text-dark d-block">' . $o_name . '<br><br><img class="img-rounded fill-section img-fluid" src="' . $o_pic_0 . '" alt="' . $o_name . '"></a>
+    </h3>
+</div>';
 
   } else {
     // no org
@@ -220,25 +202,26 @@ if ($t_id != 0) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="<?php echo base_url; ?>/img/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="author" content="No-Shave November">
     <meta name="description" content="<?php echo $t_name; ?> | No-Shave November Fundraising Page">
     <title><?php echo $t_name; ?> | No-Shave November</title>
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">    
-    <link href="/assets/css/main.css" rel="stylesheet">
-    <link href='/assets/css/font.css' rel='stylesheet' type='text/css'>
-    <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function(){
-        $("#menu").load("/platform/platform_menu.php"); 
-      });
-      $(function(){
-        $("#footer").load("/platform/platform_footer.html"); 
-      });
-    </script>
+    <link href="<?php echo base_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick-theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick.css" rel="stylesheet">   
+    <link href="<?php echo base_url; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/fonts/themify-icons.css" rel="stylesheet">   
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url; ?>/assets/css/animations.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/responsive.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>/assets/js/jquery.min.js" type="text/javascript"></script>
+    
+    <script src="<?php echo base_url; ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/loadingoverlay.js" type="text/javascript"></script>
     <script>
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
@@ -326,137 +309,113 @@ if ($t_id != 0) {
     .form-control.text-center {
       width: 100%;
     }
+    .modal-body h4{
+        color: #333;
+        font-weight: 400;
+        font-size: 20px;
+      }
     </style>
   </head>
   <body>
+  <header>
+    <?php include_once('menu.php'); ?>
+  </header>
+    
+  <section class="blog-page py-3 py-md-5">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 col-12 white-bg shadow">
+                      <div class="b-sidebar py-4">
+                          <a href="<?php echo base_url; ?>" class="side-logo d-block text-center"><img src="<?php echo base_url;?>/assets/images/sidebar-logo.png" class="img-fluid" alt="" style="max-width:150px"></a>
+                          <p>
+                              <a href="<?php echo base_url; ?>/donate?id=<?php echo $t_id; ?>&amp;c=2" class="btn btn-success btn-block btn-sm"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
+                              <?php  if (login_check($mysqli) == true) : ?>
+                              <a href="<?php echo base_url; ?>/dashboard#team_page" class="btn btn-info btn-block btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Join Team</a>
+                              <?php  else : ?>
+                              <a href="<?php echo base_url; ?>/register?t=<?php echo $t_username; ?>" class="btn btn-info btn-block btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Join Team</a>
+                              <?php  endif; ?>
 
-    <!-- MEDU BAR -->
-    <div id="menu"></div>
-    <!-- MENU BAR-->
+                              <a href="Javascript:void(0);" class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a>
+                          </p>
+                          <p>No-Shave November is a web-based, non-profit organization devoted to growing cancer awareness and raising funds to support cancer prevention, research, and education.</p>
+                     
+                            <div class="page-header">
+                                <h4><i class="fa fa-flag-checkered" aria-hidden="true"></i>&nbsp; Fundraising Goal</h4>
+                            </div>
+                          <h3><strong>$<?php echo number_format($total_team_raised); ?></strong><small> of $<?php echo number_format($t_page_goal); ?></small></h3>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $total_raised_percent; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $total_raised_width; ?>%;">
+                            <?php echo $total_raised_percent; ?></div>
+                          </div>
+                            
+                          <?php echo $org_link; ?>
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-md-8 col-12">
+                      <div class="right-board b-log">
+                          <h2> <?php echo $t_name; ?>&nbsp;&nbsp; <?php echo $org_header; ?> </h2>
+                          <figure class="">
+                              <img src="<?php echo $t_pic_0; ?>" class="img-fluid" alt="<?php echo $t_name; ?> No Shave November 2017">
+                          </figure>
+                          <div class="inner-txt p-4">
+                              <h2> <?php echo $t_page_title; ?> </h2>
+                              <p><?php echo $t_page_description; ?></p>
+                              
+                          </div>
 
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col-md-12">
-
-          <div class="page-header">
-            <h1><?php echo $t_name; ?>&nbsp;&nbsp; <?php echo $org_header; ?></h1>
-          </div>
-
-          <div class="col-sm-9">
-
-            <img style="width: 100%; height: 100%;" src="<?php echo $t_pic_0; ?>" alt="<?php echo $t_name; ?> No Shave November 2017" class="img-rounded">
-
-            <h2><strong><?php echo $t_page_title; ?></strong></h2>
-            <p id="page_description"><?php echo $t_page_description; ?><br></p>
-
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active visible-lg visible-md visible-sm hidden-xs"><a class="black-link" href="#users" aria-controls="users" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team Members</a></li>
-                <li role="presentation" class="visible-lg visible-md visible-sm hidden-xs"><a class="black-link" href="#donations" aria-controls="donations" role="tab" data-toggle="tab"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Team Donations</a></li>
-
-                <li role="presentation" class="active hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#users" aria-controls="users" role="tab" data-toggle="tab"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Members</a></li>
-                <li role="presentation" class="hidden-lg hidden-md hidden-sm visible-xs"><a class="black-link" href="#donations" aria-controls="donations" role="tab" data-toggle="tab"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Donations</a></li>
-              </ul>
-
-              <!-- Tab panes -->
-              <div class="tab-content">
-
-                <div role="tabpanel" class="tab-pane fade in active" id="users">
-                  <br>
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th class="col-md-8" colspan="2"><h4><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Member</h4></th>
-                        <th class="col-md-4"><h4>Raised</h4></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php echo $member_table ; ?>
-                    </tbody>
-                  </table>
+                <ul class="nav table-tab mb-5" id="myTab" role="tablist">
+                    <li>
+                      <a class="active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Team Member</a>
+                    </li>
+                    <li>
+                      <a class="" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Team Donations</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="col" class="pl-5">Member</th>
+                                    <th scope="col" class="pl-5">Raised</th>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php echo $member_table ; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                          <table class="table table-striped">
+                              <thead>
+                                  <tr>
+                                    <th><h4><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Donation</h4></th>
+                                    <th><h4><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; Comment</h4></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                <?php echo $donation_table; ?>
+                              </tbody>
+                          </table>
+                    </div>
                 </div>
-              
-
-                <div role="tabpanel" class="tab-pane fade in" id="donations">
-                  <br>
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th class="col-md-4"><h4><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Donation</h4></th>
-                        <th class="col-md-8"><h4><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; Comment</h4></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        echo $donation_table;
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-
-              </div> <!-- end tab content-->
-
-            </div>
-
-          <div class="col-sm-3">
-            <center><a href="/"><img class="img-responsive" src="/img/nsn_full_stacked.png" alt="No-Shave November"></a></center>
-            <p><a href="/donate?id=<?php echo $t_id; ?>&amp;c=2" class="btn btn-success btn-block"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
-
-            <?php  if (login_check($mysqli) == true) : ?>
-            <a href="/dashboard#team_page" class="btn btn-info btn-block"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Join Team</a>
-            <?php  else : ?>
-            <a href="/register?t=<?php echo $t_username; ?>" class="btn btn-info btn-block"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Join Team</a>
-            <?php  endif; ?>
-
-            <a href="" class="btn btn-primary btn-block" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a></p>
-            <p>No-Shave November is a web-based, non-profit organization devoted to growing cancer awareness and raising funds to support cancer prevention, research, and education.</p>
-            <div class="page-header">
-              <h4><i class="fa fa-flag-checkered" aria-hidden="true"></i>&nbsp; Fundraising Goal</h4>
-            </div>
-            <h1><strong>$<?php echo number_format($total_team_raised); ?></strong><small> of $<?php echo number_format($t_page_goal); ?></small></h1>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $total_raised_percent; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $total_raised_width; ?>%;">
-                <?php echo $total_raised_percent; ?>
+                      </div>
+                  </div>
               </div>
             </div>
-
-            <?php echo $org_link; ?>
-
-        </div>
-      </div>
-    </div> 
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <!-- FOOTER -->
+      </section>
 
     <!-- MODALS -->
 
     <!-- SHARE -->
     <div class="modal fade" tabindex="-1" role="dialog" id="shareTeam">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Share This Page</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
             </div>
 
             <div class="modal-body centered">
@@ -478,7 +437,7 @@ if ($t_id != 0) {
               <div class="row">
                 <div class="col-md-10 col-md-offset-1 centered">
                   <label>Page Link</label>
-                  <input type="text" class="form-control text-center" placeholder="https://no-shave.org/team/<?php echo $t_username; ?>" value="https://no-shave.org/team/<?php echo $t_username; ?>" onClick="this.select();">
+                  <input type="text" class="form-control text-center" placeholder="<?php echo base_url; ?>/team/<?php echo $t_username; ?>" value="<?php echo base_url; ?>/team/<?php echo $t_username; ?>" onClick="this.select();">
                 </div>
               </div>
 
@@ -500,13 +459,12 @@ if ($t_id != 0) {
         return false;
       }
       function facebook(){
-        window.open("https://www.facebook.com/sharer/sharer.php?u=https://no-shave.org/team/<?php echo $t_username; ?>", "newwindow", "width=500, height=400");
+        window.open("https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url; ?>/team/<?php echo $t_username; ?>", "newwindow", "width=500, height=400");
         return false;
       }
     </script>
-
-    <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
+    <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
   </body>
 </html>

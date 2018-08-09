@@ -5,12 +5,12 @@
         font-size: 20px;
     }
   </style>
-  <section class="app-sec" style="background-image: url(./img/fbg.png);">
+  <section class="app-sec" style="background-image: url(<?php echo base_url;?>/img/fbg.png);">
       <div class="container">
           <div class="row animatedParent">
               <div class="col-12 col-md-5">
                   <figure class="animated bounceInUp animate-2">
-                      <img src="./img/half-mobile.png" class="img-fluid" alt="">                           
+                      <img src="<?php echo base_url;?>/img/half-mobile.png" class="img-fluid" alt="">                           
                   </figure>
               </div>
               <div class="col-12 col-md-7">
