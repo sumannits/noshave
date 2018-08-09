@@ -234,25 +234,27 @@ if ($m_id != 0 && $m_2017 != 0) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="<?php echo base_url; ?>/img/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="author" content="No-Shave November">
     <meta name="description" content="<?php echo $m_full_name;?> | No-Shave November Fundraising Page">
     <title><?php echo $m_full_name; ?> | No-Shave November</title>
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">    
-    <link href="/assets/css/main.css" rel="stylesheet">
-    <link href='/assets/css/font.css' rel='stylesheet' type='text/css'>
-    <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function(){
-        $("#menu").load("/platform/platform_menu.php"); 
-      });
-      $(function(){
-        $("#footer").load("/platform/platform_footer.html"); 
-      });
-    </script>
+    <link href="<?php echo base_url; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick-theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/slick.css" rel="stylesheet">   
+    <link href="<?php echo base_url; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/fonts/themify-icons.css" rel="stylesheet">   
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url; ?>/assets/css/animations.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/theme.css" rel="stylesheet">
+    <link href="<?php echo base_url; ?>/assets/css/responsive.css" rel="stylesheet">
+    <script src="<?php echo base_url; ?>/assets/js/jquery.min.js" type="text/javascript"></script>
+    
+    <script src="<?php echo base_url; ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url; ?>/assets/js/loadingoverlay.js" type="text/javascript"></script>
+    
     <script>
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
@@ -331,102 +333,199 @@ if ($m_id != 0 && $m_2017 != 0) {
     .form-control.text-center {
       width: 100%;
     }
+    .modal-body h4{
+        color: #333;
+        font-weight: 400;
+        font-size: 20px;
+      }
     </style>
   </head>
   <body>
-
-    <!-- MEDU BAR -->
-    <div id="menu"></div>
-    <!-- MENU BAR-->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="page-header">
-            <h1><?php echo $m_full_name; ?>&nbsp;&nbsp; <small><?php echo $personal_location; ?></small></h1>
-          </div>
-
-          <div class="col-sm-9">
-            <img style="width: 100%; height: 100%;" src="<?php echo $m_pic_0;?>" alt="<?php echo $m_full_name; ?> No Shave November 2017" class="img-rounded">
-
-
-            <h2><strong><?php echo $m_page_title; ?></strong></h2>
-            <p id="page_description"><?php echo $m_page_description; ?></p>
-
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th class="col-md-4"><h4><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Donation</h4></th>
-                  <th class="col-md-8"><h4><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; Comment</h4></th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                  echo $donation_table;
-                ?>
-              </tbody>
-            </table>
-
-          </div>
-
-          <div class="col-sm-3">
-            <center><a href="/"><img class="img-responsive" src="/img/nsn_full_stacked.png" alt="No-Shave November"></a></center>
-            <p><a href="/donate?id=<?php echo $m_id; ?>&amp;c=1" class="btn btn-success btn-block"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
-            <a href="" class="btn btn-primary btn-block" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a></p>
-            <p>No-Shave November is a web-based, non-profit organization devoted to growing cancer awareness and raising funds to support cancer prevention, research, and education.</p>
-            <div class="page-header">
-              <h4><i class="fa fa-flag-checkered" aria-hidden="true"></i>&nbsp; Fundraising Goal</h4>
-            </div>
-            <h1><strong>$<?php echo number_format($total_raised); ?></strong><small> of $<?php echo number_format($m_page_goal); ?></small></h1>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $total_raised_percent; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $total_raised_width; ?>%;">
-                <?php echo $total_raised_percent; ?>
+  <header>
+    <?php include_once('menu.php'); ?>
+  </header>
+      <section class="blog-page py-3 py-md-5">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 col-12 white-bg shadow">
+                      <div class="b-sidebar py-4">
+                          <a href="index.html" class="side-logo d-block text-center"><img src="images/sidebar-logo.png" class="img-fluid" alt="" style="max-width:150px"></a>
+                          <p>
+                              <a href="" class="btn btn-success btn-block btn-sm"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
+                              <a href="" class="btn btn-primary btn-block btn-sm"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a>
+                          </p>
+                          <p>No-Shave November is a web-based, non-profit organization devoted to growing cancer awareness and raising funds to support cancer prevention, research, and education.</p>
+                     
+                            <div class="page-header">
+                                <h4><i class="fa fa-flag-checkered" aria-hidden="true"></i>&nbsp; Fundraising Goal</h4>
+                            </div>
+                          <h3><strong>$56,530</strong><small> of $100,000</small></h3>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width:56.53%;">
+                              57%</div>
+                          </div>
+                            <div class="page-header">
+                                <h4><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; Achievements</h4>
+                            </div>
+                          <ul class="list-inline text-center">
+                              <li>
+                                  <a class="text-warning">
+                                      <i class="fa fa-star fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="text-warning">
+                                      <i class="fa fa-star fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="text-warning">
+                                      <i class="fa fa-star-o fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
+                                  </a>
+                              </li>
+                          </ul>
+                            <div class="page-header">
+                                <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team</h4>
+                            </div>
+                            <div class="list-group">
+                                <h3><a href="" class="text-center text-dark d-block">Lorem Ipsum<br><br>
+                                    <img class="img-rounded fill-section img-fluid" src="https://storage.googleapis.com/nsn-img/img/f3f38a56062c802d877cb25ec4a39912.png" alt="ARCO_ATL_SW_MW_MA_PHL_TAMPA"></a>
+                                </h3>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-md-8 col-12">
+                      <div class="right-board b-log">
+                          <figure class="">
+                              <img src="images/blog.jpg" class="img-fluid" alt="">
+                          </figure>
+                          <div class="inner-txt p-4">
+                              <h2>Let it Grow and Join the Fight Against Cancer!</h2>
+                              <p>Almost everyone has been around or knows someone that has battled with cancer. This year, one of ARCO's own, Dave Allen, lost his battle with the disease. So in memory of him, our team is pushing to raise $100,000 to help with cancer research and finding a cure!</p>
+                              <p>Each day, 22,000 people die from cancer worldwide (WHO). There's a good chance that someone you know and love will be affected by this disease. Nearly half of cancer diagnoses and deaths are preventable. No-Shave November's mission is to not only raise funds for cancer research and treatment but to educate the population about preventative measures.</p>
+                              <p>For over six years, participants around the globe have put down their razors and foregone their hair appointments to join the fight against cancer. The No-Shave November campaign has successfully raised over $3.5 million dollars to combat this disease. Every dollar raised brings us one step closer in our efforts to fund cancer research and education, help prevent the disease, and aid those fighting the battle. Each whisker grown allows us to embrace our hair, which many cancer patients lose during treatment. Will you join me? Start by using the links to the right.</p>
+                              
+                          </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                      <th><h4><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Donation</h4></th>
+                                      <th><h4><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; Comment</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                      <td>
+                                        <h2 class="">$25</h2>
+                                        <h3>Anonymous</h3>
+                                      </td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <h2 class="">$25</h2>
+                                        <h3>Anonymous</h3>
+                                      </td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <h2 class="">$25</h2>
+                                        <h3>Anonymous</h3>
+                                      </td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <h2 class="">$25</h2>
+                                        <h3>Anonymous</h3>
+                                      </td>
+                                      <td><p>Lorem Ipsum dummy text</p></td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <h2 class="">$25</h2>
+                                        <h3>Anonymous</h3>
+                                      </td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                             </table>
+                      </div>
+                  </div>
               </div>
-            </div>
-
-            <div class="page-header">
-              <h4><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; Achievements</h4>
-            </div>
-
-            <div class="row">
-              <?php echo $achievements; ?>
-            </div>
-
-            <?php echo $team_link; ?>
-
-        </div> <!-- col md 12 -->
-      </div> <!-- row -->
-    </div> <!-- container -->
-
-    <!-- - - - - - -  -->
-    <!-- PAGE CONTENT -->
-    <!-- - - - - - -  -->
-
-    <!-- GIMME A BREAK -->
-    <br><br>
-    <!-- GIMME A BREAK -->
-
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <!-- FOOTER -->
-
+              <!--tab section dummy-->
+              <ul class="nav table-tab mb-5" id="myTab" role="tablist">
+                    <li>
+                      <a class="active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Member Leaderboard</a>
+                    </li>
+                    <li>
+                      <a class="" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Team Leaderboard</a>
+                    </li>
+                    <li>
+                      <a class="" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Organization Leaderboard</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial No</th>
+                                    <th scope="col" class="pl-5">Member</th>
+                                    <th scope="col" class="pl-5">Raised</th>                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
+                                    <td><b>$56,530</b></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                     <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
+                                    <td><b>$56,530</b></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                      <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
+                                    <td><b>$56,530</b></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                      <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
+                                    <td><b>$56,530</b></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                      <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
+                                    <td><b>$56,530</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <h2>LOREM IPSUM DUMMY TESTING</h2>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <h2>DUMMY TESTING</h2>
+                    </div>
+                </div>
+              
+          </div>
+      </section>
     <!-- MODALS -->
 
     <!-- SHARE -->
     <div class="modal fade" tabindex="-1" role="dialog" id="sharePersonal">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Share This Page</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Share This Page</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -477,6 +576,7 @@ if ($m_id != 0 && $m_2017 != 0) {
 
     <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
+    <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
   </body>
 </html>
