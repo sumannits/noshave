@@ -57,6 +57,38 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
   // unable to get data
   $member_table1 = "Something went wrong.";
 }
+
+// $team_table1='';
+// $team_count1 = 0;
+// if ($stmt1 = $mysqli->prepare("SELECT t_name, t_username, sum(d_amount) FROM (SELECT DISTINCT d_id, t_id, t_name, t_username, d_amount FROM team t INNER JOIN member m ON t.t_id = m.m_team_id INNER JOIN donation d ON d.d_classifier_id = t.t_id OR d.d_classifier_id = m.m_id) as foo GROUP BY t_id ORDER BY sum(d_amount) DESC LIMIT 10")) {
+//   $stmt1->execute();
+//   $stmt1->store_result();
+//   $stmt1->bind_result($t_name, $t_username, $t_total_raised);
+
+//   while ($stmt1->fetch()) {
+
+//     $team_count1 += 1;
+
+//                 $team_table1 .= '
+//                 <tr>
+//                   <td class="col-md-1">
+//                     <h4>' . $team_count1 . '</h4>
+//                   </td>
+//                   <td class="vert-align col-md-8">
+//                     <h4><a href="'.base_url.'/team/' . $t_username . '">' . $t_name . '</a></h4>
+//                   </td>
+//                   <td class="vert-align col-md-3">
+//                     <h3 class="donation-green">$' . number_format($t_total_raised) . '</h3>
+//                   </td>
+//                 </tr>
+//               ';                
+
+//   }
+
+// } else {
+//   // unable to get data
+//   $team_table1 = "Something went wrong.";
+// }
 //print_r($member_table);
 ?>
 
@@ -259,7 +291,7 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
       <section class="leaderboard text-center">
             <div class="container">
                 <h2>Leaderboard</h2>
-                <h3>This year $<?php echo number_format($total_raised); ?> has been raised by <?php echo number_format($total_members); ?> members, <?php echo number_format($total_teams); ?> teams and <?php echo number_format($total_orgs); ?> organizations.</h3>
+                <h3>This year <span>$<?php echo number_format($total_raised); ?></span> has been raised by <?php echo number_format($total_members); ?> members, <?php echo number_format($total_teams); ?> teams and <?php echo number_format($total_orgs); ?> organizations.</h3>
                 <div class="row">
                   <div class="col-md-12">
                 <?php
@@ -274,7 +306,7 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
           ?>
                   </div>
                 </div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-center">
                     <div class="input-group mt-4 mb-5">
                         <input type="text" class="form-control" placeholder="Search Members, Teams and Organizations" name="q" id="q" onKeyDown="if(event.keyCode==13) search1();">
                         <div class="input-group-append">

@@ -139,7 +139,7 @@ if ($stmt = $mysqli->prepare("SELECT t_name, t_username, sum(d_amount) FROM (SEL
                           <h4>' . $team_count . '</h4>
                         </td>
                         <td class="vert-align col-md-8">
-                          <h4><a href="/team/' . $t_username . '">' . $t_name . '</a></h4>
+                          <h4><a href="'.base_url.'/team/' . $t_username . '">' . $t_name . '</a></h4>
                         </td>
                         <td class="vert-align col-md-3">
                           <h3 class="donation-green">$' . number_format($t_total_raised) . '</h3>
@@ -171,7 +171,7 @@ if ($stmt = $mysqli->prepare("SELECT o_name, o_username, sum(d_amount) FROM (SEL
                           <h4>' . $org_count . '</h4>
                         </td>
                         <td class="vert-align col-md-8">
-                          <h4><a href="/org/' . $o_username . '">' . $o_name . '</a></h4>
+                          <h4><a href="'.base_url.'/org/' . $o_username . '">' . $o_name . '</a></h4>
                         </td>
                         <td class="vert-align col-md-3">
                           <h3 class="donation-green">$' . number_format($o_total_raised) . '</h3>

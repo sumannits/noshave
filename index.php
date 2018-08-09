@@ -349,6 +349,109 @@ sec_session_start();
                         })();
                         /*]]>*/
                     </script>
+
+                    <div id='product-component-e4bc1d66d8c'></div>
+                    <script type="text/javascript">
+                            /*<![CDATA[*/
+
+                            (function () {
+                              var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                              if (window.ShopifyBuy) {
+                                if (window.ShopifyBuy.UI) {
+                                  ShopifyBuyInit();
+                                } else {
+                                  loadScript();
+                                }
+                              } else {
+                                loadScript();
+                              }
+
+                              function loadScript() {
+                                var script = document.createElement('script');
+                                script.async = true;
+                                script.src = scriptURL;
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                                script.onload = ShopifyBuyInit;
+                              }
+
+                              function ShopifyBuyInit() {
+                                var client = ShopifyBuy.buildClient({
+                                  domain: 'mhf-dba-no-shave-november.myshopify.com',
+                                  apiKey: '0007cd26e3c16354feca5d50133e707a',
+                                  appId: '6',
+                                });
+
+                                ShopifyBuy.UI.onReady(client).then(function (ui) {
+                                  ui.createComponent('product', {
+                                    id: [13129540811],
+                                    node: document.getElementById('product-component-e4bc1d66d8c'),
+                                    moneyFormat: '%24%7B%7Bamount%7D%7D',
+                                    options: {
+                              "product": {
+                                "variantId": "all",
+                                "contents": {
+                                  "imgWithCarousel": false,
+                                  "variantTitle": false,
+                                  "description": false,
+                                  "buttonWithQuantity": false,
+                                  "quantity": false
+                                },
+                                "styles": {
+                                  "product": {
+                                    "@media (min-width: 601px)": {
+                                      "max-width": "calc(25% - 20px)",
+                                      "margin-left": "20px",
+                                      "margin-bottom": "50px"
+                                    }
+                                  }
+                                }
+                              },
+                              "cart": {
+                                "contents": {
+                                  "button": true
+                                },
+                                "styles": {
+                                  "footer": {
+                                    "background-color": "#ffffff"
+                                  }
+                                }
+                              },
+                              "modalProduct": {
+                                "contents": {
+                                  "img": false,
+                                  "imgWithCarousel": true,
+                                  "variantTitle": false,
+                                  "buttonWithQuantity": true,
+                                  "button": false,
+                                  "quantity": false
+                                },
+                                "styles": {
+                                  "product": {
+                                    "@media (min-width: 601px)": {
+                                      "max-width": "100%",
+                                      "margin-left": "0px",
+                                      "margin-bottom": "0px"
+                                    }
+                                  }
+                                }
+                              },
+                              "productSet": {
+                                "styles": {
+                                  "products": {
+                                    "@media (min-width: 601px)": {
+                                      "margin-left": "-20px"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                                  });
+                                });
+                              }
+                            })();
+                            /*]]>*/
+                        </script>    
+
                    <!--<div class="col-12 col-md-6 card shadow ml-auto">
                     
                        <div class="slide-wrap">

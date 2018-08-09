@@ -63,17 +63,13 @@ if ($m_id != 0 && $m_2017 != 0) {
 
       if ($d_visible_on_page == 1){
 
-        $donation_table .= '
-                              <tr>
-                                <td class="vert-align">
-                                  <h2 class="donation-green">$'. number_format($d_amount) .'</h2>
-                                  <h4>'. $d_name .'</h4>
-                                </td>
-                                <td class="vert-align">
-                                  <p>'. $d_message .'</p>
-                                </td>
-                              </tr>
-                            ';
+        $donation_table .= '<tr>
+        <td>
+          <h2 class="">$'.number_format($d_amount).'</h2>
+          <h3>'. $d_name .'</h3>
+        </td>
+        <td><p>'. $d_message .'</p></td>
+      </tr>';
 
       } else {
         // no!
@@ -84,15 +80,12 @@ if ($m_id != 0 && $m_2017 != 0) {
 
     if ($donation_table == "") {
 
-      $donation_table = '
-                      <tr>
-                        <td colspan="2" class="vert-align centered">
-                          <br>
-                          <h4>Be the first to donate to ' . $m_full_name . '!</h4>
-                          <p><a href="/donate?id=' . $m_id . '&amp;c=1" class="btn btn-success"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Donate</a>
-                        </td>
-                      </tr>
-                    ';
+      $donation_table = '<tr>
+      <td colspan="2">
+        <h2 class=""> Be the first to donate to ' . $m_full_name . '! </h2>
+        <p><a href="'.base_url.'/donate?id=' . $m_id . '&amp;c=1" class="btn btn-success"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Donate</a></p>
+      </td>
+    </tr>';
 
     }
 
@@ -172,38 +165,38 @@ if ($m_id != 0 && $m_2017 != 0) {
 
   // did they donate?
   if ($donate_trohpy == 1){
-    $achievements .= '
-                      <div class="col-sm-3">
-                        <i class="fa fa-star fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Made a Donation"></i>
-                      </div>
-                      ';
+    $achievements .= '<li>
+                          <a class="text-warning">
+                              <i class="fa fa-star fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
+                          </a>
+                      </li>';
   }
 
   // did they get screened?
   if ($m_got_screen == 1){
-    $achievements .= '
-                      <div class="col-sm-3">
-                        <i class="fa fa-user-md fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Got Screened"></i>
-                      </div>
-                      ';
+    $achievements .= '<li>
+    <a class="text-warning">
+        <i class="fa fa-user-md fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Got Screened"></i>
+    </a>
+</li>';
   }
 
   // did they reach their goal?
 
   if ($reached_goal == 1){
-    $achievements .= '
-                      <div class="col-sm-3">
-                        <i class="fa fa-flag fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Reached Fundraising Goal"></i>
-                      </div>
-                      ';
+    $achievements .= '<li>
+    <a class="text-warning">
+        <i class="fa fa-flag fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Reached Fundraising Goal"></i>
+    </a>
+</li>';
   }
 
   if (!$donate_trohpy && ! $m_got_screen && !$reached_goal){
-    $achievements .= '
-                      <div class="col-sm-3">
-                        <i class="fa fa-smile-o fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="No trophies yet :)"></i>
-                      </div>
-                      ';
+    $achievements .= '<li>
+    <a class="text-warning">
+        <i class="fa fa-smile-o fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="No trophies yet :)"></i>
+    </a>
+</li>';
   }
 
   // GET TEAM
@@ -211,14 +204,13 @@ if ($m_id != 0 && $m_2017 != 0) {
   if ($m_team_id != 0){
 
     // set team page info
-    $team_link = '
-                  <div class="page-header">
-                    <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team</h4>
-                  </div>
-                  <div class="list-group">
-                    <a href="/team/' . $t_username . '" class="list-group-item centered">' . $t_name . '<br><br><img class="img-rounded fill-section" src="' . $t_pic_0 . '" alt="' . $t_name . '"></a>
-                  </div>
-                  ';
+    $team_link = '<div class="page-header">
+    <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team</h4>
+</div>
+<div class="list-group">
+    <h3><a href="'.base_url.'/team/' . $t_username . '" class="text-center text-dark d-block">' . $t_name . '<br><br><img class="img-rounded fill-section img-fluid" src="' . $t_pic_0 . '" alt="' . $t_name . '"></a>
+    </h3>
+</div>';
 
   } else {
     // no team
@@ -349,61 +341,39 @@ if ($m_id != 0 && $m_2017 != 0) {
               <div class="row">
                   <div class="col-lg-3 col-md-4 col-12 white-bg shadow">
                       <div class="b-sidebar py-4">
-                          <a href="index.html" class="side-logo d-block text-center"><img src="images/sidebar-logo.png" class="img-fluid" alt="" style="max-width:150px"></a>
+                          <a href="<?php echo base_url; ?>" class="side-logo d-block text-center"><img src="<?php echo base_url;?>/assets/images/sidebar-logo.png" class="img-fluid" alt="" style="max-width:150px"></a>
                           <p>
-                              <a href="" class="btn btn-success btn-block btn-sm"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
-                              <a href="" class="btn btn-primary btn-block btn-sm"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a>
+                              <a href="<?php echo base_url; ?>/donate?id=<?php echo $m_id; ?>&amp;c=1" class="btn btn-success btn-block btn-sm"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
+                              <a href="Javascript:void(0);" class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a>
                           </p>
                           <p>No-Shave November is a web-based, non-profit organization devoted to growing cancer awareness and raising funds to support cancer prevention, research, and education.</p>
                      
                             <div class="page-header">
                                 <h4><i class="fa fa-flag-checkered" aria-hidden="true"></i>&nbsp; Fundraising Goal</h4>
                             </div>
-                          <h3><strong>$56,530</strong><small> of $100,000</small></h3>
+                          <h3><strong>$<?php echo number_format($total_raised); ?></strong><small> of $<?php echo number_format($m_page_goal); ?></small></h3>
                           <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width:56.53%;">
-                              57%</div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $total_raised_percent; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $total_raised_width; ?>%;">
+                            <?php echo $total_raised_percent; ?></div>
                           </div>
                             <div class="page-header">
                                 <h4><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; Achievements</h4>
                             </div>
                           <ul class="list-inline text-center">
-                              <li>
-                                  <a class="text-warning">
-                                      <i class="fa fa-star fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a class="text-warning">
-                                      <i class="fa fa-star fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a class="text-warning">
-                                      <i class="fa fa-star-o fa-3x" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Made a Donation"></i>
-                                  </a>
-                              </li>
+                            <?php echo $achievements; ?>
                           </ul>
-                            <div class="page-header">
-                                <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Team</h4>
-                            </div>
-                            <div class="list-group">
-                                <h3><a href="" class="text-center text-dark d-block">Lorem Ipsum<br><br>
-                                    <img class="img-rounded fill-section img-fluid" src="https://storage.googleapis.com/nsn-img/img/f3f38a56062c802d877cb25ec4a39912.png" alt="ARCO_ATL_SW_MW_MA_PHL_TAMPA"></a>
-                                </h3>
-                            </div>
+                          <?php echo $team_link; ?>
                       </div>
                   </div>
                   <div class="col-lg-9 col-md-8 col-12">
                       <div class="right-board b-log">
+                          <h2><?php echo $m_full_name; ?> <small><?php echo $personal_location; ?></small> </h2>
                           <figure class="">
-                              <img src="images/blog.jpg" class="img-fluid" alt="">
+                              <img src="<?php echo $m_pic_0;?>" class="img-fluid" alt="<?php echo $m_full_name; ?> No Shave November 2017">
                           </figure>
                           <div class="inner-txt p-4">
-                              <h2>Let it Grow and Join the Fight Against Cancer!</h2>
-                              <p>Almost everyone has been around or knows someone that has battled with cancer. This year, one of ARCO's own, Dave Allen, lost his battle with the disease. So in memory of him, our team is pushing to raise $100,000 to help with cancer research and finding a cure!</p>
-                              <p>Each day, 22,000 people die from cancer worldwide (WHO). There's a good chance that someone you know and love will be affected by this disease. Nearly half of cancer diagnoses and deaths are preventable. No-Shave November's mission is to not only raise funds for cancer research and treatment but to educate the population about preventative measures.</p>
-                              <p>For over six years, participants around the globe have put down their razors and foregone their hair appointments to join the fight against cancer. The No-Shave November campaign has successfully raised over $3.5 million dollars to combat this disease. Every dollar raised brings us one step closer in our efforts to fund cancer research and education, help prevent the disease, and aid those fighting the battle. Each whisker grown allows us to embrace our hair, which many cancer patients lose during treatment. Will you join me? Start by using the links to the right.</p>
+                              <h2> <?php echo $m_page_title; ?> </h2>
+                              <p><?php echo $m_page_description; ?></p>
                               
                           </div>
                             <table class="table table-striped">
@@ -414,106 +384,13 @@ if ($m_id != 0 && $m_2017 != 0) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                      <td>
-                                        <h2 class="">$25</h2>
-                                        <h3>Anonymous</h3>
-                                      </td>
-                                      <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <h2 class="">$25</h2>
-                                        <h3>Anonymous</h3>
-                                      </td>
-                                      <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <h2 class="">$25</h2>
-                                        <h3>Anonymous</h3>
-                                      </td>
-                                      <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <h2 class="">$25</h2>
-                                        <h3>Anonymous</h3>
-                                      </td>
-                                      <td><p>Lorem Ipsum dummy text</p></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <h2 class="">$25</h2>
-                                        <h3>Anonymous</h3>
-                                      </td>
-                                      <td>&nbsp;</td>
-                                    </tr>
+                                  <?php echo $donation_table; ?>
                                 </tbody>
                              </table>
-                      </div>
+                        </div>
                   </div>
               </div>
-              <!--tab section dummy-->
-              <ul class="nav table-tab mb-5" id="myTab" role="tablist">
-                    <li>
-                      <a class="active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Member Leaderboard</a>
-                    </li>
-                    <li>
-                      <a class="" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Team Leaderboard</a>
-                    </li>
-                    <li>
-                      <a class="" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Organization Leaderboard</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Serial No</th>
-                                    <th scope="col" class="pl-5">Member</th>
-                                    <th scope="col" class="pl-5">Raised</th>                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
-                                    <td><b>$56,530</b></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                     <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
-                                    <td><b>$56,530</b></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                      <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
-                                    <td><b>$56,530</b></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                      <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
-                                    <td><b>$56,530</b></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                      <td><img src="images/td1.png" alt=""><span>ARCO Design/Build</span></td>
-                                    <td><b>$56,530</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <h2>LOREM IPSUM DUMMY TESTING</h2>
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h2>DUMMY TESTING</h2>
-                    </div>
-                </div>
-              
-          </div>
+            </div>
       </section>
     <!-- MODALS -->
 
@@ -574,7 +451,6 @@ if ($m_id != 0 && $m_2017 != 0) {
       }
     </script>
 
-    <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
     <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
