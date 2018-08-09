@@ -619,11 +619,13 @@ if (isset($_GET['t'])){
     <header>           
     <?php include_once('menu.php')?>
     </header>
+    <?php if($join_team_alert!=''){?>
       <div class="row">
           <div class="col-md-12">
               <?php echo $join_team_alert; ?>
           </div>
       </div>
+    <?php }?>
       <section class="register-step-1 register-div otherSection" style="display:block;" id="section_1">
           <div class="container">
               <div class="r-container text-center">

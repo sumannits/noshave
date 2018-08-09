@@ -1218,3 +1218,36 @@ ul.d-wrap li:last-child{
 .addr-main a{
     font-size: 18px;
 }
+/*************new pages**********************************/
+.page-header {
+    padding: 15px 0;
+    margin: 15px 0;
+    color: #777;
+}
+.page-header h4{
+    color: #666666;
+}
+.page-header h4 i{
+   color: #074f5f;
+}
+.b-sidebar ul li a{
+    display: block;
+}
+.b-sidebar h3{
+    font-size: 20px;
+}
+.b-sidebar h3 strong{
+    color: #444;
+}
+.b-sidebar h3 small{
+    color: #888;
+}
+.blog-page .right-board h3{
+    font-size: 18px;
+    font-weight: 500;
+}
+.blog-page .right-board .table h2{
+    font-size: 24px;
+    color: #074f5f;
+    font-weight: 500;
+}
