@@ -64,7 +64,7 @@ if ($t_id != 0) {
                             <img class="img-rounded" height="42" width="42" src="' . $m_profile_pic . '">
                           </td>
                           <td class="vert-align col-md-8">
-                            <h4><a href="/member/' . $m_username . '">' . $m_full_name . '</a></h4>
+                            <h4><a href="'.base_url.'/member/' . $m_username . '">' . $m_full_name . '</a></h4>
                           </td>
                           <td class="vert-align col-md-4">
                             <h4 class="donation-green">$' . number_format($total_raised_member) . '</h4>
@@ -147,7 +147,7 @@ if ($t_id != 0) {
                         <td colspan="2" class="vert-align centered">
                           <br>
                           <h4>Be the first to donate to ' . $t_name . '!</h4>
-                          <p><a href="/donate?id=' . $t_id . '&amp;c=2" class="btn btn-success"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Donate</a>
+                          <p><a href="'.base_url.'/donate?id=' . $t_id . '&amp;c=2" class="btn btn-success"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Donate</a>
                         </td>
                       </tr>
                     ';
@@ -187,7 +187,7 @@ if ($t_id != 0) {
                     <h4><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Organization</h4>
                   </div>
                   <div class="list-group">
-                    <a href="/org/' . $o_username . '" class="list-group-item centered">' . $o_name . '<br><br><img class="img-rounded fill-section" src="' . $o_pic_0 . '" alt="' . $o_name . '"></a>
+                    <a href="'.base_url.'/org/' . $o_username . '" class="list-group-item centered">' . $o_name . '<br><br><img class="img-rounded fill-section" src="' . $o_pic_0 . '" alt="' . $o_name . '"></a>
                   </div>
                   ';
 

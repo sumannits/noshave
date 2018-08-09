@@ -210,7 +210,7 @@ if (isset($_POST['full_name'], $_POST['email_address'], $_POST['username'], $_PO
 
                                 You have officially registered for No-Shave November 2017! Thank you for joining our efforts in raising cancer awareness and for starting your hairy journey with us. We can’t wait to see what this November brings!
 
-                                You can view your personal fundraising page here: https://no-shave.org/member/' . $username . '
+                                You can view your personal fundraising page here: '.base_url.'/member/' . $username . '
                                 ';
 
                 // send the email

@@ -107,7 +107,7 @@ if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum
                     <tr>
                       <td>' . $member_count . '</td>
                       <td>
-                        <img src="' . $m_profile_pic . '" alt=""> <span> <a href="/member/' . $m_username . '">' . $m_full_name . '</a> </span>
+                        <img src="' . $m_profile_pic . '" alt=""> <span> <a href="'.base_url.'/member/' . $m_username . '">' . $m_full_name . '</a> </span>
                       </td>
                       <td>
                       <b>$' . number_format($m_total_raised) . '</b>
