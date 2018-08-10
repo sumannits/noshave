@@ -884,7 +884,7 @@ if (isset($_GET['t'])){
                           <input type="number" class="form-control full-input-width" id="donation_amount_other_amount" placeholder="Amount" name="donation_amount_other" onkeyup="updateAmount()">
                         </div>
                     </div>
-                    <h6>Most people are giving <span>$100</span> right now. Please give what you can.</h6>
+                    <!--<h6>Most people are giving <span>$100</span> right now. Please give what you can.</h6>-->
 
                     <div class="pay-form">
                         <form class="form" id="donation_form">

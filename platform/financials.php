@@ -33,7 +33,7 @@
     </header>
     <section class="leaderboard">
             <div class="container">
-                <h2>Financials</h2>
+                <h2 class="text-center">Financials</h2>
                 
                 <div class="row finance pt-5">                    
                   <div class="col-md-5">
@@ -58,7 +58,7 @@
                   </div>
                 </div>
                 
-                <div class="row pt-5">                  
+                <div class="row pt-5" style="border-top: 2px solid #efefef;">                  
                     <div class="col-md-7 col-12 text-right">
                         <h3> 2016 Donation Breakdown </h3>
                         <p>
