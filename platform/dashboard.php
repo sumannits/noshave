@@ -568,7 +568,7 @@ if ($m_got_screen == 0) {
         // make call
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_org_page.php', 
+          url: './platform/api/update_org_page.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -682,7 +682,7 @@ if ($m_got_screen == 0) {
         // make call
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/offline_donation.php', 
+          url: './platform/api/offline_donation.php', 
           data: args, 
           dataType: 'json',
           success: function (data) { 
@@ -757,7 +757,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/join_team.php', 
+          url: './platform/api/join_team.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -795,7 +795,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/join_org.php', 
+          url: './platform/api/join_org.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -925,7 +925,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/search_orgs.php', 
+          url: './platform/api/search_orgs.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -948,7 +948,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/leave_team.php', 
+          url: './platform/api/leave_team.php', 
           dataType: 'json',
           success: function (data) { 
             if (data['status'] == "success") {
@@ -980,7 +980,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/leave_org.php', 
+          url: './platform/api/leave_org.php', 
           dataType: 'json',
           success: function (data) { 
             if (data['status'] == "success") {
@@ -1124,7 +1124,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_team_photo.php', 
+          url: './platform/api/update_team_photo.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -1174,7 +1174,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_org_photo.php', 
+          url: './platform/api/update_org_photo.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -1224,7 +1224,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/update_personal_profile_picture.php', 
+          url: './platform/api/update_personal_profile_picture.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
@@ -1272,7 +1272,7 @@ if ($m_got_screen == 0) {
 
         $.ajax({ 
           type: 'POST',
-          url: '/platform/api/email_team.php', 
+          url: './platform/api/email_team.php', 
           data: vars, 
           dataType: 'json',
           success: function (data) { 
