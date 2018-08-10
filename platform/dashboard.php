@@ -1680,6 +1680,110 @@ if ($m_got_screen == 0) {
                           </div>
                       </div>
                       <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashteam">
+                      <?php if (team_owner($user_id, $mysqli) == true) : ?>
+
+<!-- TEAM OWNER -->
+
+<div class="right-board">
+                              <h2 class="mt-4">Team Page</h2>                            
+                                <div class="ac-own mt-5">
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Link :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-success">
+                                          <a id="view_team_page_2" href="<?php echo base_url; ?>/team/<?php echo $t_username; ?>"><?php echo base_url; ?>/team/<?php echo $t_username; ?></a></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Title :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $t_page_title; ?></span>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Photos :</label>
+                                      <div class="col-12 col-md-9">
+                                      <img id="current_team_page_photo" style="max-height: 150px;" src="<?php echo $t_pic_0; ?>" alt="<?php echo $t_name; ?> No Shave November 2017" class="mb-2">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Fundraising Goal :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted" id="team_goal">$<?php echo number_format($t_page_goal); ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Description :</label>
+                                      <div class="col-12 col-md-9">
+                                          <p class="text-muted" id="team_description"><?php echo $t_page_description; ?></p>
+                                      </div>
+                                  </div>                                 
+                                  <div class="form-group row">                                     <div class="col-12 col-md-9 ml-auto text-left">
+
+                                  <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editTeam"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edit</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#emailTeam"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Email Team</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editTeamPhotos"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#inviteTeam"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Invite</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
+      <a id="view_team_page" class="btn btn-outline-primary btn-sm" target="_blank" href="<?php echo base_url; ?>/team/<?php echo $t_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
+
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+<!-- TEAM OWNER -->
+
+<?php  elseif (team_member($user_id, $mysqli) == true) : ?>
+
+<!-- TEAM MEMBER -->
+
+<div class="right-board">
+                              <h2 class="mt-4">Team Page</h2>                            
+                                <div class="ac-own mt-5">
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Link :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-success">
+                                          <a href="<?php echo base_url; ?>/team/<?php echo $t_username; ?>"><?php echo base_url; ?>/team/<?php echo $t_username; ?></a></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Title :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $t_page_title; ?></span>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Photos :</label>
+                                      <div class="col-12 col-md-9">
+                                      <img style="max-height: 150px;" src="<?php echo $t_pic_0; ?>" alt="<?php echo $t_name; ?> No Shave November 2017" class="mb-2">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Fundraising Goal :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted">$<?php echo number_format($t_page_goal); ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Description :</label>
+                                      <div class="col-12 col-md-9">
+                                          <p class="text-muted"><?php echo $t_page_description; ?></p>
+                                      </div>
+                                  </div>                                 
+                                  <div class="form-group row">                                     <div class="col-12 col-md-9 ml-auto text-left">
+                                  <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#leaveTeam"><i class="fa fa-user-times" aria-hidden="true"></i>&nbsp; Leave Team</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#shareTeam"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
+      <a id="view_team_page" type="button" class="btn btn-outline-primary btn-sm" target="_blank" href="<?php echo base_url; ?>/team/<?php echo $t_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+<!-- TEAM MEMBER -->
+
+<?php  else : ?>
                           <div class="right-board">
                               <h2 class="mt-4">Create or Join Team </h2>
                               <span class="h-text">Select an Option Below to Get Started</span>
@@ -1701,6 +1805,7 @@ if ($m_got_screen == 0) {
                                    <button name="create_or_join_team" id="create_or_join_team" type="button" class="btn btn-primary w-25 mt-5 btn-lg" onclick="create_or_join_team_modal()">Continue</button>
                               </div>
                           </div>
+                          <?php  endif; ?>
                       </div>
                       <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashorganisation">
                           <div class="right-board">
@@ -2512,7 +2617,6 @@ if ($m_got_screen == 0) {
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Change Team Page Photo</h4>
             </div>
-
             <div class="modal-body centered">
               <form id="personal_photo">
                   <label class="btn btn-default btn-file">
