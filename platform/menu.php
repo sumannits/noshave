@@ -63,8 +63,9 @@ if ($stmt = $mysqli->prepare("SELECT m_full_name, m_email, m_username, m_team_id
                                <a class="dropdown-item" href="<?php echo base_url; ?>/#story">Our Story</a>
                                <a class="dropdown-item" href="<?php echo base_url; ?>/awarness.html">Awareness Initiative</a>
                                <div class="dropdown-divider"></div>
-                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
-                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>
+                               <!--<a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
+                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>-->
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/financials">Financials</a>
                                <a class="dropdown-item" href="<?php echo base_url; ?>/contact_us">Contact Us</a>
                             </div>        
                         </li> 
@@ -129,8 +130,9 @@ if ($stmt = $mysqli->prepare("SELECT m_full_name, m_email, m_username, m_team_id
                                <a class="dropdown-item" href="<?php echo base_url; ?>/#story">Our Story</a>
                                <a class="dropdown-item" href="<?php echo base_url; ?>/awarness.html">Awareness Initiative</a>
                                <div class="dropdown-divider"></div>
-                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
-                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>
+                               <!--<a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2015_financials">2015 Financials</a>
+                               <a class="dropdown-item" href="Javascript:void(0);" data-toggle="modal" data-target="#2016_financials">2016 Financials</a>-->
+                               <a class="dropdown-item" href="<?php echo base_url; ?>/financials">Financials</a>
                                <a class="dropdown-item" href="<?php echo base_url; ?>/contact_us">Contact Us</a>
                             </div>        
                         </li> 
