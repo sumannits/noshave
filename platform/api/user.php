@@ -380,5 +380,166 @@ if($service_type == 'email_exist'){
         // print out response to stdout
         echo json_encode($response);  
     }
+}else if($service_type == 'team_page'){
+        
+    $user_id = $_POST['user_id'];
+    $team_det_arr=array();
+    $error_msg = "";
+        
+    if (isset($user_id) && $user_id!='') {
+        if ($stmt = $mysqli->prepare("SELECT m_team_id FROM member WHERE m_id = ? LIMIT 1")) {
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($m_team_id);
+            $stmt->fetch();
+            $stmt->close();
+          
+            if ($m_team_id != "0") {
+                // Fetch team information
+                if ($stmt1 = $mysqli->prepare("SELECT t_id, t_name, t_username, t_pic_0, t_page_title, t_page_description, t_page_goal FROM team WHERE t_id = ? LIMIT 1")) {
+                  $stmt1->bind_param('i', $m_team_id);
+                  $stmt1->execute();
+                  $result = $stmt1->get_result();
+                  $data_det = $result->fetch_assoc();
+                  $data_det['t_page_link']=base_url.'/team/'.$data_det['t_username'];
+                  $stmt->close();
+                  $team_det_arr=$data_det;
+                }
+            }
+
+            $is_team_owner=is_team_owner($user_id, $mysqli);
+            $is_team_member=is_team_member($user_id, $mysqli);
+            if($is_team_owner == true){
+                $is_team_member = false;
+            }
+            $response = array(
+                'status' => 'success',
+                'is_team_owner' => $is_team_owner,
+                'is_team_member' => $is_team_member,
+                'team_details'=>$team_det_arr
+            );
+            echo json_encode($response); 
+        }else{
+            $response = array(
+                'status' => 'failure',
+                'fail_code' => '0',
+                'reason' => 'Invalid user id.'
+            );
+            // print out response to stdout
+            echo json_encode($response);  
+        }
+    } else {
+        // POST vars not provided
+        $response = array(
+            'status' => 'failure',
+            'fail_code' => '0',
+            'reason' => 'One or more fields was not provided.'
+        );
+        // print out response to stdout
+        echo json_encode($response);  
+    }
+}else if($service_type == 'donation_page'){
+        
+    $user_id = $_POST['user_id'];
+    $per_don_arr=array();
+    $team_don_arr=array();
+    $org_don_arr=array();
+    $error_msg = "";
+        
+    if (isset($user_id) && $user_id!='') {
+        if ($stmt = $mysqli->prepare("SELECT m_team_id, m_org_id,m_team_editor,m_org_editor FROM member WHERE m_id = ? LIMIT 1")) {
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($m_team_id,$m_org_id, $m_team_editor,$m_org_editor);
+            $stmt->fetch();
+            $stmt->close();
+
+            // GET PERSONAL DONATIONS
+            if ($stmt1 = $mysqli->prepare("SELECT d_id, d_time, d_name, d_email, d_amount, d_message, d_anonymous, d_message_on_page, d_thank_you_sent FROM donation WHERE d_classifier = 1 AND d_classifier_id = ? AND d_verified_payment = 1")) {
+                $stmt1->bind_param('s', $user_id);
+                $stmt1->execute();
+                $stmt1->bind_result($d_id, $d_time, $d_name, $d_email,$d_amount, $d_message, $d_anonymous, $d_message_on_page, $d_thank_you_sent);
+              
+                // donation table
+                $donation_count = 0;
+                while ($stmt1->fetch()) {
+                    $donation_count = $donation_count + 1;
+                    if ($d_anonymous == 1) {
+                      $d_name = "Anonymous";
+                    }
+                    $perbind_arr_donation = array('donation_count'=>$donation_count, 'd_time'=> date('F j, Y', strtotime($d_time . '- 5 hours')), 'd_name'=>$d_name, 'd_amount'=>$d_amount,'d_message'=>$d_message);
+                    array_push($per_don_arr,$perbind_arr_donation);
+                }
+                $stmt1->close();
+            }
+
+            if ($m_team_editor == 1) {
+                if ($stmt2 = $mysqli->prepare("SELECT d_time, d_name, d_email, d_amount, d_message, d_anonymous, d_message_on_page FROM donation WHERE d_classifier = 2 AND d_classifier_id = ? AND d_verified_payment = 1")) {
+                    $stmt2->bind_param('s', $m_team_id);
+                    $stmt2->execute();
+                    $stmt2->bind_result($d_time, $d_name, $d_email,$d_amount, $d_message, $d_anonymous, $d_message_on_page);
+
+                    // donation table
+                    $team_donation_count = 0;
+                    while ($stmt2->fetch()) {
+                        $team_donation_count = $team_donation_count + 1;
+                        if ($d_anonymous == 1) {
+                            $d_name = "Anonymous";
+                        }
+                        $teambind_arr_donation = array('donation_count'=>$team_donation_count, 'd_time'=> date('F j, Y', strtotime($d_time . '- 5 hours')), 'd_name'=>$d_name, 'd_amount'=>$d_amount,'d_message'=>$d_message);
+                        array_push($team_don_arr,$teambind_arr_donation);
+                    }
+                    $stmt2->close();
+                }
+            }
+
+            if ($m_org_editor == 1) {
+                if ($stmt3 = $mysqli->prepare("SELECT d_time, d_name, d_email, d_amount, d_message, d_anonymous, d_message_on_page FROM donation WHERE d_classifier = 3 AND d_classifier_id = ? AND d_verified_payment = 1")) {
+                    $stmt3->bind_param('s', $m_org_id);
+                    $stmt3->execute();
+                    $stmt3->bind_result($d_time, $d_name, $d_email,$d_amount, $d_message, $d_anonymous, $d_message_on_page);
+
+                    // donation table
+                    $org_donation_count = 0;
+                    while ($stmt3->fetch()) {
+                        $org_donation_count = $org_donation_count + 1;
+                        if ($d_anonymous == 1) {
+                            $d_name = "Anonymous";
+                        }
+                        $orgbind_arr_donation = array('donation_count'=>$org_donation_count, 'd_time'=> date('F j, Y', strtotime($d_time . '- 5 hours')), 'd_name'=>$d_name, 'd_amount'=>$d_amount,'d_message'=>$d_message);
+                        array_push($org_don_arr,$orgbind_arr_donation);
+                    }
+                    $stmt3->close();
+                }
+            }
+
+            $response = array(
+                'status' => 'success',
+                'personal_donation' => $per_don_arr,
+                'team_donation' => $team_don_arr,
+                'org_donation'=>$org_don_arr
+            );
+            echo json_encode($response); 
+        }else{
+            $response = array(
+                'status' => 'failure',
+                'fail_code' => '0',
+                'reason' => 'Invalid user id.'
+            );
+            // print out response to stdout
+            echo json_encode($response);  
+        }
+    } else {
+        // POST vars not provided
+        $response = array(
+            'status' => 'failure',
+            'fail_code' => '0',
+            'reason' => 'One or more fields was not provided.'
+        );
+        // print out response to stdout
+        echo json_encode($response);  
+    }
 }
 ?>

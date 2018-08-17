@@ -6,8 +6,13 @@ include_once '../includes/db_connect.php';
 include_once '../includes/psl-config.php';
 include_once '../includes/functions.php';
 sec_session_start();
+$api_user_id=isset($_POST['user_id'])?$_POST['user_id']:'';
+if($api_user_id!=''){
+    $m_id = $api_user_id;
+}else{
+    $m_id = $_SESSION['user_id'];
+}
 
-$m_id = $_SESSION['user_id'];
 
 // get the POST vars
 $t_name = $_POST['t_name'];

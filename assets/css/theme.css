@@ -343,6 +343,7 @@ header.fixed-header .curve-bg-div{
 .spread-word{
     padding:50px 0;
     min-height: 120px;
+    background-image: url('../images/texture1.jpg')
 }
 .pink-box{
      padding: 45px 25px 25px;
@@ -1278,3 +1279,25 @@ ul#myTab {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+/***************************************************************/
+.awareness h2{font-size: 38px;
+    color: #6a3447;
+    font-weight: 900;}
+.awareness h2 span{    color: #074f5f;
+    font-weight: 900;
+    font-size: 28px;}
+.awareness .sub-heading{color: #7d7d7d;font-size: 16px;line-height: 26px;font-weight: 400;text-align:center}
+
+.awareness h4{color: #392d19;font-weight: 900}
+
+
+
+
+
+
+
+
+
+
+

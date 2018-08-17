@@ -343,8 +343,8 @@ if ($m_id != 0 && $m_2017 != 0) {
                       <div class="b-sidebar py-4">
                           <a href="<?php echo base_url; ?>" class="side-logo d-block text-center"><img src="<?php echo base_url;?>/assets/images/sidebar-logo.png" class="img-fluid" alt="" style="max-width:150px"></a>
                           <p>
-                              <a href="<?php echo base_url; ?>/donate?id=<?php echo $m_id; ?>&amp;c=1" class="btn btn-success btn-block btn-sm"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
-                              <a href="Javascript:void(0);" class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a>
+                              <a href="<?php echo base_url; ?>/donate?id=<?php echo $m_id; ?>&amp;c=1" class="btn btn-primary btn-block btn-sm"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; Make a Donation</a>
+                              <a href="Javascript:void(0);" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#sharePersonal"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share this Page</a>
                           </p>
                           <p>No-Shave November is a web-based, non-profit organization devoted to growing cancer awareness and raising funds to support cancer prevention, research, and education.</p>
                      

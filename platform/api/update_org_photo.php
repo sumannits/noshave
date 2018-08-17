@@ -33,10 +33,10 @@ if (isset($m_id, $_POST['org_photo'])) {
     $imageMD5 = md5($imageContent);
 
     // save locally to ship to bucket
-    file_put_contents('/var/www/noshave/platform/uploads/' . $imageMD5, $imageContent);
+    file_put_contents(ROOT_PATH . $imageMD5, $imageContent);
 
     // move to GCS
-    $cmd = 'sudo -u root gsutil mv /var/www/noshave/platform/uploads/' . $imageMD5 . ' gs://nsn-img/2017/' . $imageMD5;
+    $cmd = 'sudo -u root gsutil mv '. ROOT_PATH . $imageMD5 . ' gs://nsn-img/2017/' . $imageMD5;
     // lets get an error here TODO
     shell_exec($cmd);
 

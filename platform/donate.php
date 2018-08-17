@@ -630,5 +630,12 @@ if (isset($_GET['c'], $_GET['id'])) {
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
     <?php include_once('footer.php')?>
     <?php include_once("analyticstracking.php") ?>
+    <!--<script>
+     $(document).ready(function(){
+            var $content = $("iframe").contents();
+            $content.find("body").append("I'm in an iframe!");
+     });
+    	
+    </script>-->
   </body>
 </html>

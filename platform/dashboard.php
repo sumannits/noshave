@@ -1865,8 +1865,8 @@ if ($m_got_screen == 0) {
                                          <!--  <img id="blah" src="./img/pic.png" alt="your image" class="mb-2"  style="max-height: 150px;"/> -->
                                           <img id="preview_profile_picture_image" class="mb-2" style="max-height: 150px;" src="<?php echo $m_profile_pic; ?>">
                                           <br>
-                                          <input type="file" id="picown" onchange="readURL(this);" hidden="">
-                                          <label class="btn btn-primary" for="picown"><i class="ion ion-md-cloud-upload"></i> Change Photo</label>
+                                          <!--<input type="file" id="picown" onchange="readURL(this);" hidden="">-->
+                                          <label class="btn btn-primary" for="picown" data-toggle="modal" data-target="#changeProfilePicture"><i class="ion ion-md-cloud-upload"></i> Change Photo</label>
                                       </div>
                                   </div>
                                   <div class="form-group row">
@@ -2082,8 +2082,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
+            <h4 class="modal-title">Edit Team Page</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Edit Team Page</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -2675,8 +2676,8 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Change Profile Picture</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Change Profile Picture</h4>
             </div>
 
             <div class="modal-body centered">
@@ -2686,7 +2687,7 @@ if ($m_got_screen == 0) {
                   </label>
                   <br><br>
 
-                  <img id="profile_picture_image_preview" name="profile_picture_image_preview" style="width: 100%; height: 100%;" src="<?php echo $m_profile_pic;?>" alt="<?php echo $m_full_name; ?> No Shave November 2017" class="img-rounded">
+                  <img id="profile_picture_image_preview" name="profile_picture_image_preview" style="width: 100%;" src="<?php echo $m_profile_pic;?>" alt="<?php echo $m_full_name; ?> No Shave November 2017" class="img img-responsive">
                 </div>
               </form>
             <div class="modal-footer">
@@ -2815,8 +2816,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Leave <?php echo $t_name; ?></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
             </div>
 
             <div class="modal-body">

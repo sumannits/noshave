@@ -6,9 +6,12 @@ include_once '../includes/db_connect.php';
 include_once '../includes/psl-config.php';
 include_once '../includes/functions.php';
 sec_session_start();
-
-$m_id = $_SESSION['user_id'];
-
+$api_user_id=isset($_POST['user_id'])?$_POST['user_id']:'';
+if($api_user_id!=''){
+    $m_id = $api_user_id;
+}else{
+    $m_id = $_SESSION['user_id'];
+}
 $error_msg = "";
 
 if ($m_id == ""){
@@ -37,7 +40,8 @@ if (empty($error_msg)){
         } else {
             // it succeeded
             $response = array(
-                'status' => 'success'
+                'status' => 'success',
+                'msg' => 'You have successfully leave the team.'
             );
 
             echo json_encode($response);
