@@ -35,31 +35,12 @@
             <div class="container">
                 <h2 class="text-center">Financials</h2>
                 
-                <div class="row finance pt-5">                    
-                  <div class="col-md-5">
-                    <img class="img-fluid" src="https://storage.googleapis.com/nsn-misc/2015_financial_chart.png" alt="No-Shave November 2015 Financials">
-                  </div>
-                    <div class="col-md-7">
-                        <h3> 2015 Donation Breakdown </h3>
-                    <p>
-                        <h5 style="color: #396cc6;">Programs</h5>
-                        Benefiting charities and other miscellaneous program costs<br><br>
-                        <h5 style="color: #d83c2a;">Fundraising</h5>
-                        Payroll, payment processing and technology fees<br><br>
-                        <h5 style="color: #fb9738;">Reserve</h5>
-                        Funds held for future programs and contingency of foundation<br><br>
-                        <h5 style="color: #25942c;">General &amp; Administrative</h5>
-                        Marketing, charity registration, payroll, and office expenses<br><br>
-                        <!-- Financial statement PDFs-->
-                        <h5 style="color: #33691E;">Financial Statements</h5>
-                        <a class="btn btn-default" style="background-color:#DCEDC8" href="https://storage.googleapis.com/nsn-misc/2015_990_form.pdf" target="_blank">990</a>
-                        <a class="btn btn-default" style="background-color:#DCEDC8" href="https://storage.googleapis.com/nsn-misc/2015_financials.pdf" target="_blank">2015 Financial Statement</a>
-                    </p>
-                  </div>
-                </div>
-                
-                <div class="row pt-5" style="border-top: 2px solid #efefef;">                  
-                    <div class="col-md-7 col-12 text-right">
+                <div class="row pt-5">                  
+                    <div class="col-md-5 col-12">
+                        <img class="img-fluid" src="https://storage.googleapis.com/nsn-misc/2016_financial_chart.png" alt="No-Shave November 2015 Financials">
+                        
+                    </div>
+                    <div class="col-md-7 col-12">
                         <h3> 2016 Donation Breakdown </h3>
                         <p>
                             <h4 style="color: #396cc6;">Programs</h4>
@@ -76,10 +57,31 @@
                             <a class="btn btn-default" style="background-color:#DCEDC8" href="https://storage.googleapis.com/nsn-misc/2016_financials.pdf" target="_blank">2016 Financial Statement</a>
                         </p>
                     </div>
-                    <div class="col-md-5 col-12">
-                        <img class="img-fluid" src="https://storage.googleapis.com/nsn-misc/2016_financial_chart.png" alt="No-Shave November 2015 Financials">
-                    </div>
                 </div>
+
+                <div class="row finance pt-5" style="border-top: 2px solid #efefef;">             <div class="col-md-7 text-right">
+                    <h3> 2015 Donation Breakdown </h3>
+                    <p>
+                        <h5 style="color: #396cc6;">Programs</h5>
+                        Benefiting charities and other miscellaneous program costs<br><br>
+                        <h5 style="color: #d83c2a;">Fundraising</h5>
+                        Payroll, payment processing and technology fees<br><br>
+                        <h5 style="color: #fb9738;">Reserve</h5>
+                        Funds held for future programs and contingency of foundation<br><br>
+                        <h5 style="color: #25942c;">General &amp; Administrative</h5>
+                        Marketing, charity registration, payroll, and office expenses<br><br>
+                        <!-- Financial statement PDFs-->
+                        <h5 style="color: #33691E;">Financial Statements</h5>
+                        <a class="btn btn-default" style="background-color:#DCEDC8" href="https://storage.googleapis.com/nsn-misc/2015_990_form.pdf" target="_blank">990</a>
+                        <a class="btn btn-default" style="background-color:#DCEDC8" href="https://storage.googleapis.com/nsn-misc/2015_financials.pdf" target="_blank">2015 Financial Statement</a>
+                    </p>
+                  </div>
+                    <div class="col-md-5 ">
+                        <img class="img-fluid" src="https://storage.googleapis.com/nsn-misc/2015_financial_chart.png" alt="No-Shave November 2015 Financials">
+                  </div>
+                </div>
+                
+               
             </div>
         </section>
         <!--end of leaderboard-->       

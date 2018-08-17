@@ -12,5 +12,5 @@ define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
 define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
 define('base_url','http://localhost/noshave-new');
-
+define('ROOT_PATH','/var/www/html/noshave-new/platform/uploads/');
 ?>

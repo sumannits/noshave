@@ -6,8 +6,12 @@ include_once '../includes/db_connect.php';
 include_once '../includes/psl-config.php';
 include_once '../includes/functions.php';
 sec_session_start();
-
-$m_id = $_SESSION['user_id'];
+$api_user_id=isset($_POST['user_id'])?$_POST['user_id']:'';
+if($api_user_id!=''){
+    $m_id = $api_user_id;
+}else{
+    $m_id = $_SESSION['user_id'];
+}
 
 // get the POST vars
 $t_id = $_POST['t_id'];
@@ -56,7 +60,8 @@ if (isset($m_id,$_POST['t_id'])) {
             } else {
                 // it succeeded
                 $response = array(
-                    'status' => 'success'
+                    'status' => 'success',
+                    'msg' => 'You have successfully join the team.'
                 );
 
                 echo json_encode($response);
