@@ -11,11 +11,11 @@ $password = $_POST['password'];
 
 if (isset($_POST['email'], $_POST['password'])){
     // let's grab what we can based on the email
-    if ($stmt = $mysqli->prepare("SELECT m_id, m_full_name, m_email, m_username, m_password, m_pic_0 FROM member WHERE m_email = ? LIMIT 1")) {
+    if ($stmt = $mysqli->prepare("SELECT m_id, m_full_name, m_email, m_username, m_password, m_pic_0,m_city,m_state,m_country FROM member WHERE m_email = ? LIMIT 1")) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($m_id, $m_full_name, $m_email, $m_username, $m_password, $m_pic_0);
+        $stmt->bind_result($m_id, $m_full_name, $m_email, $m_username, $m_password, $m_pic_0, $m_city, $m_state, $m_country);
         $stmt->fetch();
         if ($stmt->num_rows == 1) {
             if (password_verify($password, $m_password)) {
@@ -26,7 +26,9 @@ if (isset($_POST['email'], $_POST['password'])){
                     'm_full_name' => $m_full_name,
                     'm_email' => $m_email,
                     'm_username' => $m_username,
-                    'm_username' => $m_username,
+                    'm_city' => $m_city,
+                    'm_state' => $m_state,
+                    'm_country' => $m_country,
                     'm_pic_0' => $m_pic_0 
                 );
 

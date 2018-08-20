@@ -372,7 +372,7 @@ if (isset($_GET['c'], $_GET['id'])) {
               toggleProcessing();
 
               // thank them elsewhere
-              window.location.replace("/leaderboard?d=1");
+              window.location.replace("<?php echo base_url; ?>/leaderboard?d=1");
 
             } else if (data['fail_code']) {
 

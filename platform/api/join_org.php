@@ -7,7 +7,12 @@ include_once '../includes/psl-config.php';
 include_once '../includes/functions.php';
 sec_session_start();
 
-$m_id = $_SESSION['user_id'];
+$api_user_id=isset($_POST['user_id'])?$_POST['user_id']:'';
+if($api_user_id!=''){
+    $m_id = $api_user_id;
+}else{
+    $m_id = $_SESSION['user_id'];
+}
 
 // get the POST vars
 $o_id = $_POST['o_id'];
