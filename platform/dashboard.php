@@ -531,7 +531,6 @@ if ($m_got_screen == 0) {
               $('#team_title').text($('#team_title_edit').val());
               $('#team_goal').text('$' + $('#team_goal_edit').val());
               $('#team_description').text($('#team_description_edit').val());
-
               // update the fields on the page
               $('#editTeam').modal('toggle'); // this should hide the modal
 
@@ -575,9 +574,9 @@ if ($m_got_screen == 0) {
             if (data['status'] == "success") {
 
               // UPDATE TEAM VARS IN REAL TIME
-              $('#view_org_page').attr("href", "/org/" + $('#org_username_edit').val());
-              $('#view_org_page_1').text('no-shave.org/org/' + $('#org_username_edit').val());
-              $('#view_org_page_1').attr("href", "/org/" + $('#org_username_edit').val());
+              $('#view_org_page').attr("href", "<?php echo base_url;?>/org/" + $('#org_username_edit').val());
+              $('#view_org_page_1').text('<?php echo base_url;?>/org/' + $('#org_username_edit').val());
+              $('#view_org_page_1').attr("href", "<?php echo base_url;?>/org/" + $('#org_username_edit').val());
               $('#org_title').text($('#org_title_edit').val());
               $('#org_goal').text('$' + $('#org_goal_edit').val());
               $('#org_description').text($('#org_description_edit').val());
@@ -921,7 +920,7 @@ if ($m_got_screen == 0) {
       function search_orgs() {
         var vars = {
                       search_term: $('#search_org_input').val()
-                    }
+        }
 
         $.ajax({ 
           type: 'POST',
@@ -1808,6 +1807,105 @@ if ($m_got_screen == 0) {
                           <?php  endif; ?>
                       </div>
                       <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashorganisation">
+                      <?php if (org_owner($user_id, $mysqli) == true) : ?>
+                      <!-- ORG OWNER -->
+                        <div class="right-board">
+                              <h2 class="mt-4">Organization Page</h2>                            <div class="ac-own mt-5">
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Link :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-success">
+                                          <a id="view_org_page_1" href="<?php echo base_url; ?>/org/<?php echo $o_username; ?>"><?php echo base_url; ?>/org/<?php echo $o_username; ?></a></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Title :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted" id="org_title"><?php echo $o_page_title; ?></span>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Photos :</label>
+                                      <div class="col-12 col-md-9">
+                                      <img id="current_org_page_photo" style="max-height: 150px;" src="<?php echo $o_pic_0; ?>" alt="<?php echo $o_name; ?> No Shave November 2017" class="mb-2">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Fundraising Goal :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted" id="org_goal">$<?php echo number_format($o_page_goal); ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Description :</label>
+                                      <div class="col-12 col-md-9">
+                                          <p class="text-muted" id="org_description"><?php echo $o_page_description; ?></p>
+                                      </div>
+                                  </div>                                 
+                                  <div class="form-group row">                                     <div class="col-12 col-md-9 ml-auto text-left">
+
+                                  <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editOrg"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edit</button>
+      
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editOrgPhotos"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Change Photo</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#shareOrg"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
+      <a id="view_org_page" class="btn btn-outline-primary btn-sm" target="_blank" href="<?php echo base_url; ?>/org/<?php echo $o_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
+
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- ORG OWNER -->
+
+                      <?php  elseif (org_member($user_id, $mysqli) == true) : ?>
+                        <!-- ORG MEMBER -->
+                        <div class="right-board">
+                              <h2 class="mt-4">Organization Page</h2>                            <div class="ac-own mt-5">
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Link :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-success">
+                                          <a href="<?php echo base_url; ?>/org/<?php echo $o_username; ?>"><?php echo base_url; ?>/org/<?php echo $o_username; ?></a></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Title :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted"><?php echo $o_page_title;?></span>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Photos :</label>
+                                      <div class="col-12 col-md-9">
+                                      <img style="max-height: 150px;" src="<?php echo $o_pic_0; ?>" alt="<?php echo $o_name; ?> No Shave November 2017" class="mb-2">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Fundraising Goal :</label>
+                                      <div class="col-12 col-md-9">
+                                          <span class="text-muted">$<?php echo number_format($o_page_goal); ?></span>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-12">Page Description :</label>
+                                      <div class="col-12 col-md-9">
+                                          <p class="text-muted"><?php echo $o_page_description; ?></p>
+                                      </div>
+                                  </div>                                 
+                                  <div class="form-group row">                                     <div class="col-12 col-md-9 ml-auto text-left">
+                                  <?php if (team_owner($user_id, $mysqli) == true) : ?>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#leaveOrg"><i class="fa fa-user-times" aria-hidden="true"></i>&nbsp; Leave Organization</button>
+                    <?php  else : ?>
+                    <?php  endif; ?>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#shareOrg"><i class="fa fa-share" aria-hidden="true"></i>&nbsp; Share</button>
+      <a id="view_org_page" type="button" class="btn btn-outline-primary btn-sm" target="_blank" href="<?php echo base_url; ?>/org/<?php echo $o_username; ?>"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      <!-- ORG MEMBER -->
+                      <?php  else : ?>
                           <div class="right-board">
                               <h2 class="mt-4">Create or Join an Organization?</h2>
                               <span class="h-text">Select an Option Below to Get Started</span>
@@ -1829,6 +1927,7 @@ if ($m_got_screen == 0) {
                                   <button name="create_or_join_org" id="create_or_join_org" type="button" class="btn btn-primary w-25 mt-5 btn-lg" onclick="create_or_join_org_modal()">Continue</button>
                               </div>
                           </div>
+                          <?php  endif; ?>
                       </div>
                       <div class="col-12 col-md-8 col-lg-9 otherSection" id="dashdonation">
                           <div class="right-board">
@@ -2136,8 +2235,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Edit Organization Page</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
             </div>
 
             <div class="modal-body">
@@ -2261,8 +2361,9 @@ if ($m_got_screen == 0) {
           <form><!-- form -->
 
             <div class="modal-header">
+            <h4 class="modal-title">Add Offline Contribution</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Add Offline Contribution</h4>
+              
             </div>
 
             <div class="modal-body">
@@ -2433,8 +2534,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Share Team Page</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Share Team Page</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -2483,8 +2585,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Invite People to Join Your Team</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Invite People to Join Your Team</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -2533,8 +2636,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Share Organization Page</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Share Organization Page</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -2562,7 +2666,7 @@ if ($m_got_screen == 0) {
               <div class="row">
                 <div class="col-md-10 col-md-offset-1 centered">
                   <label>Page Link</label>
-                  <input type="text" class="form-control text-center" placeholder="https://no-shave.org/org/<?php echo $o_username; ?>" value="https://no-shave.org/org/<?php echo $o_username; ?>" onClick="this.select();">
+                  <input type="text" class="form-control text-center" placeholder="<?php echo base_url;?>/org/<?php echo $o_username; ?>" value="<?php echo base_url;?>/org/<?php echo $o_username; ?>" onClick="this.select();">
                 </div>
               </div>
 
@@ -2615,8 +2719,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Change Team Page Photo</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Change Team Page Photo</h4>
+              
             </div>
             <div class="modal-body centered">
               <form id="personal_photo">
@@ -2645,8 +2750,9 @@ if ($m_got_screen == 0) {
         <div class="modal-content">
 
             <div class="modal-header">
+            <h4 class="modal-title">Change Organization Page Photo</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Change Organization Page Photo</h4>
+              
             </div>
 
             <div class="modal-body centered">
@@ -2841,12 +2947,11 @@ if ($m_got_screen == 0) {
     <div class="modal fade" tabindex="-1" role="dialog" id="leaveOrg">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          
           <form><!-- form -->
-
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Leave <?php echo $o_name; ?></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
             </div>
 
             <div class="modal-body">

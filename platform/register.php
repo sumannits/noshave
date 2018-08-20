@@ -381,6 +381,9 @@ if (isset($_GET['t'])){
               $('input[name="e_full_name"]').val(data['m_full_name']);
               $('input[name="e_email_address"]').val(data['m_email']);
               $('input[name="e_username"]').val(data['m_username']);
+              $('input[name="e_city"]').val(data['m_city']);
+              $('input[name="e_state"]').val(data['m_state']);
+              $('input[name="e_country"]').val(data['m_country']);
               $('input[name="e_m_id"]').val(data['m_id']);
 
               // add username to variable to allow it in the form when checking usernames

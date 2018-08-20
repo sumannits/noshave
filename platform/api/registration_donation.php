@@ -7,10 +7,10 @@ include_once '../includes/psl-config.php';
 include_once '../includes/email.php';
 require_once '../includes/braintree/lib/Braintree.php';
 
-Braintree_Configuration::environment('production');
-Braintree_Configuration::merchantId('rxn35zvzhyq2m2yt');
-Braintree_Configuration::publicKey('48s5tzh9f4tkymwc');
-Braintree_Configuration::privateKey('68d746242773084de5e07bfef00b82b2');
+Braintree_Configuration::environment(environment);
+Braintree_Configuration::merchantId(merchantId);
+Braintree_Configuration::publicKey(publicKey);
+Braintree_Configuration::privateKey(privateKey);
 
 $donation_name = $_POST['donation_name'];
 $donation_company = $_POST['donation_company'];

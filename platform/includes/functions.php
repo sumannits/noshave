@@ -239,6 +239,60 @@ function is_team_member($user_id, $mysqli) {
     }
 }
 
+function is_org_owner($user_id, $mysqli) {
+    if (isset($user_id)) {
+        if ($stmt = $mysqli->prepare("SELECT m_org_editor FROM member WHERE m_id = ? LIMIT 1")) {
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows == 1) {
+                $stmt->bind_result($m_org_editor);
+                $stmt->fetch();
+
+                if ($m_org_editor == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function is_org_member($user_id, $mysqli) {
+    if (isset($user_id)) {
+        if ($stmt = $mysqli->prepare("SELECT m_org_id FROM member WHERE m_id = ? LIMIT 1")) {
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows == 1) {
+                $stmt->bind_result($m_org_id);
+                $stmt->fetch();
+
+                if ($m_org_id != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 function org_owner($user_id, $mysqli) {
 
     if (isset($user_id)) {
