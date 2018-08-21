@@ -43,7 +43,7 @@ if (isset($_POST['q'])){
         $member_results = '
                           <!-- Tab panes -->
                           <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade in active" id="member_results">
+                            <div role="tabpanel" class="tab-pane fade in active show" id="member_results">
                               <br>
                               <table class="table table-hover">
                                 <thead>
@@ -58,7 +58,7 @@ if (isset($_POST['q'])){
             $member_results .= '
                                   <tr>
                                     <td class="vert-align col-md-12">
-                                      <h4><a href="/member/' . $m_username . '">' . $m_full_name . '</a></h4>
+                                      <h4><a href="'.base_url.'/member/' . $m_username . '">' . $m_full_name . '</a></h4>
                                     </td>
                                   </tr>
                                 ';
@@ -135,7 +135,7 @@ if (isset($_POST['q'])){
             $org_results .= '
                                   <tr>
                                     <td class="vert-align col-md-12">
-                                      <h4><a href="/org/' . $o_username . '">' . $o_name . '</a></h4>
+                                      <h4><a href="'.base_url.'/org/' . $o_username . '">' . $o_name . '</a></h4>
                                     </td>
                                   </tr>
                                 ';

@@ -775,5 +775,143 @@ if($service_type == 'email_exist'){
         'clientToken' => $clientToken
     );
     echo json_encode($response);
+}else if($service_type == 'dashboard_page'){
+        
+    $user_id = $_POST['user_id'];
+    $donation_count = 0;
+    $total_raised = 0;
+    $m_page_goal = 0;
+    $error_msg = "";
+        
+    if (isset($user_id) && $user_id!='') {
+        if ($stmt1 = $mysqli->prepare("SELECT m_page_goal FROM member WHERE m_id = ? LIMIT 1")) {
+            $stmt1->bind_param('i', $user_id);
+            $stmt1->execute();
+            $stmt1->store_result();
+            $stmt1->bind_result($m_page_goal);
+            $stmt1->fetch();
+            $stmt1->close();
+        }
+
+        if ($stmt = $mysqli->prepare("SELECT d_id, d_time, d_name, d_email, d_amount, d_message, d_anonymous, d_message_on_page, d_thank_you_sent FROM donation WHERE d_classifier = 1 AND d_classifier_id = ? AND d_verified_payment = 1")) {
+            $stmt->bind_param('s', $user_id);
+            $stmt->execute();
+            $stmt->bind_result($d_id, $d_time, $d_name, $d_email,$d_amount, $d_message, $d_anonymous, $d_message_on_page, $d_thank_you_sent);
+            while ($stmt->fetch()) {
+                $donation_count = $donation_count + 1;
+                $total_raised += $d_amount;
+            }
+
+            $stmt->close();
+
+            $goal_percentage = ceil(($total_raised / $m_page_goal) * 100) . "%";
+            if ($goal_percentage > 100) {
+                $goal_percentage = "100%+";
+            }
+            $response = array(
+                'status' => 'success',
+                'donations' => $donation_count,
+                'raised' => number_format($total_raised),
+                'goal_percentage'=>$goal_percentage,
+                'goal_amt'=>number_format($m_page_goal)
+            );
+            echo json_encode($response);             
+        }else{
+            $response = array(
+                'status' => 'failure',
+                'fail_code' => '0',
+                'reason' => 'Invalid user id.'
+            );
+            // print out response to stdout
+            echo json_encode($response);  
+        }
+    } else {
+        // POST vars not provided
+        $response = array(
+            'status' => 'failure',
+            'fail_code' => '0',
+            'reason' => 'One or more fields was not provided.'
+        );
+        // print out response to stdout
+        echo json_encode($response);  
+    }
+}else if($service_type == 'leaderboard_page'){
+    $member_count = 0;
+    $member_arr=array();
+    $team_arr=array();
+    $org_arr=array();
+    if ($stmt = $mysqli->prepare("SELECT total_raised, total_members, total_teams, total_orgs, top_members, top_teams, top_orgs FROM leaderboard")) {
+        $stmt->execute();
+        //print_r($stmt);
+        $stmt->store_result();
+        $stmt->bind_result($total_raised, $total_members, $total_teams, $total_orgs, $member_table, $team_table, $org_table);
+        $stmt->fetch();
+        $stmt->close();
+        //member leaderboard
+        if ($stmt = $mysqli->prepare("SELECT m_username, m_full_name, m_profile_pic, sum(d_amount) FROM donation, member WHERE m_id = d_classifier_id GROUP BY d_classifier_id ORDER BY sum(d_amount) DESC LIMIT 10")) {
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($m_username, $m_full_name, $m_profile_pic, $m_total_raised);
+            while ($stmt->fetch()) {
+                $member_count += 1;
+                $bind_arr_member = array('member_count'=>$member_count, 'm_profile_pic'=>$m_profile_pic,'m_username'=>$m_username,'m_full_name'=>$m_full_name,'m_total_raised'=>number_format($m_total_raised));
+                array_push($member_arr,$bind_arr_member);
+            }
+            $stmt->close();
+        }
+        //Team
+        if($team_table!=''){
+            $exp_str_team = explode('</tr>', $team_table);
+            foreach($exp_str_team as $val){
+                $exp_str_price = explode('<h3 class="donation-green">', $val);
+                $exp_str_team_name = explode('</a>', $val);
+                $exp_str_team_uname = explode('<a href="', $exp_str_team_name[0]);
+                $get_name = explode('">', $exp_str_team_uname[1]);
+                $get_uname_exp = explode('/', $get_name[0]);
+                
+                $team_price=strip_tags($exp_str_price[1]);
+                $price_string = trim(preg_replace('/\s\s+/', ' ', $team_price));
+                $bind_arr_team = array('team_name'=>$get_name[1], 'team_price'=>$price_string,'team_uname'=>end($get_uname_exp));
+                if($get_name[1]!=''){
+                    array_push($team_arr,$bind_arr_team);
+                }
+            }
+        }
+        // Organization
+        if($org_table!=''){
+            $exp_str_team = explode('</tr>', $org_table);
+            foreach($exp_str_team as $val){
+                $exp_str_price = explode('<h3 class="donation-green">', $val);
+                $exp_str_team_name = explode('</a>', $val);
+                $exp_str_team_uname = explode('<a href="', $exp_str_team_name[0]);
+                $get_name = explode('">', $exp_str_team_uname[1]);
+                $get_uname_exp = explode('/', $get_name[0]);
+                
+                $team_price=strip_tags($exp_str_price[1]);
+                $price_string = trim(preg_replace('/\s\s+/', ' ', $team_price));
+                $bind_arr_org = array('org_name'=>$get_name[1], 'org_price'=>$price_string,'org_uname'=>end($get_uname_exp));
+                if($get_name[1]!=''){
+                    array_push($org_arr,$bind_arr_org);
+                }
+            }
+        }
+
+        $response = array(
+            'status' => 'success',
+            'member_arr' => $member_arr,
+            'team_arr' => $team_arr,
+            'org_arr'=>$org_arr
+        );
+        echo json_encode($response);             
+    }else{
+        $response = array(
+            'status' => 'failure',
+            'fail_code' => '0',
+            'reason' => 'Invalid user id.'
+        );
+        // print out response to stdout
+        echo json_encode($response);  
+    }
+    
 }
 ?>
